@@ -147,6 +147,9 @@
     <ClInclude Include="source\precomp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\physics\utilities\boundingbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\sirelphy.cpp">
@@ -213,6 +216,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\precomp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\utilities\boundingbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
