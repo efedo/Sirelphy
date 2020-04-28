@@ -13,6 +13,7 @@ class cVector2D : public cVector<2> {
 public:
 	//cVector2D();
 	cVector2D(const double&, const double&);
+	cVector2D& operator=(const cVector<2>&);
 	inline double& x() const { return dim(0); };
 	inline double& y() const { return dim(1); };
 };

@@ -20,9 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\interface\object_interface.h" />
-    <ClInclude Include="source\physics\utilities\boundingbox.h" />
+    <ClInclude Include="source\physics\helpers\bounding.h" />
+    <ClInclude Include="source\physics\helpers\octree.h" />
     <ClInclude Include="source\precomp.h" />
-    <ClInclude Include="source\physics\composites\bounding.h" />
     <ClInclude Include="source\physics\forces\forces.h" />
     <ClInclude Include="source\physics\forces\property.h" />
     <ClInclude Include="source\physics\objects\blop.h" />
@@ -67,7 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\interface\object_interface.cpp" />
-    <ClCompile Include="source\physics\utilities\boundingbox.cpp" />
+    <ClCompile Include="source\physics\helpers\bounding.cpp" />
+    <ClCompile Include="source\physics\helpers\octree.cpp" />
     <ClCompile Include="source\precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugBGFX|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugConsole|x64'">Create</PrecompiledHeader>

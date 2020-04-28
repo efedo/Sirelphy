@@ -103,7 +103,7 @@ public:
 	cVector4D& get4D() const;
 
 	// Vector information
-	uint8_t						getDimensions() const { return _dimensions; }
+	uint8_t						getDimensions() const { return ND; }
 
 
 	double& dim(const uint8_t&) const; // Gets direct access to dimension
@@ -192,7 +192,5 @@ public:
 	//friend double distance(const cVector<ND>*, const cVector<ND>*); // Spatial distance from first vector to second vector
 protected:
 	double* _values = 0;
-	// Number of dimensions
-	uint8_t				_dimensions = ND;
 };
 

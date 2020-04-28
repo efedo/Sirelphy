@@ -15,3 +15,7 @@ cVector4D::cVector4D(const double& tmpX, const double& tmpY, const double& tmpZ,
 	z() = tmpY;
 	t() = tmpY;
 }
+
+cVector4D& cVector4D::operator=(const cVector<4>& rhs) {
+	return rhs.get4D();
+}

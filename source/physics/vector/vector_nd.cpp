@@ -29,14 +29,15 @@ template <uint8_t ND>
 cVector<ND>::cVector()
 //: _dimensions(ND)
 {
-	_values = new double[_dimensions];
+	_values = new double[ND];
 }
 
 template <uint8_t ND>
 cVector<ND>::cVector(const cVector<ND>& rhs)
 {
-	_values = new double[_dimensions];
-	for (uint8_t i = 0; i != _dimensions; ++i) {
+	const uint8_t dimensions = ND;
+	_values = new double[dimensions];
+	for (uint8_t i = 0; i != dimensions; ++i) {
 		_values[i] = rhs._values[i];
 	}
 }
@@ -74,8 +75,9 @@ template <uint8_t ND>
 cVector<ND>& cVector<ND>::operator=(const cVector<ND>& rhs)
 {
 	if (this == &rhs) return *this;
-	if (_dimensions != rhs._dimensions) throw_line("Mismatched vector dimensions")
-	for (uint8_t i = 0; i != _dimensions; ++i) {
+	const uint8_t dimensions = ND;
+	//if (_dimensions != rhs._dimensions) throw_line("Mismatched vector dimensions")
+	for (uint8_t i = 0; i != dimensions; ++i) {
 		_values[i] = rhs._values[i];
 	}
 	return *this;
@@ -89,14 +91,16 @@ cVector<ND>::~cVector()
 
 template <uint8_t ND>
 double & cVector<ND>::dim(const uint8_t & dimnum) const {
-	if (dimnum >= _dimensions) throw_line("Trying to access non-existant vector dimension");
+	const uint8_t dimensions = ND;
+	if (dimnum >= dimensions) throw_line("Trying to access non-existant vector dimension");
 	return _values[dimnum];
 }
 
 template <uint8_t ND>
 double cVector<ND>::magnitude() const {
+	const uint8_t dimensions = ND;
 	double sum = 0;
-	for (uint8_t i = 0; i != _dimensions; ++i) {
+	for (uint8_t i = 0; i != dimensions; ++i) {
 		sum += (double)_values[i] * (double)_values[i];
 	}
 	sum = sqrt(sum);
@@ -111,7 +115,8 @@ void cVector<ND>::unitize() {
 // Flushes values to 0
 template <uint8_t ND>
 void cVector<ND>::zero() {
-	for (uint8_t i = 0; i != _dimensions; ++i) {
+	const uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
 		_values[i] = 0;
 	}
 }
@@ -128,15 +133,16 @@ void cVector<ND>::scaleTo(const double & targetMagnitude) {
 
 template <uint8_t ND>
 void cVector<ND>::scaleBy(const double & scaleFactor) {
-	for (uint8_t i = 0; i != _dimensions; ++i) {
+	const uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
 		_values[i] = (double)(scaleFactor * (double)_values[i]);
 	}
 }
 
 template <uint8_t ND>
 bool operator==(const cVector<ND>& lhs, const cVector<ND>& rhs) {
-	const uint8_t dimensions = lhs.getDimensions();
-	if (dimensions != rhs.getDimensions()) throw_line("Trying to compare vectors with different numbers of dimensions");
+	const uint8_t dimensions = ND;
+	//if (dimensions != rhs.getDimensions()) throw_line("Trying to compare vectors with different numbers of dimensions");
 	for (uint8_t i = 0; i != dimensions; ++i) {
 		if (lhs._values[i] != rhs._values[i]) return false;
 	}
@@ -145,8 +151,8 @@ bool operator==(const cVector<ND>& lhs, const cVector<ND>& rhs) {
 
 template <uint8_t ND>
 cVector<ND> operator+(const cVector<ND>& lhs, const cVector<ND>& rhs) {
-	const uint8_t dimensions = lhs.getDimensions();
-	if (dimensions != rhs.getDimensions()) throw_line("Trying to add vectors with different numbers of dimensions");
+	const uint8_t dimensions = ND;
+	//if (dimensions != rhs.getDimensions()) throw_line("Trying to add vectors with different numbers of dimensions");
 
 	cVector<ND> newVec;
 
@@ -158,8 +164,8 @@ cVector<ND> operator+(const cVector<ND>& lhs, const cVector<ND>& rhs) {
 
 template <uint8_t ND>
 cVector<ND> operator-(const cVector<ND>& lhs, const cVector<ND>& rhs) {
-	const uint8_t dimensions = lhs.getDimensions();
-	if (dimensions != rhs.getDimensions()) throw_line("Trying to subtract vectors with different numbers of dimensions");
+	const uint8_t dimensions = ND;
+	//if (dimensions != rhs.getDimensions()) throw_line("Trying to subtract vectors with different numbers of dimensions");
 
 	cVector<ND> newVec;
 
@@ -171,7 +177,7 @@ cVector<ND> operator-(const cVector<ND>& lhs, const cVector<ND>& rhs) {
 
 template <uint8_t ND>
 cVector<ND> operator-(const cVector<ND>& rhs) {
-	const uint8_t dimensions = rhs.getDimensions();
+	const uint8_t dimensions = ND;
 	cVector<ND> unaryNeg;
 
 	for (uint8_t i = 0; i != dimensions; ++i) {
@@ -182,7 +188,7 @@ cVector<ND> operator-(const cVector<ND>& rhs) {
 
 template <uint8_t ND>
 cVector<ND> operator*(const cVector<ND>& vec, const double & mult) {
-	const uint8_t dimensions = vec.getDimensions();
+	const uint8_t dimensions = ND;
 	cVector<ND> newVec;
 	/// Scale a vector by a given factor
 	for (uint8_t i = 0; i != dimensions; ++i) {
@@ -209,8 +215,8 @@ cVector<ND> operator/(const double & /*div*/, const cVector<ND>& /*vec*/) {
 
 template <uint8_t ND>
 cVector<ND>& operator+=(cVector<ND>& lhs, const cVector<ND>& rhs) {
-	const uint8_t dimensions = lhs.getDimensions();
-	if (dimensions != rhs.getDimensions()) throw_line("Trying to add vectors with different numbers of dimensions");
+	const uint8_t dimensions = ND;
+	//if (dimensions != rhs.getDimensions()) throw_line("Trying to add vectors with different numbers of dimensions");
 	for (uint8_t i = 0; i != dimensions; ++i) {
 		lhs._values[i] += rhs._values[i];
 	}
@@ -219,8 +225,8 @@ cVector<ND>& operator+=(cVector<ND>& lhs, const cVector<ND>& rhs) {
 
 template <uint8_t ND>
 cVector<ND>& operator-=(cVector<ND>& lhs, const cVector<ND>& rhs) {
-	const uint8_t dimensions = lhs.getDimensions();
-	if (dimensions != rhs.getDimensions()) throw_line("Trying to subtract vectors with different numbers of dimensions");
+	const uint8_t dimensions = ND;
+	//if (dimensions != rhs.getDimensions()) throw_line("Trying to subtract vectors with different numbers of dimensions");
 	for (uint8_t i = 0; i != dimensions; ++i) {
 		lhs._values[i] -= rhs._values[i];
 	}
@@ -229,7 +235,7 @@ cVector<ND>& operator-=(cVector<ND>& lhs, const cVector<ND>& rhs) {
 
 template <uint8_t ND>
 cVector<ND>& operator*=(cVector<ND>& lhs, const double & rhs) {
-	const uint8_t dimensions = lhs.getDimensions();
+	const uint8_t dimensions = ND;
 	for (uint8_t i = 0; i != dimensions; ++i) {
 		lhs._values[i] = (double)((double)(lhs._values[i]) * rhs);
 	}

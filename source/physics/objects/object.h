@@ -4,7 +4,7 @@
 #include "Sirelphy/source/precomp.h"
 #include "Sirelphy/source/physics/vector/vector_nd.h"
 #include "Sirelphy/source/physics/objects/frame.h"
-#include "Sirelphy/source/physics/composites/bounding.h"
+#include "Sirelphy/source/physics/helpers/bounding.h"
 #include "Sirelphy/source/unitlib/unitlib.h"
 
 using namespace mass;

@@ -10,3 +10,7 @@ cVector2D::cVector2D(const double& tmpX, const double& tmpY)
 	x() = tmpX;
 	y() = tmpY;
 }
+
+cVector2D& cVector2D::operator=(const cVector<2>& rhs) {
+	return rhs.get2D();
+}

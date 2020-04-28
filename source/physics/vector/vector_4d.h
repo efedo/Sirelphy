@@ -13,6 +13,7 @@ class cVector4D : public cVector<4> {
 public:
 	cVector4D();
 	cVector4D(const double&, const double&, const double&, const double&);
+	cVector4D& operator=(const cVector<4>&);
 	inline double& x() const { return dim(0); };
 	inline double& y() const { return dim(1); };
 	inline double& z() const { return dim(2); };

@@ -13,6 +13,7 @@ class cVector3D : public cVector<3> {
 public:
 	cVector3D();
 	cVector3D(const double&, const double&, const double&);
+	cVector3D& operator=(const cVector<3>&);
 	inline double& x() const { return dim(0); };
 	inline double& y() const { return dim(1); };
 	inline double& z() const { return dim(2); };

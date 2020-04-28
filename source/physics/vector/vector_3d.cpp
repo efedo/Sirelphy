@@ -14,3 +14,7 @@ cVector3D::cVector3D(const double& tmpX, const double& tmpY, const double& tmpZ)
 	y() = tmpY;
 	z() = tmpY;
 }
+
+cVector3D & cVector3D::operator=(const cVector<3>& rhs) {
+	return rhs.get3D();
+}

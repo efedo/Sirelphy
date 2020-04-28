@@ -81,9 +81,6 @@
     <ClInclude Include="source\physics\objects\particle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\physics\composites\bounding.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\physics\objects\object_compound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -147,7 +144,10 @@
     <ClInclude Include="source\precomp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\physics\utilities\boundingbox.h">
+    <ClInclude Include="source\physics\helpers\bounding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\helpers\octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -218,7 +218,10 @@
     <ClCompile Include="source\precomp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\physics\utilities\boundingbox.cpp">
+    <ClCompile Include="source\physics\helpers\bounding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\helpers\octree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
