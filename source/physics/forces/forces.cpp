@@ -28,7 +28,7 @@ cProperty * cForce::getDestProperty() {
 void cForce::applyForce(cParticle * particleA, cParticle * particleB) {
 
 	// Get direction from A to B
-	cVector3D dirVec(particleA->direction(*particleB).get3D());
+	cVector3D dirVec(particleA->direction(*particleB));
 		
 	// Get distance and property values
 	const double dist = particleB->distance(*particleA).getRaw();

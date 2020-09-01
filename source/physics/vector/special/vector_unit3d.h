@@ -14,8 +14,8 @@ public:
 	cVectorUnit3(const cVector3D& tmpVec)
 		: vec3d_backend(tmpVec) {}
 
-	cVectorUnit3(const cVector<3>& tmpVec)
-		: vec3d_backend(tmpVec.get3D()) {}
+	//cVectorUnit3(const cVector<3>& tmpVec)
+	//	: vec3d_backend(tmpVec.get3D()) {}
 
 	cVectorUnit3(const double& tmp_x, const double& tmp_y, const double& tmp_z)
 		: vec3d_backend(tmp_x, tmp_y, tmp_z) {}
@@ -47,7 +47,7 @@ public:
 
 	// Unit direction from first vector to second vector
 	friend cVectorUnit3<T> direction(const cVectorUnit3<T>& lhs, const cVectorUnit3<T>& rhs) {
-		return cVectorUnit3<T>(lhs.vec3d_backend.direction(rhs.vec3d_backend).get3D());
+		return cVectorUnit3<T>(lhs.vec3d_backend.direction(rhs.vec3d_backend));
 	}
 
 	// Normal angle from first vector to second vector (0 to 1)

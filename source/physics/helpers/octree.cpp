@@ -4,14 +4,14 @@
 #include "Sirelphy/source/physics/vector/vector_3d.h"
 #include "Sirelphy/source/physics/helpers/octree.h"
 
-cOctreeMember::cOctreeMember(const cVector3D& tmpPosition) 
-	: position(tmpPosition)
+cOctreeMember::cOctreeMember(const cVector3D& tmpPosition, cOctree* tmpOwner)
+	: position(tmpPosition), octree(tmpOwner)
 {
-	getOwnerOctree()->add(this); 
+	if (octree)	octree->add(this); 
 }
 
-cOctreeMember::~cOctreeMember() { 
-	getOwnerOctree()->remove(this); 
+cOctreeMember::~cOctreeMember() {
+	if (octree) octree->remove(this);
 }
 
 cVector3D cOctreeMember::getPosition() const {
@@ -131,7 +131,9 @@ cOctree::cOctree(const cVector3D& lowerBound, const cVector3D& upperBound)
 
 void cOctree::add(cOctreeMember* const newMember) {
 	//Check if within bounds
-	if (!boundingBox.contains(newMember->getPosition())) throw_line("New member is outside bounds of octree");
+	if (!boundingBox.contains(newMember->getPosition())) {
+		throw_line("New member is outside bounds of octree");
+	}
 	_add(newMember);
 }
 
@@ -143,7 +145,7 @@ void cOctree::remove(cOctreeMember* const memberToRemove) {
 		memberToRemove->setOctant(0);
 	}
 	catch (...) {
-		RETHROW_LINE("Could not remove member from supposed containing octant (containing octant pointer not properly updated?");
+		RETHROW("Could not remove member from supposed containing octant (containing octant pointer not properly updated?");
 		// If you are so inclined, you could implement a back-up search for the member here based on its location
 	}
 }

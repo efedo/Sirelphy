@@ -76,11 +76,11 @@ public:
 	{ }
 
 	cVector3D			getRandomPositionInside() const {
-		return cBoundingBox<3>::getRandomPositionInside().get3D();
+		return cBoundingBox<3>::getRandomPositionInside();
 	}
 
-	cVector3D			getLowerBound() const { return cBoundingBox<3>::getLowerBound().get3D(); }
-	cVector3D			getUpperBound() const { return cBoundingBox<3>::getUpperBound().get3D(); }
+	cVector3D			getLowerBound() const { return cBoundingBox<3>::getLowerBound(); }
+	cVector3D			getUpperBound() const { return cBoundingBox<3>::getUpperBound(); }
 };
 
 // Make specializations for 2d/3d

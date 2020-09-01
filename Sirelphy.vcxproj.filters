@@ -66,9 +66,6 @@
     <ClInclude Include="source\unitlib\constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\physics\vector\vector_nd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\physics\objects\origin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -97,15 +94,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\physics\universe\universe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\physics\vector\vector_3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\physics\vector\vector_4d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\physics\vector\vector_2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\physics\vector\special\vector_length.h">
@@ -150,6 +138,21 @@
     <ClInclude Include="source\physics\helpers\octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\physics\vector\vector_nd.decl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\vector\vector_2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\vector\vector_3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\vector\vector_4d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\vector\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\sirelphy.cpp">
@@ -165,9 +168,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\unitlib\units\mass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\physics\vector\vector_nd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\physics\objects\object.cpp">
@@ -197,15 +197,6 @@
     <ClCompile Include="source\physics\universe\universe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\physics\vector\vector_3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\physics\vector\vector_2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\physics\vector\vector_4d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\unitlib\units\velocity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -222,6 +213,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\physics\helpers\octree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\vector\vector_nd.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\vector\vector_2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\vector\vector_3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\vector\vector_4d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

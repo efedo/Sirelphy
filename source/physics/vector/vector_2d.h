@@ -9,11 +9,14 @@
 // 2 dimensional vector specialization interface
 // cannot have any data members (must be able to up-cast from base
 // with appropriate number of dimensions)
+
 class cVector2D : public cVector<2> {
 public:
-	//cVector2D();
+	cVector2D();
 	cVector2D(const double&, const double&);
-	cVector2D& operator=(const cVector<2>&);
+	cVector2D(const cVector<2>&);
+	const cVector2D& operator=(const cVector<2>&);
+	cVector2D& operator=(cVector<2>&);
 	inline double& x() const { return dim(0); };
 	inline double& y() const { return dim(1); };
 };

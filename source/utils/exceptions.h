@@ -29,7 +29,7 @@
 //
 //void print_exception(const std::exception &, unsigned int level = 0);
 //
-//#define TRY_CODE try{
+//#define TRY try{
 //#define CODE_FAILED_VOCAL_RETHROW(arg) } catch (const std::exception & e) { std::lock_guard<std::recursive_mutex> lock(globals::consoleOutMutex); std::cerr << "Exception caught by " << __FILE__ << ":" << __LINE__ << "\n"; print_exception(e); std::cerr << "Rethrowing.\n\n"; rethrow_line(arg); } catch (...) { rethrow_line(arg);}
 //#define CODE_FAILED_SILENT_RETHROW(arg) } catch (...) { rethrow_line(arg);}
 //

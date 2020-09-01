@@ -7,7 +7,7 @@
 //class cMersenneTwister {
 //public:
 //	std::string randomHexString(unsigned int);
-//	int randomCheapInt(const int &, const int &);
+//	int randomCheaperInt(const int &, const int &);
 //	float randomFloat(const float &, const float &);
 //	double randomDouble(const double &, const double &);
 //	double randomDoubleNormalDist(const double &, const double &);

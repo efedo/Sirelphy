@@ -11,17 +11,18 @@ class cOctree;
 
 class cOctreeMember {
 public:
-	cOctreeMember(const cVector3D &);
+	cOctreeMember(const cVector3D &, cOctree *);
 	~cOctreeMember();
 	cVector3D getPosition() const;
 	void setPosition(const cVector3D& newPosition);
-	virtual cOctree * getOwnerOctree() const { throw_line_overridden; }
+	cOctree* getOwnerOctree() const { return octree; };
 private:
 	friend class cOctant;
 	friend class cOctree;
 	void setOctant(cOctant* const newOctant) { octant = newOctant; }
 	cOctant* getOctant() const { return octant; }
 	cOctant* octant = 0;
+	cOctree* octree = 0;
 	cVector3D position;
 };
 

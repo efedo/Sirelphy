@@ -19,7 +19,7 @@ const QMass cParticleClass::getMass() const {
 }
 
 void cParticleClass::setProperty(cProperty * propToSet, const double & newVal) {
-//	TRY_CODE
+//	TRY
 
 	if (!newVal) {
 		throw_line("Cannot zero out a force using set property -- need to use remove command");

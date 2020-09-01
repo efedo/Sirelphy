@@ -7,9 +7,9 @@
 #ifndef PCH_H
 #define PCH_H
 
-#ifdef _DEBUG
-#define DEBUG
-#endif //_DEBUG
+//#ifdef _DEBUG
+//#define DEBUG
+//#endif //_DEBUG
 
 #include <iostream>
 #include <list>

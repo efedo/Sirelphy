@@ -188,7 +188,7 @@ double cObject::rel_velocity(const cObject& objectB) const {
 	if (getUniverse() != objectB.getUniverse()) throw_line("Trying to get relative velocity between objects in different universes")
 
 	// Get unit direction from A to B
-	cVector3D dirAtoB = direction(objectB).get3D();
+	cVector3D dirAtoB = direction(objectB);
 
 	// Determine angle between velocity of A and direction from A to B and vice versa
 	double angleVelAToB = angle(getVelocity().getRaw(), dirAtoB);

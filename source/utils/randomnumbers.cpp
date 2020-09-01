@@ -28,7 +28,7 @@
 //	return tmpString;
 //}
 //
-//int cMersenneTwister::randomCheapInt(const int & min, const int & max) {
+//int cMersenneTwister::randomCheaperInt(const int & min, const int & max) {
 //	std::uniform_int_distribution<int> distribution(min, max);
 //	return distribution(cheaprng);
 //}

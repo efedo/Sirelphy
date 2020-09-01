@@ -2,195 +2,265 @@
 
 #pragma once
 #include "Sirelphy/source/precomp.h"
-#include "Sirelphy/source/unitlib/unitlib.h"
+#include "Sirelphy/source/physics/vector/vector_nd.decl.h"
+#include "Sirelphy/source/utils/randomnumbers.h"
 #include "Utilogeny/source/exceptions.h"
-
-template <uint8_t ND> class cVector;
-class cVector2D;
-class cVector3D;
-class cVector4D;
-
-// Multidimensional Operations
-
-//std::vector<double> getRandomDirection(unsigned int);
-
-// Advanced declarations of vector friends
-
-// https://isocpp.org/wiki/faq/templates#template-friends
-template <uint8_t ND>
-bool operator==(const cVector<ND>&, const cVector<ND>&);
+#include "Utilogeny/source/randomnumbers.h"
 
 template <uint8_t ND>
-cVector<ND> operator+(const cVector<ND>&, const cVector<ND>&);
+cVector<ND>::cVector()
+//: _dimensions(ND)
+{
+	_values = new double[ND+5];
+	memset(_values, double(0), sizeof(double) * ND);
+	//for (uint8_t i = 0; i != ND; ++i) {
+	//	_values[i] = 0.0;
+	//}
+}
 
 template <uint8_t ND>
-cVector<ND> operator-(const cVector<ND>&, const cVector<ND>&);
+cVector<ND>::cVector(const cVector<ND>& rhs)
+{
+	constexpr uint8_t dimensions = ND;
+	_values = new double[dimensions];
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		_values[i] = rhs._values[i];
+	}
+}
+
+////template <uint8_t ND>
+//cVector2D& cVector<2>::get2D() const {
+//	return *const_cast<cVector2D*>(static_cast<const cVector2D*>(this));
+//}
+
+//template <uint8_t ND>
+//cVector2D& cVector<ND>::get2D() const {
+//	throw_line("Base vector has incorrect number of dimensions");
+//}
+
+////template <uint8_t ND>
+//cVector3D& cVector<3>::get3D() const {
+//	return *const_cast<cVector3D*>(static_cast<const cVector3D*>(this));
+//}
+
+//template <uint8_t ND>
+//cVector3D& cVector<ND>::get3D() const {
+//	throw_line("Base vector has incorrect number of dimensions");
+//}
+
+//cVector4D& cVector<4>::get4D() const {
+//	return *const_cast<cVector4D*>(static_cast<const cVector4D*>(this));
+//}
+
+//template <uint8_t ND>
+//cVector4D& cVector<ND>::get4D() const {
+//	throw_line("Base vector has incorrect number of dimensions");
+//}
 
 template <uint8_t ND>
-cVector<ND> operator-(const cVector<ND>&);
+cVector<ND>& cVector<ND>::operator=(const cVector<ND>& rhs)
+{
+	if (this == &rhs) return *this;
+	constexpr uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		_values[i] = rhs._values[i];
+	}
+	return *this;
+}
 
 template <uint8_t ND>
-cVector<ND> operator*(const cVector<ND>&, const double&);
+cVector<ND>::~cVector()
+{
+	if (_values) delete[] _values;
+}
 
 template <uint8_t ND>
-cVector<ND> operator/(const cVector<ND>&, const double&);
+inline double & cVector<ND>::dim(const uint8_t & dimnum) const {
+	#ifdef DEBUG
+	if (dimnum >= ND) throw_line("Trying to access non-existant vector dimension");
+	#endif //DEBUG
+	return _values[dimnum];
+}
 
 template <uint8_t ND>
-cVector<ND> operator*(const double&, const cVector<ND>&);
+double cVector<ND>::magnitude() const {
+	constexpr uint8_t dimensions = ND;
+	double sum = 0;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		sum += (double)_values[i] * (double)_values[i];
+	}
+	sum = sqrt(sum);
+	return sum;
+}
 
+// Generates a random unit vector
 template <uint8_t ND>
-cVector<ND> operator/(const double&, const cVector<ND>&);
-
-template <uint8_t ND>
-cVector<ND>& operator+=(cVector<ND>&, const cVector<ND>&);
-
-template <uint8_t ND>
-cVector<ND>& operator-=(cVector<ND>&, const cVector<ND>&);
-
-template <uint8_t ND>
-cVector<ND>& operator*=(cVector<ND>&, const double&);
-
-template <uint8_t ND>
-cVector<ND>& operator/=(cVector<ND>&, const double&);
-
-template <uint8_t ND>
-cVector<ND> direction(const cVector<ND>&, const cVector<ND>&);
-
-template <uint8_t ND>
-cVector<ND> direction(const cVector<ND>*, const cVector<ND>*);
-
-template <uint8_t ND>
-double angle(const cVector<ND>&, const cVector<ND>&); // Normal angle from first vector to second vector (0 to 1)
-
-template <uint8_t ND>
-double angle(const cVector<ND>*, const cVector<ND>*); // Normal angle from first vector to second vector (0 to 1)
-
-template <uint8_t ND>
-double distance(const cVector<ND>&, const cVector<ND>&); // Spatial distance from first vector to second vector
-
-template <uint8_t ND>
-double distance(const cVector<ND>*, const cVector<ND>*); // Spatial distance from first vector to second vector
-
-
-// Instantiations of non-operator friends
-
-//cVector<3> direction(const cVector<3>&, const cVector<3>&);
-//cVector<3> direction(const cVector<3>*, const cVector<3>*);
-//double angle(const cVector<3>&, const cVector<3>&); // Normal angle from first vector to seco3 vector (0 to 1)
-//double angle(const cVector<3>*, const cVector<3>*); // Normal angle from first vector to seco3 vector (0 to 1)
-//double distance(const cVector<3>&, const cVector<3>&); // Spatial distance from first vector to seco3 vector
-//double distance(const cVector<3>*, const cVector<3>*); // Spatial distance from first vector to seco3 vector
-
-
-
-
-// Multidimensional vector base class
-// Eventually, cVectorND will only be used for dim > 4, with all operations for dim <= 4 handled by
-// dedicated specialized objects (e.g. cVector3D will implement all functions directly).
-// For now, however, I'm being lazy and using cVectorND as the backend for vectors of all dimensions
-
-template <uint8_t ND>
-class cVector {
-public:
-	cVector();
-	//cVectorND(const uint8_t&);
-	cVector(const cVector&);
-	cVector& operator=(const cVector&);
-	~cVector();
-
-	cVector2D& get2D() const;
-	cVector3D& get3D() const;
-	cVector4D& get4D() const;
-
-	// Vector information
-	uint8_t						getDimensions() const { return ND; }
-
-
-	double& dim(const uint8_t&) const; // Gets direct access to dimension
-
-	double magnitude() const; // Gets magnitude of vector
-	void unitize();
-	void scaleTo(const double&);
-	void scaleBy(const double&);
-	void zero(); // Flushes values to 0
-
-	friend bool operator==<ND>(const cVector&, const cVector&);
-	friend cVector operator+<ND>(const cVector&, const cVector&);
-	friend cVector operator-<ND>(const cVector&, const cVector&);
-	friend cVector operator-<ND>(const cVector&);
-	friend cVector operator*<ND>(const cVector&, const double&);
-	friend cVector operator/<ND>(const cVector&, const double&);
-	friend cVector operator*<ND>(const double&, const cVector&);
-	friend cVector operator/<ND>(const double&, const cVector&);
-	friend cVector& operator+=<ND>(cVector&, const cVector&);
-	friend cVector& operator-=<ND>(cVector&, const cVector&);
-	friend cVector& operator*=<ND>(cVector&, const double&);
-	friend cVector& operator/=<ND>(cVector&, const double&);
-
-	double distance(const cVector& rhs) const {
-		const uint8_t dimensions = getDimensions();
-		if (dimensions != rhs.getDimensions()) throw_line("Trying to calculate distance between vectors with different numbers of dimensions");
-		double sum = 0;
+void cVector<ND>::randomUnit() {
+	constexpr uint8_t dimensions = ND;
+	bool incomplete = true;
+	while (incomplete) {
 		for (uint8_t i = 0; i != dimensions; ++i) {
-			const double dif = (double)(rhs._values[i] - _values[i]);
-			sum += (dif * dif);
+			_values[i] = globals::mersenneTwister.randomDouble(0, 1);
 		}
-		return sqrt(sum);
+		if (this->isNotZero()) incomplete = false;
 	}
+	this->unitize();
+}
 
-	friend double distance(const cVector& lhs, const cVector& rhs) {
-		return lhs.distance(rhs);
+// Checks if not zero
+template <uint8_t ND>
+bool cVector<ND>::isNotZero() {
+	constexpr uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		if (_values[i]) return true;
 	}
+	return false;
+}
 
-	friend double distance(const cVector* lhs, const cVector* rhs) {
-		if (!(lhs && rhs)) throw_line("Trying to get distance for vector with undefined pointer");
-		return lhs->distance(*rhs);
+template <uint8_t ND>
+void cVector<ND>::unitize() {
+	scaleTo(1.0);
+}
+
+// Flushes values to 0
+template <uint8_t ND>
+void cVector<ND>::zero() {
+	constexpr uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		_values[i] = 0;
 	}
+}
 
-	cVector direction(const cVector& rhs) const {
-		if (this == &rhs) throw_line("Cannot get direction of vector to itself");
-		if (*this == rhs) throw_line("Cannot get direction of vectors at same position");
-		cVector dirVec(rhs - *this);
-		dirVec.unitize();
-		return dirVec;
+/// Scales a vector to magnitude
+template <uint8_t ND>
+void cVector<ND>::scaleTo(const double & targetMagnitude) {
+	if (!isfinite(targetMagnitude)) throw_line("Cannot scale vector to non-finite magnitude");
+	const double mag = magnitude();
+	if (!isfinite(mag)) throw_line("Cannot scale vector with non-finite magnitude to a target magnitude");
+	const double scaleFactor = targetMagnitude / mag;
+	scaleBy(scaleFactor);
+}
+
+template <uint8_t ND>
+void cVector<ND>::scaleBy(const double & scaleFactor) {
+	constexpr uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		_values[i] = (double)(scaleFactor * (double)_values[i]);
 	}
+}
 
-	friend cVector direction(const cVector& lhs, const cVector& rhs) {
-		return lhs.direction(rhs);
+template <uint8_t ND>
+bool operator==(const cVector<ND>& lhs, const cVector<ND>& rhs) {
+	constexpr uint8_t dimensions = ND;
+	//if (dimensions != rhs.getDimensions()) throw_line("Trying to compare vectors with different numbers of dimensions");
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		if (lhs._values[i] != rhs._values[i]) return false;
 	}
+	return true;
+}
 
-	friend cVector direction(const cVector* lhs, const cVector* rhs) {
-		if (!(lhs && rhs)) throw_line("Trying to get distance for vector with undefined pointer");
-		return lhs->direction(*rhs);
+// Uint8_t template comparitor
+template<uint8_t A, uint8_t B>
+constexpr uint8_t greaterTemplateUint8()
+{
+	if (A > B) return A;
+	else return B;
+}
+
+template <uint8_t ND, uint8_t RD>
+cVector<ND> operator+(const cVector<ND>& lhs, const cVector<RD>& rhs) {
+	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
+	cVector<ND> newVec;
+	uint8_t i = 0;
+	for (; i != RD; ++i) {
+		newVec.dim(i)= lhs.dim(i) + rhs.dim(i);
 	}
-
-	// Normal angle from first vector to second vector (0 to 1)
-	double angle(const cVector& rhs) const {
-		return asin(distance(rhs));
-		// not sure if this is in degrees, rads or what... check doc
+	for (; i != ND; ++i) {
+		newVec.dim(i) = lhs.dim(i);
 	}
+	return newVec;
+}
 
-	// Normal angle from first vector to second vector (0 to 1)
-	friend double angle(const cVector& lhs, const cVector& rhs) {
-		return lhs.angle(rhs);
-		// not sure if this is in degrees, rads or what... check doc
+template <uint8_t ND, uint8_t RD>
+cVector<ND> operator-(const cVector<ND>& lhs, const cVector<RD>& rhs) {
+	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
+	cVector<ND> newVec;
+	uint8_t i = 0;
+	for (; i != RD; ++i) {
+		newVec.dim(i) = lhs.dim(i) - rhs.dim(i);
 	}
-
-	// Normal angle from first vector to second vector (0 to 1)
-	friend double angle(const cVector* lhs, const cVector* rhs) {
-		return lhs->angle(*rhs);
+	for (; i != ND; ++i) {
+		newVec.dim(i) = lhs.dim(i);
 	}
+	return newVec;
+}
 
-	//cVector direction(const cVector&) const; // Unit direction from first vector to second vector
-	//friend cVector<ND> direction(const cVector<ND>&, const cVector<ND>&); // Unit direction from first vector to second vector
-	//friend cVector<ND> direction(const cVector<ND>*, const cVector<ND>*); // Unit direction from first vector to second vector
-	//double angle(const cVector&) const; // Normal angle from first vector to second vector (0 to 1)
-	//friend double angle(const cVector<ND>&, const cVector<ND>&); // Normal angle from first vector to second vector (0 to 1)
-	//friend double angle(const cVector<ND>*, const cVector<ND>*); // Normal angle from first vector to second vector (0 to 1)
-	//double distance(const cVector<ND>&) const; // Spatial distance from first vector to second vector
-	//friend double distance(const cVector<ND>&, const cVector<ND>&); // Spatial distance from first vector to second vector
-	//friend double distance(const cVector<ND>*, const cVector<ND>*); // Spatial distance from first vector to second vector
-protected:
-	double* _values = 0;
-};
+template <uint8_t ND>
+cVector<ND> operator-(const cVector<ND>& rhs) {
+	constexpr uint8_t dimensions = ND;
+	cVector<ND> unaryNeg;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		unaryNeg._values[i] = -rhs._values[i];
+	}
+	return unaryNeg;
+}
+
+template <uint8_t ND>
+cVector<ND> operator*(const cVector<ND>& vec, const double & mult) {
+	constexpr uint8_t dimensions = ND;
+	cVector<ND> newVec;
+	/// Scale a vector by a given factor
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		newVec._values[i] = (double)((double)(vec._values[i]) * mult);
+	}
+	return newVec;
+}
+
+template <uint8_t ND>
+cVector<ND> operator/(const cVector<ND>& vec, const double & div) {
+	const double mult = 1 / div;
+	return vec * mult;
+}
+
+template <uint8_t ND>
+cVector<ND> operator*(const double & mult, const cVector<ND>& vec) {
+	return operator*(vec, mult);
+}
+
+template <uint8_t ND>
+cVector<ND> operator/(const double & /*div*/, const cVector<ND>& /*vec*/) {
+	throw_line_not_implemented;
+}
+
+template <uint8_t ND, uint8_t RD>
+cVector<ND>& operator+=(cVector<ND>& lhs, const cVector<RD>& rhs) {
+	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
+	for (uint8_t i = 0; i != RD; ++i) {
+		lhs.dim(i) += rhs.dim(i);
+	}
+	return lhs;
+}
+
+template <uint8_t ND, uint8_t RD>
+cVector<ND>& operator-=(cVector<ND>& lhs, const cVector<RD>& rhs) {
+	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
+	for (uint8_t i = 0; i != RD; ++i) {
+		lhs.dim(i) -= rhs.dim(i);
+	}
+	return lhs;
+}
+
+template <uint8_t ND>
+cVector<ND>& operator*=(cVector<ND>& lhs, const double & rhs) {
+	constexpr uint8_t dimensions = ND;
+	for (uint8_t i = 0; i != dimensions; ++i) {
+		lhs._values[i] = (double)((double)(lhs._values[i]) * rhs);
+	}
+	return lhs;
+}
+
+template <uint8_t ND>
+cVector<ND>& operator/=(cVector<ND>& lhs, const double & rhs) {
+	return operator*=(lhs, 1.0 / rhs); // speedier
+}
 
