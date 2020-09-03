@@ -153,6 +153,12 @@
     <ClInclude Include="source\physics\vector\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\physics\helpers\ntree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\helpers\ntree.decl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\sirelphy.cpp">
@@ -210,9 +216,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\physics\helpers\bounding.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\physics\helpers\octree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\physics\vector\vector_nd.h">

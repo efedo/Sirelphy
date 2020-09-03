@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClInclude Include="source\interface\object_interface.h" />
     <ClInclude Include="source\physics\helpers\bounding.h" />
+    <ClInclude Include="source\physics\helpers\ntree.decl.h" />
+    <ClInclude Include="source\physics\helpers\ntree.h" />
     <ClInclude Include="source\physics\helpers\octree.h" />
     <ClInclude Include="source\physics\vector\vector.h" />
     <ClInclude Include="source\precomp.h" />
@@ -61,7 +63,6 @@
   <ItemGroup>
     <ClCompile Include="source\interface\object_interface.cpp" />
     <ClCompile Include="source\physics\helpers\bounding.cpp" />
-    <ClCompile Include="source\physics\helpers\octree.cpp" />
     <ClCompile Include="source\precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -123,12 +124,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\lib\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\intermediate\$(ProjectName)</IntDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\lib\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\intermediate\$(ProjectName)</IntDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

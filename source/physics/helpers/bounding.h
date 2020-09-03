@@ -6,43 +6,42 @@
 #include "Sirelphy/source/physics/vector/vector_3d.h"
 #include "Utilogeny/source/randomnumbers.h"
 
-template <uint8_t ND>
-
+template <uint8_t D>
 class cBoundingBox {
 public:
 
 	cBoundingBox() {}
-	cBoundingBox(const cVector<ND> tmpLowerBound, const cVector<ND> tmpUpperBound)
+	cBoundingBox(const cVector<D> tmpLowerBound, const cVector<D> tmpUpperBound)
 		: _lowerBound(tmpLowerBound), _upperBound(tmpUpperBound)
 	{
 		_fixOutOfOrderBounds();
 	}
 
-	cVector<ND>			getLowerBound() const { return _lowerBound; }
-	cVector<ND>			getUpperBound() const { return _upperBound; }
+	cVector<D>			getLowerBound() const { return _lowerBound; }
+	cVector<D>			getUpperBound() const { return _upperBound; }
 
-	void				setLowerBound(const cVector<ND> & newLowerBound) {
+	void				setLowerBound(const cVector<D> & newLowerBound) {
 		_lowerBound = newLowerBound;
 		_fixOutOfOrderBounds();
 	}
 
 
-	void				setUpperBound(const cVector<ND>& newUpperBound) {
+	void				setUpperBound(const cVector<D>& newUpperBound) {
 		_upperBound = newUpperBound;
 		_fixOutOfOrderBounds();
 	}
 
-	bool				contains(const cVector<ND>& point) const { 
-		for (int i = 0; i != ND; ++i) {
+	bool				contains(const cVector<D>& point) const { 
+		for (int i = 0; i != D; ++i) {
 			if (point.dim(i) < _lowerBound.dim(i)) return false;
 			if (point.dim(i) > _upperBound.dim(i)) return false;
 		}
 		return true;
 	}
 
-	cVector<ND>			getRandomPositionInside() const {
-		cVector<ND> randomPosition;
-		for (int i = 0; i != ND; ++i) {
+	cVector<D>			getRandomPositionInside() const {
+		cVector<D> randomPosition;
+		for (int i = 0; i != D; ++i) {
 			randomPosition.dim(i) = globals::mersenneTwister.randomDouble(_lowerBound.dim(i), _upperBound.dim(i));
 		}
 		return randomPosition;
@@ -55,7 +54,7 @@ public:
 protected:
 	void				_fixOutOfOrderBounds() {
 		// Fix out of order bound
-		for (int i = 0; i != ND; ++i) {
+		for (int i = 0; i != D; ++i) {
 			if (_lowerBound.dim(i) > _upperBound.dim(i)) {
 				double high = _lowerBound.dim(i);
 				_lowerBound.dim(i) = _upperBound.dim(i);
@@ -63,9 +62,9 @@ protected:
 			}
 		}
 	}
-	uint8_t				_dimensions = ND;
-	cVector<ND>			_lowerBound;
-	cVector<ND> 		_upperBound;
+	uint8_t				_dimensions = D;
+	cVector<D>			_lowerBound;
+	cVector<D> 		_upperBound;
 };
 
 class cBoundingBox3D : public cBoundingBox<3> {

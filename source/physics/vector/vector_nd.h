@@ -12,7 +12,7 @@ cVector<ND>::cVector()
 //: _dimensions(ND)
 {
 	_values = new double[ND+5];
-	memset(_values, double(0), sizeof(double) * ND);
+	memset(_values, 0, sizeof(double) * ND);
 	//for (uint8_t i = 0; i != ND; ++i) {
 	//	_values[i] = 0.0;
 	//}
