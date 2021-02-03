@@ -1,1 +1,0 @@
-C:\Programming\Sirelphy\source\test\x64\Release\SirelphyTest.vcxproj.CopyComplete
