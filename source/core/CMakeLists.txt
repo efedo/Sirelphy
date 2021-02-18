@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-add_library(Sirelphy STATIC
+add_library(SirelphyCore STATIC
     interface/object_interface.h
     physics/helpers/bounding.h
     physics/helpers/ntree.decl.h
@@ -8,7 +8,6 @@ add_library(Sirelphy STATIC
     physics/helpers/octree.h
     physics/vector/vector.decl.h
     physics/vector/vector.h
-    precomp.h
     physics/forces/forces.h
     physics/forces/property.h
     physics/objects/blop.h
@@ -47,6 +46,7 @@ add_library(Sirelphy STATIC
     interface/object_interface.cpp
     physics/helpers/bounding.cpp
     precomp.cpp
+	precomp.h
     physics/forces/forces.cpp
     physics/forces/property.cpp
     physics/objects/frame.cpp
@@ -63,7 +63,12 @@ add_library(Sirelphy STATIC
     unitlib/units/velocity.cpp
 )
 
-set_target_properties(Sirelphy PROPERTIES
-            CXX_STANDARD ${OVERRIDE_CXX_STANDARD}
-            CXX_EXTENSIONS OFF
-            )
+target_precompile_headers(SirelphyCore
+	PRIVATE precomp.h)
+	
+target_config_compiler(SirelphyCore)
+
+set_target_properties(SirelphyCore PROPERTIES
+           CXX_STANDARD ${OVERRIDE_CXX_STANDARD}
+           CXX_EXTENSIONS OFF
+           )
