@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 include(${UTILOGENY_DIR}/cmake/target_add_googletest.cmake)
+include(${UTILOGENY_DIR}/cmake/target_add_tbb.cmake)
 
 add_executable(SirelphyTest
 	pch.cpp

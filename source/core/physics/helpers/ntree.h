@@ -176,10 +176,8 @@ void cNtree<D>::remove(cNtreeMember<D>* const memberToRemove) {
 		containingNtant->_remove(memberToRemove);
 		memberToRemove->setNtant(0);
 	}
-	catch (...) {
-		RETHROW("Could not remove member from supposed containing ntant (containing ntant pointer not properly updated?");
-		// If you are so inclined, you could implement a back-up search for the member here based on its location
-	}
+	// If you are so inclined, you could implement a back-up search for the member here based on its location
+	catch_rethrow("Could not remove member from supposed containing ntant (containing ntant pointer not properly updated?");	
 }
 
 template <uint8_t D>
