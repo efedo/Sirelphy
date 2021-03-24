@@ -21,5 +21,5 @@ set_target_properties(SirelphyTest PROPERTIES
 			
 target_link_tbb(SirelphyTest)			
 target_link_gtest(SirelphyTest)
-target_link_libraries(SirelphyTest SirelphyCore UtilogenyCore)
+target_link_libraries(SirelphyTest PUBLIC SirelphyCore UtilogenyCore)
 
