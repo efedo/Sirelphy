@@ -106,25 +106,33 @@ public:
 	// 2. Use SFINAI to always provide only the correct option for a vector of given dimensions
 
 	template<uint8_t T_ = ND>
-	cVector(const double nx, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<1, 1>>::value>* = nullptr) {
+	cVector(const double nx, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<1, 1>>::value>* = nullptr) 
+		: _values(new double[ND])
+	{
 		x() = nx;
 	};
 
 	template<uint8_t T_ = ND>
-	cVector(const double nx, const double ny, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<2, 1>>::value>* = nullptr) {
+	cVector(const double nx, const double ny, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<2, 1>>::value>* = nullptr) 
+		: _values(new double[ND])
+	{
 		x() = nx;
 		y() = ny;
 	};
 
 	template<uint8_t T_ = ND>
-	cVector(const double nx, const double ny, const double nz, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<3, 1>>::value>* = nullptr) {
+	cVector(const double nx, const double ny, const double nz, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<3, 1>>::value>* = nullptr) 
+		: _values(new double[ND])
+	{
 		x() = nx;
 		y() = ny;
 		z() = nz;
 	};
 
 	template<uint8_t T_ = ND>
-	cVector(const double nx, const double ny, const double nz, const double nt, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<4, 1>>::value>* = nullptr) { 
+	cVector(const double nx, const double ny, const double nz, const double nt, std::enable_if_t<std::ratio_equal<std::ratio<T_, 1>, std::ratio<4, 1>>::value>* = nullptr) 
+		: _values(new double[ND])
+	{ 
 		x() = nx; 
 		y() = ny; 
 		z() = nz; 

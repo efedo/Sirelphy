@@ -18,8 +18,9 @@ namespace energy {
 namespace mass {
 
 	// Base unit
-	UNIT_ADD_BASE(joule_mass, joule_masses, 1.0)
-	UNIT_ADD_RELATIVE(gram, grams, joule_mass, c2 / 1000)
+	//UNIT_ADD_BASE(joule_mass, joule_masses, 1.0)
+	UNIT_ADD_BASE(_kilogram, _kilograms, 1.0)
+	UNIT_ADD_RELATIVE(gram, grams, _kilogram, 1.0 / 1000)
 
 	// SI derived units
 	UNIT_ADD_SIPREFIXES(gram, grams)

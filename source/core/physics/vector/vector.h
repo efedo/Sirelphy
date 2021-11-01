@@ -9,9 +9,10 @@
 
 template <uint8_t ND>
 cVector<ND>::cVector()
+	: _values(new double[ND])
 //: _dimensions(ND)
 {
-	_values = new double[ND+5];
+	//_values = new double[ND];
 	memset(_values, 0, sizeof(double) * ND);
 	//for (uint8_t i = 0; i != ND; ++i) {
 	//	_values[i] = 0.0;
@@ -20,10 +21,10 @@ cVector<ND>::cVector()
 
 template <uint8_t ND>
 cVector<ND>::cVector(const cVector<ND>& rhs)
+	: _values(new double[ND])
 {
-	constexpr uint8_t dimensions = ND;
-	_values = new double[dimensions];
-	for (uint8_t i = 0; i != dimensions; ++i) {
+	_values = new double[ND];
+	for (uint8_t i = 0; i != ND; ++i) {
 		_values[i] = rhs._values[i];
 	}
 }

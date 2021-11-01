@@ -17,6 +17,10 @@ public:
 		return *(static_cast<const QUnit *>(this));
 	}
 
+	void debugUnitPrint() {
+		D::debugPrint();
+	}
+
 	inline void setRaw(const double & _val) { val = _val; }
 	inline T getRaw() const { return val; }
 //	inline cRunTimeDimensions getDimensions() const { return D::getDimensionsRunTime(); }

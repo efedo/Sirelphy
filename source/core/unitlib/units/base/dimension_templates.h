@@ -26,6 +26,15 @@ struct unitDimensions {
 	static constexpr long long charge_den = Charge::den;
 	static constexpr long long angle_num = Angle::num;
 	static constexpr long long angle_den = Angle::den;
+	static void debugPrint() {
+		std::cout << "Unit dimensions:" << "\n";
+		std::cout << "amount: " << amount_num << "/" << amount_den << "\n";
+		std::cout << "length: " << length_num << "/" << length_den << "\n";
+		std::cout << "time: " << time_num << "/" << time_den << "\n";
+		std::cout << "energy: " << energy_num << "/" << energy_den << "\n";
+		std::cout << "charge: " << charge_num << "/" << charge_den << "\n";
+		std::cout << "angle: " << angle_num << "/" << angle_den << "\n";
+	}
 };
 
 template <class LHS, class RHS>
@@ -34,12 +43,12 @@ struct _unitDimensions_add { // add two ratios
 
 	// redirection necessary to make this possible
 	using type = typename unitDimensions<
-		std::ratio_add<std::ratio<LHS::amount_num, LHS::amount_den>, std::ratio<LHS::amount_num, LHS::amount_den>>,
-		std::ratio_add<std::ratio<LHS::length_num, LHS::length_den>, std::ratio<LHS::length_num, LHS::length_den>>,
-		std::ratio_add<std::ratio<LHS::time_num, LHS::time_den>, std::ratio<LHS::time_num, LHS::time_den>>,
-		std::ratio_add<std::ratio<LHS::energy_num, LHS::energy_den>, std::ratio<LHS::energy_num, LHS::energy_den>>,
-		std::ratio_add<std::ratio<LHS::charge_num, LHS::charge_den>, std::ratio<LHS::charge_num, LHS::charge_den>>,
-		std::ratio_add<std::ratio<LHS::angle_num, LHS::angle_den>, std::ratio<LHS::angle_num, LHS::angle_den>>
+		std::ratio_add<std::ratio<LHS::amount_num, LHS::amount_den>, std::ratio<RHS::amount_num, RHS::amount_den>>,
+		std::ratio_add<std::ratio<LHS::length_num, LHS::length_den>, std::ratio<RHS::length_num, RHS::length_den>>,
+		std::ratio_add<std::ratio<LHS::time_num, LHS::time_den>, std::ratio<RHS::time_num, RHS::time_den>>,
+		std::ratio_add<std::ratio<LHS::energy_num, LHS::energy_den>, std::ratio<RHS::energy_num, RHS::energy_den>>,
+		std::ratio_add<std::ratio<LHS::charge_num, LHS::charge_den>, std::ratio<RHS::charge_num, RHS::charge_den>>,
+		std::ratio_add<std::ratio<LHS::angle_num, LHS::angle_den>, std::ratio<RHS::angle_num, RHS::angle_den>>
 	>;
 };
 
@@ -52,12 +61,12 @@ struct _unitDimensions_subtract { // add two ratios
 
 	// redirection necessary to make this possible
 	using type = typename unitDimensions<
-		std::ratio_subtract<std::ratio<LHS::amount_num, LHS::amount_den>, std::ratio<LHS::amount_num, LHS::amount_den>>,
-		std::ratio_subtract<std::ratio<LHS::length_num, LHS::length_den>, std::ratio<LHS::length_num, LHS::length_den>>,
-		std::ratio_subtract<std::ratio<LHS::time_num, LHS::time_den>, std::ratio<LHS::time_num, LHS::time_den>>,
-		std::ratio_subtract<std::ratio<LHS::energy_num, LHS::energy_den>, std::ratio<LHS::energy_num, LHS::energy_den>>,
-		std::ratio_subtract<std::ratio<LHS::charge_num, LHS::charge_den>, std::ratio<LHS::charge_num, LHS::charge_den>>,
-		std::ratio_subtract<std::ratio<LHS::angle_num, LHS::angle_den>, std::ratio<LHS::angle_num, LHS::angle_den>>
+		std::ratio_subtract<std::ratio<LHS::amount_num, LHS::amount_den>, std::ratio<RHS::amount_num, RHS::amount_den>>,
+		std::ratio_subtract<std::ratio<LHS::length_num, LHS::length_den>, std::ratio<RHS::length_num, RHS::length_den>>,
+		std::ratio_subtract<std::ratio<LHS::time_num, LHS::time_den>, std::ratio<RHS::time_num, RHS::time_den>>,
+		std::ratio_subtract<std::ratio<LHS::energy_num, LHS::energy_den>, std::ratio<RHS::energy_num, RHS::energy_den>>,
+		std::ratio_subtract<std::ratio<LHS::charge_num, LHS::charge_den>, std::ratio<RHS::charge_num, RHS::charge_den>>,
+		std::ratio_subtract<std::ratio<LHS::angle_num, LHS::angle_den>, std::ratio<RHS::angle_num, RHS::angle_den>>
 	>;
 };
 

@@ -18,8 +18,10 @@ namespace velocity { class QVelocity; };
 namespace length {
 
 	// Base unit
-	UNIT_ADD_BASE(light_second, light_seconds, 1.0)
-	UNIT_ADD_RELATIVE(meter, meters, light_second, 1.0 / c)
+	//UNIT_ADD_BASE(light_second, light_seconds, 1.0)
+	//UNIT_ADD_RELATIVE(meter, meters, light_second, 1.0 / c)
+	UNIT_ADD_BASE(meter, meters, 1.0)
+	UNIT_ADD_RELATIVE(light_second, light_seconds, meter, c)
 
 	// SI derived units
 	UNIT_ADD_SIPREFIXES(meter, meters)
