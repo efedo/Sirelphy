@@ -43,10 +43,10 @@ UNIT_ADD_RELATIVE(zetta##BASE, zetta##BASE_PLURAL, BASE, si_zetta) __NL__ \
 UNIT_ADD_RELATIVE(yotta##BASE, yotta##BASE_PLURAL, BASE, si_yotta) __NL__
 
 #define GENERATE_MEMBER_FUNCTIONS(NAME, NAME_PLURAL, ABBREV) \
-inline void set_##NAME_PLURAL(const double& _val) { val = double(_val * units_per_##NAME); } __NL__ \
+inline void set_##NAME_PLURAL(const double& _val) { val = double(_val * _units_private::units_per_##NAME); } __NL__ \
 inline void set_##ABBREV(const double& _val) { set_##NAME_PLURAL(_val); } __NL__ \
-inline double in_##NAME_PLURAL() { return double(val) * NAME_PLURAL##_per_unit; } __NL__ \
-inline double in_##ABBREV() { return in_##NAME_PLURAL(); } __NL__
+inline double get_##NAME_PLURAL() { return double(val) * _units_private::NAME_PLURAL##_per_unit; } __NL__ \
+inline double get_##ABBREV() { return get_##NAME_PLURAL(); } __NL__
 
 #define GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(NAME, NAME_PLURAL, ABBREV) \
 GENERATE_MEMBER_FUNCTIONS(yocto##NAME, yocto##NAME_PLURAL, y##ABBREV) __NL__ \
@@ -71,8 +71,8 @@ GENERATE_MEMBER_FUNCTIONS(zetta##NAME, zetta##NAME_PLURAL, Z##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(yotta##NAME, yotta##NAME_PLURAL, Y##ABBREV) __NL__
 
 #define GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
-constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) { return CLASSNAME(double(_val)); } __NL__ \
-constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) { return CLASSNAME(double(_val)); }
+//constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) { return CLASSNAME(double(_val)); } __NL__ \
+//constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) { return CLASSNAME(double(_val)); }
 
 #define GENERATE_LITERALS_SIPREFIXES(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
 GENERATE_LITERALS(CLASSNAME, yocto##NAME, yocto##NAME_PLURAL, y##ABBREV) __NL__ \

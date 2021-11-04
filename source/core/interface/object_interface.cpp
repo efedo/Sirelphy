@@ -8,9 +8,9 @@ cObjectInterface::cObjectInterface(cObject* tmpObject)
 	: _object(tmpObject) {}
 
 void cObjectInterface::getPosition(double& posX, double& posY, double& posZ) {
-	posX = _object->getPosition().x().in_meters();
-	posY = _object->getPosition().y().in_meters();
-	posZ = _object->getPosition().z().in_meters();
+	posX = _object->getPosition().x().get_meters();
+	posY = _object->getPosition().y().get_meters();
+	posZ = _object->getPosition().z().get_meters();
 }
 
 void cObjectInterface::getVelocity(double& velX, double& velY, double& velZ) {

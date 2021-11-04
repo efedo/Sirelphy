@@ -9,15 +9,10 @@
 
 using namespace si;
 
-namespace units {
+namespace _units_private {
 
-	// Base unit
 	UNIT_ADD_BASE(radian, radians, 1854858 * pow(10, 38))
-
-	// SI derived units
 	UNIT_ADD_SIPREFIXES(radian, radians)
-
-	// Non-SI units
 	UNIT_ADD_RELATIVE(degree, degrees, radian, 1 / 180) //deg
 	UNIT_ADD_RELATIVE(arcminute, arcminutes, degree, 1 / 60) //arcmin
 	UNIT_ADD_RELATIVE(arcsecond, arcseconds, arcminute, 1 / 60) //arcsec

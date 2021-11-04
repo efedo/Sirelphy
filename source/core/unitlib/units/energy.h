@@ -10,20 +10,17 @@
 
 using namespace si;
 
+namespace _units_private {
+	UNIT_ADD_BASE(joule, joules, 1.0)
+	//UNIT_ADD_SIPREFIXES(gram, grams)
+	//UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847 * pow(10, 30)) //t
+	//UNIT_ADD_RELATIVE(metric_ton, metric_tons, kilogram, 1000) //t
+}
+
 namespace units {
 
 	class QMass;
 	class QVelocity;
-
-	// Base unit
-	UNIT_ADD_BASE(joule, joules, 1.0)
-
-	//// SI derived units
-	//UNIT_ADD_SIPREFIXES(gram, grams)
-
-	//// Non-SI units
-	//UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847 * pow(10, 30)) //t
-	//UNIT_ADD_RELATIVE(metric_ton, metric_tons, kilogram, 1000) //t
 
 	class QEnergy : public QUnit<double, _units_private::dim_energy> {
 	public:

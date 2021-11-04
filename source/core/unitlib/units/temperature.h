@@ -9,16 +9,12 @@
 
 using namespace si;
 
-namespace units {
-
-	// Base unit
+namespace _units_private {
 	UNIT_ADD_BASE(kelvin, kelvin, 1854858 * pow(10, 38)) // K
-
-	// SI derived units
 	UNIT_ADD_SIPREFIXES(kelvin, kelvin)
-
-	// Non-SI units
 	//UNIT_ADD(temperature, celsius, celsius, degC, unit<std::ratio<1>, kelvin, std::ratio<0>, std::ratio<27315, 100>>)
 	//UNIT_ADD(temperature, fahrenheit, fahrenheit, degF, unit<std::ratio<5, 9>, celsius, std::ratio<0>, std::ratio<-160, 9>>)
+}
 
+namespace units {
 }

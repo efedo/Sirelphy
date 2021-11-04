@@ -11,21 +11,10 @@
 
 using namespace si;
 
-namespace units {
-
-	class QTime;
-	class QVelocity;
-
-	// Base unit
-	//UNIT_ADD_BASE(light_second, light_seconds, 1.0)
-	//UNIT_ADD_RELATIVE(meter, meters, light_second, 1.0 / c)
+namespace _units_private {
 	UNIT_ADD_BASE(meter, meters, 1.0)
 	UNIT_ADD_RELATIVE(light_second, light_seconds, meter, c)
-
-	// SI derived units
 	UNIT_ADD_SIPREFIXES(meter, meters)
-
-	// Non-SI units
 	UNIT_ADD_RELATIVE(foot, feet, meter, 381 / 1250)
 	UNIT_ADD_RELATIVE(yard, yards, foot, 3)
 	UNIT_ADD_RELATIVE(inch, inches, foot, 1 / 12)
@@ -35,6 +24,12 @@ namespace units {
 	UNIT_ADD_RELATIVE(light_year, light_years, meter, 9460730472580800)
 	UNIT_ADD_RELATIVE(parsec, parsecs, light_year, 3.26156)
 	UNIT_ADD_RELATIVE(angstrom, angstroms, nanometer, 0.1)
+}
+
+namespace units {
+
+	class QTime;
+	class QVelocity;
 
 	class QLength : public QUnit<double, _units_private::dim_length> {
 		public:

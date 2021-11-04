@@ -9,15 +9,9 @@
 
 using namespace si;
 
-namespace units {
-
-	// Base unit
+namespace _units_private {
 	UNIT_ADD_BASE(second, seconds, 1.0)
-
-	// SI derived units
 	UNIT_ADD_SIPREFIXES(second, seconds)
-
-	// Non-SI units
 	UNIT_ADD_RELATIVE(minute, minutes, second, 60) // min
 	UNIT_ADD_RELATIVE(hour, hours, minute, 60) // hr
 	UNIT_ADD_RELATIVE(day, days, hour, 24) // d
@@ -25,7 +19,9 @@ namespace units {
 	UNIT_ADD_RELATIVE(year, years, day, 365) // yr
 	UNIT_ADD_RELATIVE(julian_year, julian_years, second, 31557600) // yr_j
 	UNIT_ADD_RELATIVE(gregorian_year, gregorian_years, second, 31556952) // yr_g
+}
 
+namespace units {
 	class QTime : public QUnit<double, _units_private::dim_time> {
 	public:
 

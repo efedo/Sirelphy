@@ -23,13 +23,13 @@ int fnSirelphy()
 
 	units::QLength mylength;
 	mylength.setRaw(10000000000000000);
-	double lenm = mylength.in_m();
+	double lenm = mylength.get_m();
 	std::cout << "length in m: " << lenm;
 
 	units::QLength myotherlength;
 
 	using namespace units;
-	myotherlength = 10.56_meters;
+	myotherlength.set_meters(10.56);
 
 	return 5;
 }

@@ -11,19 +11,11 @@
 
 using namespace si;
 
-namespace units {
-
-	class QEnergy;
-
-	// Base unit
+namespace _units_private {
 	//UNIT_ADD_BASE(joule_mass, joule_masses, 1.0)
 	UNIT_ADD_BASE(_kilogram, _kilograms, 1.0)
 	UNIT_ADD_RELATIVE(gram, grams, _kilogram, 1.0 / 1000)
-
-	// SI derived units
 	UNIT_ADD_SIPREFIXES(gram, grams)
-
-	// Non-SI units
 	UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847e30) //t
 	UNIT_ADD_RELATIVE(metric_ton, metric_tons, kilogram, 1000) //t
 	UNIT_ADD_RELATIVE(pound, pounds, kilogram, 45359237 / 100000000) // //lb
@@ -35,6 +27,11 @@ namespace units {
 	UNIT_ADD_RELATIVE(dalton, daltons, gram, 1.66053906660e-24) // Da
 	UNIT_ADD_RELATIVE(kilodalton, kilodaltons, dalton, 1000) // kDa
 	UNIT_ADD_RELATIVE(electronvolt_mass, electronvolts_mass, gram, 1.782662e-33) // eVm
+}
+
+namespace units {
+
+	class QEnergy;
 
 	class QMass : public QUnit<double, _units_private::dim_mass> {
 	public:
