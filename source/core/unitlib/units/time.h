@@ -2,10 +2,7 @@
 
 #pragma once
 
-#include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/si_prefixes.h"
-#include "Sirelphy/source/core/unitlib/units/base/baseunit.h"
-#include "Sirelphy/source/core/unitlib/units/base/dimension_fundamentals.h"
+#include "Sirelphy/source/core/unitlib/units/base.h"
 
 using namespace si;
 
@@ -22,10 +19,10 @@ namespace _units_private {
 }
 
 namespace units {
-	class QTime : public QUnit<double, _units_private::dim_time> {
+	class Time : public Unit<double, _units_private::dim_time> {
 	public:
 
-		explicit constexpr QTime(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr Time(const double& _val = 0) : Unit(_val) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(second, seconds, s)
@@ -43,24 +40,24 @@ namespace units {
 		GENERATE_MEMBER_FUNCTIONS(gregorian_year, gregorian_years, yr_g)
 
 		// Math functions
-		//friend QLength operator*(const velocity::QVelocity&, const time::QTime&);
+		//friend Length operator*(const velocity::Velocity&, const time::Time&);
 	};
-	typedef QTime QDuration;
+	typedef Time Duration;
 
 	// Literals
 
 	// Base unit
-	GENERATE_LITERALS(QTime, second, seconds, s)
+	GENERATE_LITERALS(Time, second, seconds, s)
 
 	// SI prefix units
-	GENERATE_LITERALS_SIPREFIXES(QTime, second, seconds, s)
+	GENERATE_LITERALS_SIPREFIXES(Time, second, seconds, s)
 
 	// Non-SI units
-	GENERATE_LITERALS(QTime, minute, minutes, min)
-	GENERATE_LITERALS(QTime, hour, hours, hr)
-	GENERATE_LITERALS(QTime, day, days, d)
-	GENERATE_LITERALS(QTime, week, weeks, wk)
-	GENERATE_LITERALS(QTime, year, years, yr)
-	GENERATE_LITERALS(QTime, julian_year, julian_years, yr_j)
-	GENERATE_LITERALS(QTime, gregorian_year, gregorian_years, yr_g)
+	GENERATE_LITERALS(Time, minute, minutes, min)
+	GENERATE_LITERALS(Time, hour, hours, hr)
+	GENERATE_LITERALS(Time, day, days, d)
+	GENERATE_LITERALS(Time, week, weeks, wk)
+	GENERATE_LITERALS(Time, year, years, yr)
+	GENERATE_LITERALS(Time, julian_year, julian_years, yr_j)
+	GENERATE_LITERALS(Time, gregorian_year, gregorian_years, yr_g)
 }

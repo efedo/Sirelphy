@@ -7,7 +7,7 @@
 #include "Sirelphy/source/core/physics/vector/special/vector_length.h"
 #include "Sirelphy/source/core/physics/vector/special/vector_velocity.h"
 #include "Sirelphy/source/core/physics/objects/frame.h"
-#include "Sirelphy/source/core/unitlib/unitlib.h"
+#include "Sirelphy/source/core/unitlib/units.h"
 
 //class cParticleSystem;
 class cParticleClass;
@@ -21,7 +21,7 @@ public:
 	//void						provideKinEnergy(cVectorND);
 
 	// Friend functions
-	friend units::QLength		distance(const cParticle&, const cParticle&);
+	friend units::Length		distance(const cParticle&, const cParticle&);
 	//friend double				distance_spacetime(const cParticle&, const cParticle&);
 	friend double				rel_velocity(const cParticle&, const cParticle&);
 

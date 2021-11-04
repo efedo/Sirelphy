@@ -3,8 +3,8 @@
 #pragma once
 
 #include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/macro_debugging.h"
-#include "Sirelphy/source/core/unitlib/si_prefixes.h"
+#include "Sirelphy/source/core/unitlib/helpers/macro_debugging.h"
+#include "Sirelphy/source/core/unitlib/helpers/si_prefixes.h"
 
 using namespace si;
 

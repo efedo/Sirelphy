@@ -2,11 +2,7 @@
 
 #pragma once
 
-#include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/si_prefixes.h"
-#include "Sirelphy/source/core/unitlib/units/helper_macros.h"
-#include "Sirelphy/source/core/unitlib/units/base/baseunit.h"
-#include "Sirelphy/source/core/unitlib/units/base/dimension_fundamentals.h"
+#include "Sirelphy/source/core/unitlib/units/base.h"
 
 using namespace si;
 
@@ -19,25 +15,25 @@ namespace _units_private {
 
 namespace units {
 
-	class QMass;
-	class QVelocity;
+	class Mass;
+	class Velocity;
 
-	class QEnergy : public QUnit<double, _units_private::dim_energy> {
+	class Energy : public Unit<double, _units_private::dim_energy> {
 	public:
-		explicit constexpr QEnergy(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr Energy(const double& _val = 0) : Unit(_val) {}
 
 		// Functions
-		QMass convertToMass() const;
+		Mass convertToMass() const;
 
-		constexpr friend QEnergy operator+(const QEnergy lhs, const QEnergy rhs) {
-			return QEnergy(lhs.val + rhs.val);
+		constexpr friend Energy operator+(const Energy lhs, const Energy rhs) {
+			return Energy(lhs.val + rhs.val);
 		}
 
-		constexpr friend QEnergy operator-(const QEnergy lhs, const QEnergy rhs) {
-			return QEnergy(lhs.val - rhs.val);
+		constexpr friend Energy operator-(const Energy lhs, const Energy rhs) {
+			return Energy(lhs.val - rhs.val);
 		}
 	};
 
-	QEnergy getKineticEnergy(const QMass& _mass, const QVelocity& _vel);
+	Energy getKineticEnergy(const Mass& _mass, const Velocity& _vel);
 };
 

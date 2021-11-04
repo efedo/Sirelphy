@@ -2,7 +2,7 @@
 
 #pragma once
 #include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/unitlib.h"
+#include "Sirelphy/source/core/unitlib/units.h"
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/physics/vector/special/vector_length.h"
 
@@ -10,16 +10,16 @@
 //class cVectorLength3Time1 {
 //protected:
 //	cVectorLength3 _space;
-//	QTime _time;
+//	Time _time;
 //public:
-//	inline QLength x() const { return _space.x(); }
-//	inline QLength y() const { return _space.y(); }
-//	inline QLength z() const { return _space.z(); }
-//	inline QTime t() const { return QTime(_time); }
+//	inline Length x() const { return _space.x(); }
+//	inline Length y() const { return _space.y(); }
+//	inline Length z() const { return _space.z(); }
+//	inline Time t() const { return Time(_time); }
 //	inline cVectorLength3 getSpacePosition() const { return _space; }
 //
-//	QLength getLengthSpace() const { return QLength(_space.magnitude()); }
-//	QTime getLengthTime() const { return (_time); }
+//	Length getLengthSpace() const { return Length(_space.magnitude()); }
+//	Time getLengthTime() const { return (_time); }
 //
 //	double getLengthSpacetime(const cVectorLength3Time1 &) {
 //		const double lSpace = getLengthSpace().getRaw();
@@ -33,7 +33,7 @@
 //		_z = _vecSpace.z().getRaw();
 //	}
 //	void setTimePosition(const double& tmp_t) { _t = tmp_t; }
-//	void setTimePosition(const QTime& tmp_t) { setTimePosition(tmp_t.getRaw()); }
+//	void setTimePosition(const Time& tmp_t) { setTimePosition(tmp_t.getRaw()); }
 //
 //
 //
@@ -59,11 +59,11 @@
 //		: cVector4D(tmp_x, tmp_y, tmp_z, tmp_t)
 //	{}
 //
-//	cVectorLength3Time1(const QLength& _x, const QLength& _y, const QLength& _z, const QTime& _t)
+//	cVectorLength3Time1(const Length& _x, const Length& _y, const Length& _z, const Time& _t)
 //		: cVectorLength3Time1(_x.getRaw(), _y.getRaw(), _z.getRaw(), _t.getRaw())
 //	{}
 //
-//	cVectorLength3Time1(const cVectorLength3& _vecSpace, const QTime& _t)
+//	cVectorLength3Time1(const cVectorLength3& _vecSpace, const Time& _t)
 //		: cVectorLength3Time1(_vecSpace.x().getRaw(), _vecSpace.y().getRaw(), _vecSpace.z().getRaw(), _t.getRaw())
 //	{}
 //

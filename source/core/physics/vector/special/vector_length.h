@@ -2,24 +2,24 @@
 
 #pragma once
 #include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/unitlib.h"
+#include "Sirelphy/source/core/unitlib/units.h"
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/physics/vector/special/vector_unit3d.h"
 
-typedef cVectorUnit3<units::QLength> cVectorLength3;
+typedef cVectorUnit3<units::Length> cVectorLength3;
 
-//class cVectorLength3 : public cVectorUnit3<QLength> {
+//class cVectorLength3 : public cVectorUnit3<Length> {
 //public:
 //	cVectorLength3() {}
 //
 //	cVectorLength3(const cVector3D& tmpVec)
-//		: cVectorUnit3<QLength>(tmpVec) {}
+//		: cVectorUnit3<Length>(tmpVec) {}
 //
 //	cVectorLength3(const double& tmp_x, const double& tmp_y, const double& tmp_z)
-//		: cVectorUnit3<QLength>(tmp_x, tmp_y, tmp_z) {}
+//		: cVectorUnit3<Length>(tmp_x, tmp_y, tmp_z) {}
 //
-//	cVectorLength3(const QLength& tmp_x, const QLength& tmp_y, const QLength& tmp_z)
-//		: cVectorUnit3<QLength>(tmp_x.getRaw(), tmp_y.getRaw(), tmp_z.getRaw()) {}
+//	cVectorLength3(const Length& tmp_x, const Length& tmp_y, const Length& tmp_z)
+//		: cVectorUnit3<Length>(tmp_x.getRaw(), tmp_y.getRaw(), tmp_z.getRaw()) {}
 //
 //	cVectorLength3(const cVectorUnit3<T>& rhs)
 //		: cVectorUnit3(rhs.vec3d_backend)
@@ -33,20 +33,20 @@ typedef cVectorUnit3<units::QLength> cVectorLength3;
 //		: vec3d_backend(tmpVec) {}
 //	cVectorLength3(const double& tmp_x, const double& tmp_y, const double& tmp_z)
 //		: vec3d_backend(tmp_x, tmp_y, tmp_z) {}
-//	cVectorLength3(const QLength& tmp_x, const QLength& tmp_y, const QLength& tmp_z) 
+//	cVectorLength3(const Length& tmp_x, const Length& tmp_y, const Length& tmp_z) 
 //		: cVectorLength3(tmp_x.getRaw(), tmp_y.getRaw(), tmp_z.getRaw()) {}
 //
-//	inline QLength x() const { return QLength(vec3d_backend.x()); }
-//	inline QLength y() const { return QLength(vec3d_backend.y()); }
-//	inline QLength z() const { return QLength(vec3d_backend.z()); }
+//	inline Length x() const { return Length(vec3d_backend.x()); }
+//	inline Length y() const { return Length(vec3d_backend.y()); }
+//	inline Length z() const { return Length(vec3d_backend.z()); }
 //
 //	cVector3D& getRaw() {
 //		return vec3d_backend;
 //	}
 //
 //	// Spatial distance from first vector to second vector
-//	friend QLength distance(const cVectorLength3& lhs, const cVectorLength3& rhs) {
-//		return QLength(distance(lhs.vec3d_backend, rhs.vec3d_backend));
+//	friend Length distance(const cVectorLength3& lhs, const cVectorLength3& rhs) {
+//		return Length(distance(lhs.vec3d_backend, rhs.vec3d_backend));
 //	}
 //
 //	// Unit direction from first vector to second vector

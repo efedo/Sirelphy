@@ -2,18 +2,14 @@
 
 #pragma once
 
-#include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/si_prefixes.h"
-#include "Sirelphy/source/core/unitlib/units/helper_macros.h"
-#include "Sirelphy/source/core/unitlib/units/base/baseunit.h"
-#include "Sirelphy/source/core/unitlib/units/base/dimension_fundamentals.h"
-#include "Sirelphy/source/core/unitlib/constants.h"
+#include "Sirelphy/source/core/unitlib/units/base.h"
+#include "Sirelphy/source/core/unitlib/helpers/constants_private.h"
 
 using namespace si;
 
 namespace _units_private {
 	//UNIT_ADD_BASE(joule_mass, joule_masses, 1.0)
-	UNIT_ADD_BASE(_kilogram, _kilograms, 1.0)
+	UNIT_ADD_BASE(_kilogram, _kilograms, 1.0) // underscore to avoid collision with SI prefix autofill
 	UNIT_ADD_RELATIVE(gram, grams, _kilogram, 1.0 / 1000)
 	UNIT_ADD_SIPREFIXES(gram, grams)
 	UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847e30) //t
@@ -31,15 +27,15 @@ namespace _units_private {
 
 namespace units {
 
-	class QEnergy;
+	class Energy;
 
-	class QMass : public QUnit<double, _units_private::dim_mass> {
+	class Mass : public Unit<double, _units_private::dim_mass> {
 	public:
-		explicit constexpr QMass(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr Mass(const double& _val = 0) : Unit(_val) {}
 
 		// Functions
-		QEnergy convertToEnergy() const {
-			return QEnergy(val);
+		Energy convertToEnergy() const {
+			return Energy(val);
 		}
 	};
 }

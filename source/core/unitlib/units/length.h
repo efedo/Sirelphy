@@ -2,18 +2,14 @@
 
 #pragma once
 
-#include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/unitlib/si_prefixes.h"
-#include "Sirelphy/source/core/unitlib/units/helper_macros.h"
-#include "Sirelphy/source/core/unitlib/units/base/baseunit.h"
-#include "Sirelphy/source/core/unitlib/units/base/dimension_fundamentals.h"
-#include "Sirelphy/source/core/unitlib/constants.h"
+#include "Sirelphy/source/core/unitlib/units/base.h"
+#include "Sirelphy/source/core/unitlib/helpers/constants_private.h"
 
 using namespace si;
 
 namespace _units_private {
 	UNIT_ADD_BASE(meter, meters, 1.0)
-	UNIT_ADD_RELATIVE(light_second, light_seconds, meter, c)
+	UNIT_ADD_RELATIVE(light_second, light_seconds, meter, _constants::c)
 	UNIT_ADD_SIPREFIXES(meter, meters)
 	UNIT_ADD_RELATIVE(foot, feet, meter, 381 / 1250)
 	UNIT_ADD_RELATIVE(yard, yards, foot, 3)
@@ -28,12 +24,12 @@ namespace _units_private {
 
 namespace units {
 
-	class QTime;
-	class QVelocity;
+	class Time;
+	class Velocity;
 
-	class QLength : public QUnit<double, _units_private::dim_length> {
+	class Length : public Unit<double, _units_private::dim_length> {
 		public:
-		explicit constexpr QLength(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr Length(const double& _val = 0) : Unit(_val) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(meter, meters, m)
@@ -53,27 +49,27 @@ namespace units {
 		GENERATE_MEMBER_FUNCTIONS(angstrom, angstroms, ang)
 
 		// Math functions
-		friend QLength operator*(const QVelocity&, const QTime&);
+		friend Length operator*(const Velocity&, const Time&);
 	};
-	typedef QLength QDistance;
-	typedef QLength QPosition;
+	typedef Length Distance;
+	typedef Length Position;
 
 	// Literals
 
 	// Base unit
-	GENERATE_LITERALS(QLength, meter, meters, m)
+	GENERATE_LITERALS(Length, meter, meters, m)
 
 	// SI prefix units
-	GENERATE_LITERALS_SIPREFIXES(QLength, meter, meters, m)
+	GENERATE_LITERALS_SIPREFIXES(Length, meter, meters, m)
 
 	// Non-SI units
-	GENERATE_LITERALS(QLength, foot, feet, ft)
-	GENERATE_LITERALS(QLength, yard, yards, yd)
-	GENERATE_LITERALS(QLength, inch, inches, in)
-	GENERATE_LITERALS(QLength, mile, miles, mi)
-	GENERATE_LITERALS(QLength, nautical_mile, nautical_miles, nmi)
-	GENERATE_LITERALS(QLength, astronomical_unit, astronomical_units, au)
-	GENERATE_LITERALS(QLength, light_year, light_years, ly)
-	GENERATE_LITERALS(QLength, parsec, parsecs, pc)
-	GENERATE_LITERALS(QLength, angstrom, angstroms, ang)
+	GENERATE_LITERALS(Length, foot, feet, ft)
+	GENERATE_LITERALS(Length, yard, yards, yd)
+	GENERATE_LITERALS(Length, inch, inches, in)
+	GENERATE_LITERALS(Length, mile, miles, mi)
+	GENERATE_LITERALS(Length, nautical_mile, nautical_miles, nmi)
+	GENERATE_LITERALS(Length, astronomical_unit, astronomical_units, au)
+	GENERATE_LITERALS(Length, light_year, light_years, ly)
+	GENERATE_LITERALS(Length, parsec, parsecs, pc)
+	GENERATE_LITERALS(Length, angstrom, angstroms, ang)
 }

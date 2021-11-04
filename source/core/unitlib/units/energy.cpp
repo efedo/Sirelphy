@@ -4,13 +4,13 @@
 
 namespace units {
 
-	QMass QEnergy::convertToMass() const {
-		return QMass(val);
+	Mass Energy::convertToMass() const {
+		return Mass(val);
 	}
 
-	QEnergy getKineticEnergy(const QMass& _mass, const QVelocity& _vel) {
+	Energy getKineticEnergy(const Mass& _mass, const Velocity& _vel) {
 		const double dbl_mass = getRaw(_mass);// _mass.getRaw();
 		const double dbl_vel = getRaw(_vel);
-		return QEnergy(0.5 * dbl_mass * dbl_vel * dbl_vel);
+		return Energy(0.5 * dbl_mass * dbl_vel * dbl_vel);
 	}
 }

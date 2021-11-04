@@ -25,7 +25,7 @@ cVectorLength3 cFrame::getPositionSpace() const {
 	return _position; 
 }
 
-//QTime cFrame::getPositionTime()	const { 
+//Time cFrame::getPositionTime()	const { 
 //	return _position.t(); 
 //}
 
@@ -33,7 +33,7 @@ cVectorVelocity3 cFrame::getVelocity() const {
 	return _velocity;
 }
 
-units::QVelocity cFrame::getVelocityMagnitude() const {
+units::Velocity cFrame::getVelocityMagnitude() const {
 	return _velocity.magnitude(); 
 }
 
@@ -49,11 +49,11 @@ void cFrame::setPositionSpace(const cVectorLength3& _space) {
 	_position = _space; 
 }
 
-//void cFrame::setPositionTime(const QTime& _time) { 
+//void cFrame::setPositionTime(const Time& _time) { 
 //	_position.t() = _time; 
 //}
 
-//void cFrame::setTime(const QTime& _time) { 
+//void cFrame::setTime(const Time& _time) { 
 //	setPositionTime(_time);
 //}
 

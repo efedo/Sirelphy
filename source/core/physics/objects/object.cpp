@@ -33,23 +33,23 @@ void cObject::setVelocity(const cVectorVelocity3& tmpVel) {
 // Get mass/energy																	 //
 ///////////////////////////////////////////////////////////////////////////////////////
 
-units::QEnergy cObject::getEnergyRest() const {
+units::Energy cObject::getEnergyRest() const {
 	return _restMass.convertToEnergy(); 
 }
 
-units::QEnergy cObject::getEnergyKinetic() const {
+units::Energy cObject::getEnergyKinetic() const {
 	return units::getKineticEnergy(getMassRest(), getVelocity().magnitude());
 }
 
-units::QEnergy cObject::getEnergyTotal() const {
+units::Energy cObject::getEnergyTotal() const {
 	return getEnergyRest() + getEnergyKinetic();
 }
 
-units::QMass cObject::getMassRest() const {
+units::Mass cObject::getMassRest() const {
 	return _restMass; 
 };
 
-units::QMass cObject::getMassEffective() const {
+units::Mass cObject::getMassEffective() const {
 	throwl_unimplemented; 
 }
 
@@ -113,7 +113,7 @@ double cObject::getSpaceLikeness() const {
 }
 
 // Update functions
-void cObject::tick(const units::QDuration&) {
+void cObject::tick(const units::Duration&) {
 	throwl_unimplemented;
 }
 
@@ -160,14 +160,14 @@ void cObject::calcVelocityAndMove() {
 	// do not fully account for relativistic effects (e.g. length contraction)
 }
 
-units::QLength cObject::distance(const cObject& objectB) const {
+units::Length cObject::distance(const cObject& objectB) const {
 	// Check for same owner
 	if (getUniverse() != objectB.getUniverse()) throwl("Trying to get distances between objects in different universes");
-	return units::QLength(0);
-	//return QLength(distance(getPosition().getRaw(), objectB.getPosition().getRaw()));
+	return units::Length(0);
+	//return Length(distance(getPosition().getRaw(), objectB.getPosition().getRaw()));
 }
 
-units::QLength distance(const cObject& objectA, const cObject& objectB) {
+units::Length distance(const cObject& objectA, const cObject& objectB) {
 	return objectA.distance(objectB);
 }
 
