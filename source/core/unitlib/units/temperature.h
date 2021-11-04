@@ -9,7 +9,7 @@
 
 using namespace si;
 
-namespace temperature {
+namespace units {
 
 	// Base unit
 	UNIT_ADD_BASE(kelvin, kelvin, 1854858 * pow(10, 38)) // K

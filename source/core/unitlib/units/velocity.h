@@ -10,10 +10,10 @@
 
 using namespace si;
 
-namespace length { class QLength; }
-namespace unittime { class QTime; }
+namespace units {
 
-namespace velocity {
+	class QLength;
+	class QTime;
 
 	// Base unit
 	UNIT_ADD_BASE(meter_per_second, meters_per_second, 1.0)
@@ -21,28 +21,19 @@ namespace velocity {
 
 	UNIT_ADD_RELATIVE(km_per_hour, kms_per_hour, meter_per_second, 3.6)
 
-	class QVelocity : public QUnit<double, dim_velocity> {
+	class QVelocity : public QUnit<double, _units_private::dim_velocity> {
 	public:
-		constexpr QVelocity(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr QVelocity(const double& _val = 0) : QUnit(_val) {}
+		constexpr QVelocity(QUnit<double, _units_private::dim_velocity> _oldunit) : QUnit(_oldunit) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(meter_per_second, meters_per_second, m_per_s)
-
+		GENERATE_MEMBER_FUNCTIONS(km_per_hour, kms_per_hour, km_per_h)
 
 		// Normalize to c
 		inline double relToC() const {
 			return val / units_per_light_speed;
 		}
-
-		// Operators
-
-		friend QUnit operator*(const QVelocity&, const QVelocity&);
-		friend QVelocity operator/(const length::QLength&, const unittime::QTime&);
 	};
 }
 
-template <class T>
-constexpr velocity::QVelocity
-operator/(const QUnit<T, dim_length>& lhs, const QUnit<T, dim_time>& rhs) {
-	return velocity::QVelocity(lhs.getRaw() * rhs.getRaw());
-}

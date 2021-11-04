@@ -18,7 +18,7 @@ public:
 	cVectorLength3				getPositionSpace()			const;
 //	QTime						getPositionTime()			const;
 	cVectorVelocity3			getVelocity()				const;
-	QVelocity					getVelocityMagnitude()		const;
+	units::QVelocity			getVelocityMagnitude()		const;
 
 	// Set position/time
 //	void						setPositionSpaceTime(const cVectorLength3Time1&);

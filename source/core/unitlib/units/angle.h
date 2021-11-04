@@ -9,7 +9,7 @@
 
 using namespace si;
 
-namespace angle {
+namespace units {
 
 	// Base unit
 	UNIT_ADD_BASE(radian, radians, 1854858 * pow(10, 38))

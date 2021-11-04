@@ -6,8 +6,6 @@
 #include "Sirelphy/source/core/interface/universe_interface.h"
 #include "Sirelphy/source/core/physics/universe/universe.h"
 
-using namespace length;
-
 // Exists only to ensure that required templates for all interfaces are instantiated
 int instantiateTemplates()
 {
@@ -23,13 +21,15 @@ int fnSirelphy()
 
 //	instantiateTemplates();
 
-	QLength mylength;
+	units::QLength mylength;
 	mylength.setRaw(10000000000000000);
 	double lenm = mylength.in_m();
 	std::cout << "length in m: " << lenm;
 
-	QLength myotherlength;
-	myotherlength = 10.56_nm;
+	units::QLength myotherlength;
+
+	using namespace units;
+	myotherlength = 10.56_meters;
 
 	return 5;
 }

@@ -9,7 +9,7 @@
 
 using namespace si;
 
-namespace unittime {
+namespace units {
 
 	// Base unit
 	UNIT_ADD_BASE(second, seconds, 1.0)
@@ -26,10 +26,10 @@ namespace unittime {
 	UNIT_ADD_RELATIVE(julian_year, julian_years, second, 31557600) // yr_j
 	UNIT_ADD_RELATIVE(gregorian_year, gregorian_years, second, 31556952) // yr_g
 
-	class QTime : public QUnit<double, dim_time> {
+	class QTime : public QUnit<double, _units_private::dim_time> {
 	public:
 
-		constexpr QTime(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr QTime(const double& _val = 0) : QUnit(_val) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(second, seconds, s)

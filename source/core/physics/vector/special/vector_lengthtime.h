@@ -6,9 +6,6 @@
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/physics/vector/special/vector_length.h"
 
-using namespace length;
-using namespace unittime;
-using namespace velocity; 
 //
 //class cVectorLength3Time1 {
 //protected:

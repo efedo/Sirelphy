@@ -7,11 +7,6 @@
 #include "Sirelphy/source/core/physics/helpers/bounding.h"
 #include "Sirelphy/source/core/unitlib/unitlib.h"
 
-using namespace mass;
-using namespace length;
-using namespace energy;
-using namespace unittime;
-
 class cFrame;
 class cUniverse;
 
@@ -26,11 +21,11 @@ public:
 	void						changeReference(cFrame* const);			// Will be very complicated to implement....
 
 	// Get mass/energy
-	QEnergy						getEnergyRest()						const;
-	QEnergy						getEnergyKinetic()					const;
-	QEnergy						getEnergyTotal()					const;
-	QMass						getMassRest()						const;
-	QMass						getMassEffective()					const;
+	units::QEnergy				getEnergyRest()						const;
+	units::QEnergy				getEnergyKinetic()					const;
+	units::QEnergy				getEnergyTotal()					const;
+	units::QMass				getMassRest()						const;
+	units::QMass				getMassEffective()					const;
 
 	// Relativity
 	cFrame *					getReference()						const;
@@ -49,17 +44,17 @@ public:
 	double						getSpaceLikeness()					const;
 
 	// Update functions
-	void						tick(const QDuration &);
+	void						tick(const units::QDuration &);
 	void						provideKinEnergy(cVector3D);
 	void						calcVelocityAndMove();
 
 	// Two-object functions
-	QLength						distance(const cObject&) const;
+	units::QLength				distance(const cObject&) const;
 	double						rel_velocity(const cObject&) const;
 	cVector<3>					direction(const cObject&) const; // Unit direction from first vector to second vector
 
 	// Friend functions
-	friend QLength				distance(const cObject&, const cObject&);
+	friend units::QLength		distance(const cObject&, const cObject&);
 	friend cVector<3>			direction(const cObject&, const cObject&); // Unit direction from first vector to second vector
 	//friend double				distance_spacetime(const cParticle&, const cParticle&);
 	friend double				rel_velocity(const cObject&, const cObject&);
@@ -71,8 +66,8 @@ protected:
 	cUniverse* const			_universe = 0;
 
 	// Proper properties (reference-frame-independent properties) 
-	QTime						_age = 0;
-	QMass						_restMass = 0;
+	units::QTime				_age = units::QTime(0);
+	units::QMass				_restMass = units::QMass(0);
 
 	// Relative properties (reference-frame-dependent)
 	cFrame * const				_relativeTo = 0;

@@ -11,11 +11,10 @@
 
 using namespace si;
 
-namespace unittime { class QTime; };
-namespace velocity { class QVelocity; };
+namespace units {
 
-
-namespace length {
+	class QTime;
+	class QVelocity;
 
 	// Base unit
 	//UNIT_ADD_BASE(light_second, light_seconds, 1.0)
@@ -37,9 +36,9 @@ namespace length {
 	UNIT_ADD_RELATIVE(parsec, parsecs, light_year, 3.26156)
 	UNIT_ADD_RELATIVE(angstrom, angstroms, nanometer, 0.1)
 
-	class QLength : public QUnit<double, dim_length> {
-	public:
-		constexpr QLength(const double & _val = 0) : QUnit(_val) {}
+	class QLength : public QUnit<double, _units_private::dim_length> {
+		public:
+		explicit constexpr QLength(const double& _val = 0) : QUnit(_val) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(meter, meters, m)
@@ -59,7 +58,7 @@ namespace length {
 		GENERATE_MEMBER_FUNCTIONS(angstrom, angstroms, ang)
 
 		// Math functions
-		friend QLength operator*(const velocity::QVelocity&, const unittime::QTime&);
+		friend QLength operator*(const QVelocity&, const QTime&);
 	};
 	typedef QLength QDistance;
 	typedef QLength QPosition;

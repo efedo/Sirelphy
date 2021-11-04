@@ -6,11 +6,7 @@
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/physics/vector/special/vector_unit3d.h"
 
-using namespace length;
-using namespace unittime;
-using namespace velocity;
-
-typedef cVectorUnit3<QLength> cVectorLength3;
+typedef cVectorUnit3<units::QLength> cVectorLength3;
 
 //class cVectorLength3 : public cVectorUnit3<QLength> {
 //public:

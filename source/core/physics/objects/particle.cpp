@@ -38,10 +38,10 @@ void cParticle::tryAffecting(cParticle * target) {
 	}
 }
 
-QLength distance(const cParticle& objectA, const cParticle& objectB) {
+units::QLength distance(const cParticle& objectA, const cParticle& objectB) {
 	// Check for same owner
 	if (objectA.getUniverse() != objectB.getUniverse()) throwl("Trying to get distances between objects in different universes");
-	return QLength(distance(objectA.getPosition(), objectB.getPosition()));
+	return units::QLength(distance(objectA.getPosition(), objectB.getPosition()));
 }
 
 double rel_velocity(const cParticle& objectA, const cParticle& objectB) {

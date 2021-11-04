@@ -5,22 +5,20 @@
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/unitlib/unitlib.h"
 
-using namespace mass;
-
 class cUniverse;
 
 class cParticleClass {
 public:
 	/* constructor */			cParticleClass(const std::string&, cUniverse*);
-	void						setMass(const QMass &); // Mass is a universal property separate from others
-	const QMass					getMass() const;
+	void						setMass(const units::QMass &); // Mass is a universal property separate from others
+	const units::QMass			getMass() const;
 	void						setProperty(cProperty *, const double &);
 	void						setProperty(const std::string &, const double &);
 	double						getPropertyVal(cProperty *);
 	void						addOriginatingForce(cParticleClass *, cForce *);
 	std::set<cForce *> *		getForcesToOtherClass(cParticleClass *);
 private:
-	QMass						_mass = 1;
+	units::QMass				_mass = units::QMass(1);
 	std::map<cProperty *, 
 		double>					propertyVals;
 	cUniverse *					_owner = 0;

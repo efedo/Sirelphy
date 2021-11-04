@@ -58,10 +58,10 @@ add_library(SirelphyCore STATIC
     physics/objects/particleclass.cpp
     physics/universe/universe.cpp
     sirelphy.cpp
-    unitlib/units/energy.cpp
-    unitlib/units/mass.cpp
-    unitlib/units/velocity.cpp
-)
+    
+    
+    
+ "unitlib/units/energy.cpp")
 
 target_precompile_headers(SirelphyCore
 	PRIVATE precomp.h)

@@ -9,11 +9,11 @@ cParticleClass::cParticleClass(const std::string & tmpName, cUniverse * tmpOwner
 	: _name(tmpName), _owner(tmpOwner)
 {}
 
-void cParticleClass::setMass(const QMass & newmass) {
+void cParticleClass::setMass(const units::QMass & newmass) {
 	_mass = newmass;
 }
 
-const QMass cParticleClass::getMass() const {
+const units::QMass cParticleClass::getMass() const {
 	return _mass;
 }
 

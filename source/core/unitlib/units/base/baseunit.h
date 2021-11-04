@@ -5,53 +5,57 @@
 #include "Sirelphy/source/core/precomp.h"
 #include "Sirelphy/source/core/unitlib/units/base/dimension_templates.h"
 
-// Base unit
-template <class T, class D>
-class QUnit {
-public:
+namespace units {
 
-	constexpr QUnit(const T& _val = 0) : val(_val) {}
-	constexpr QUnit(const QUnit& rhs) : val(rhs.val) {}
+	// Base unit
+	template <class T, class D>
+	class QUnit {
+	public:
 
-	const QUnit& getBaseUnit() const {
-		return *(static_cast<const QUnit *>(this));
+		constexpr QUnit(const T& _val = 0) : val(_val) {}
+		constexpr QUnit(const QUnit& rhs) : val(rhs.val) {}
+
+		const QUnit& getBaseUnit() const {
+			return *(static_cast<const QUnit*>(this));
+		}
+
+		void debugUnitPrint() {
+			D::debugPrint();
+		}
+
+		inline void setRaw(const double& _val) { val = _val; }
+		inline T getRaw() const { return val; }
+		//	inline cRunTimeDimensions getDimensions() const { return D::getDimensionsRunTime(); }
+
+		//	template <class T, class D>
+		constexpr friend T getRaw(QUnit<T, D> orig) {
+			return orig.val;
+		}
+	protected:
+		T val;
+	};
+
+	// Operators
+	template <class T, class D>
+	constexpr QUnit<T, D> operator+(const QUnit<T, D>& lhs, const QUnit<T, D>& rhs) {
+		return QUnit<T, D>(lhs.getRaw() + rhs.getRaw());
 	}
 
-	void debugUnitPrint() {
-		D::debugPrint();
+	template <class T, class D>
+	constexpr QUnit<T, D> operator-(const QUnit<T, D>& lhs, const QUnit<T, D>& rhs) {
+		return QUnit<T, D>(lhs.getRaw() - rhs.getRaw());
 	}
 
-	inline void setRaw(const double & _val) { val = _val; }
-	inline T getRaw() const { return val; }
-//	inline cRunTimeDimensions getDimensions() const { return D::getDimensionsRunTime(); }
-
-//	template <class T, class D>
-	constexpr friend T getRaw(QUnit<T, D> orig) {
-		return orig.val;
+	template <class T, class D_LHS, class D_RHS>
+	constexpr QUnit<T, _units_private::unitDimensions_add<D_LHS, D_RHS >>
+		operator*(const QUnit<T, D_LHS>& lhs, const QUnit<T, D_RHS>& rhs) {
+		return QUnit<T, _units_private::unitDimensions_add<D_LHS, D_RHS>>(lhs.getRaw() * rhs.getRaw());
 	}
-protected:
-	T val;
-};
 
-// Operators
-template <class T, class D>
-constexpr QUnit<T, D> operator+(const QUnit<T, D>& lhs, const QUnit<T, D>& rhs) {
-	return QUnit<T, D>(lhs.getRaw() + rhs.getRaw());
-}
+	template <class T, class D_LHS, class D_RHS>
+	constexpr QUnit<T, _units_private::unitDimensions_subtract<D_LHS, D_RHS>>
+		operator/(const QUnit<T, D_LHS>& lhs, const QUnit<T, D_RHS>& rhs) {
+		return QUnit<T, _units_private::unitDimensions_subtract<D_LHS, D_RHS>>(lhs.getRaw() / rhs.getRaw());
+	}
 
-template <class T, class D>
-constexpr QUnit<T, D> operator-(const QUnit<T, D>& lhs, const QUnit<T, D>& rhs) {
-	return QUnit<T, D>(lhs.getRaw() - rhs.getRaw());
-}
-
-template <class T, class D_LHS, class D_RHS>
-constexpr QUnit<T, unitDimensions_add<D_LHS, D_RHS >>
-	operator*(const QUnit<T, D_LHS>& lhs, const QUnit<T, D_RHS>& rhs) {
-	return QUnit<T, unitDimensions_add<D_LHS, D_RHS>>(lhs.getRaw() * rhs.getRaw());
-}
-
-template <class T, class D_LHS, class D_RHS>
-constexpr QUnit<T, unitDimensions_subtract<D_LHS, D_RHS>>
-operator/(const QUnit<T, D_LHS>& lhs, const QUnit<T, D_RHS>& rhs) {
-	return QUnit<T, unitDimensions_subtract<D_LHS, D_RHS>>(lhs.getRaw() * rhs.getRaw());
 }

@@ -11,11 +11,9 @@
 
 using namespace si;
 
-namespace energy {
-	class QEnergy;
-}
+namespace units {
 
-namespace mass {
+	class QEnergy;
 
 	// Base unit
 	//UNIT_ADD_BASE(joule_mass, joule_masses, 1.0)
@@ -38,11 +36,13 @@ namespace mass {
 	UNIT_ADD_RELATIVE(kilodalton, kilodaltons, dalton, 1000) // kDa
 	UNIT_ADD_RELATIVE(electronvolt_mass, electronvolts_mass, gram, 1.782662e-33) // eVm
 
-	class QMass : public QUnit<double, dim_mass> {
+	class QMass : public QUnit<double, _units_private::dim_mass> {
 	public:
-		constexpr QMass(const double& _val = 0) : QUnit(_val) {}
+		explicit constexpr QMass(const double& _val = 0) : QUnit(_val) {}
 
 		// Functions
-		energy::QEnergy convertToEnergy() const;
+		QEnergy convertToEnergy() const {
+			return QEnergy(val);
+		}
 	};
 }

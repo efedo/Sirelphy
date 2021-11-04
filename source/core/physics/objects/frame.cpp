@@ -33,7 +33,7 @@ cVectorVelocity3 cFrame::getVelocity() const {
 	return _velocity;
 }
 
-QVelocity cFrame::getVelocityMagnitude() const { 
+units::QVelocity cFrame::getVelocityMagnitude() const {
 	return _velocity.magnitude(); 
 }
 

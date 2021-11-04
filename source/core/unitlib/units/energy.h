@@ -10,39 +10,37 @@
 
 using namespace si;
 
-namespace mass { class QMass; }
+namespace units {
 
-namespace velocity { class QVelocity; }
-
-namespace energy {
+	class QMass;
+	class QVelocity;
 
 	// Base unit
 	UNIT_ADD_BASE(joule, joules, 1.0)
 
-		//// SI derived units
-		//UNIT_ADD_SIPREFIXES(gram, grams)
+	//// SI derived units
+	//UNIT_ADD_SIPREFIXES(gram, grams)
 
-		//// Non-SI units
-		//UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847 * pow(10, 30)) //t
-		//UNIT_ADD_RELATIVE(metric_ton, metric_tons, kilogram, 1000) //t
+	//// Non-SI units
+	//UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847 * pow(10, 30)) //t
+	//UNIT_ADD_RELATIVE(metric_ton, metric_tons, kilogram, 1000) //t
 
-		class QEnergy : public QUnit<double, dim_energy> {
-		public:
-			constexpr QEnergy(const double& _val = 0) : QUnit(_val) {}
+	class QEnergy : public QUnit<double, _units_private::dim_energy> {
+	public:
+		explicit constexpr QEnergy(const double& _val = 0) : QUnit(_val) {}
 
-			// Functions
-			mass::QMass convertToMass() const;
+		// Functions
+		QMass convertToMass() const;
 
-			constexpr friend QEnergy operator+(const QEnergy lhs, const QEnergy rhs) {
-				return QEnergy(lhs.val + rhs.val);
-			}
+		constexpr friend QEnergy operator+(const QEnergy lhs, const QEnergy rhs) {
+			return QEnergy(lhs.val + rhs.val);
+		}
 
-			constexpr friend QEnergy operator-(const QEnergy lhs, const QEnergy rhs) {
-				return QEnergy(lhs.val - rhs.val);
-			}
+		constexpr friend QEnergy operator-(const QEnergy lhs, const QEnergy rhs) {
+			return QEnergy(lhs.val - rhs.val);
+		}
 	};
 
-	//constexpr QEnergy getKineticEnergy(const mass::QMass&, const velocity::QVelocity&);
-	QEnergy getKineticEnergy(const mass::QMass&, const velocity::QVelocity&);
+	QEnergy getKineticEnergy(const QMass& _mass, const QVelocity& _vel);
 };
 

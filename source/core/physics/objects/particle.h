@@ -13,12 +13,6 @@
 class cParticleClass;
 class cUniverse;
 
-using namespace length;
-using namespace unittime;
-using namespace energy;
-using namespace mass;
-using namespace velocity;
-
 class cParticle : public cObject {
 public:
 	cParticle(cUniverse * const, cFrame* const, cParticleClass* const);
@@ -27,7 +21,7 @@ public:
 	//void						provideKinEnergy(cVectorND);
 
 	// Friend functions
-	friend QLength				distance(const cParticle&, const cParticle&);
+	friend units::QLength		distance(const cParticle&, const cParticle&);
 	//friend double				distance_spacetime(const cParticle&, const cParticle&);
 	friend double				rel_velocity(const cParticle&, const cParticle&);
 

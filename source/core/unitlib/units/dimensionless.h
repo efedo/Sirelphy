@@ -9,7 +9,11 @@
 
 using namespace si;
 
-class QDimensionless : public QUnit<double, dim_none> {
-public:
-	constexpr QDimensionless(const double& _val = 0) : QUnit(_val) {}
-};
+namespace units {
+
+	class QDimensionless : public _units_private::QUnit<double, dim_none> {
+	public:
+		constexpr QDimensionless(const double& _val = 0) : _units_private::QUnit(_val) {}
+	};
+
+}
