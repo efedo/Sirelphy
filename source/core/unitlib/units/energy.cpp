@@ -9,8 +9,9 @@ namespace units {
 	}
 
 	Energy getKineticEnergy(const Mass& _mass, const Velocity& _vel) {
-		const double dbl_mass = getRaw(_mass);// _mass.getRaw();
-		const double dbl_vel = getRaw(_vel);
-		return Energy(0.5 * dbl_mass * dbl_vel * dbl_vel);
+		throw; // need to update due to change in base units
+		//const double dbl_mass = getRaw(_mass);// _mass.getRaw();
+		//const double dbl_vel = getRaw(_vel);
+		//return Energy(0.5 * dbl_mass * dbl_vel * dbl_vel);
 	}
 }

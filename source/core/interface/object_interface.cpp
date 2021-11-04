@@ -14,13 +14,13 @@ void cObjectInterface::getPosition(double& posX, double& posY, double& posZ) {
 }
 
 void cObjectInterface::getVelocity(double& velX, double& velY, double& velZ) {
-	velX = _object->getVelocity().x().getRaw();
-	velY = _object->getVelocity().y().getRaw();
-	velZ = _object->getVelocity().z().getRaw();
+	velX = _object->getVelocity().x().get_meters_per_second();
+	velY = _object->getVelocity().y().get_meters_per_second();
+	velZ = _object->getVelocity().z().get_meters_per_second();
 }
 
 void cObjectInterface::getVelocityMagnitudeMPS(double& velMPS) {
-	velMPS = _object->getVelocity().magnitude().getRaw();
+	velMPS = _object->getVelocity().magnitude().get_meters_per_second();
 }
 
 void cObjectInterface::getVelocityMagnitudeC(double& velC) {

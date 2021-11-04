@@ -44,9 +44,9 @@ UNIT_ADD_RELATIVE(yotta##BASE, yotta##BASE_PLURAL, BASE, si_yotta) __NL__
 
 #define GENERATE_MEMBER_FUNCTIONS(NAME, NAME_PLURAL, ABBREV) \
 inline void set_##NAME_PLURAL(const double& _val) { val = double(_val * _units_private::units_per_##NAME); } __NL__ \
-inline void set_##ABBREV(const double& _val) { set_##NAME_PLURAL(_val); } __NL__ \
 inline double get_##NAME_PLURAL() { return double(val) * _units_private::NAME_PLURAL##_per_unit; } __NL__ \
-inline double get_##ABBREV() { return get_##NAME_PLURAL(); } __NL__
+//inline void set_##ABBREV(const double& _val) { set_##NAME_PLURAL(_val); } __NL__ \
+//inline double get_##ABBREV() { return get_##NAME_PLURAL(); } __NL__
 
 #define GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(NAME, NAME_PLURAL, ABBREV) \
 GENERATE_MEMBER_FUNCTIONS(yocto##NAME, yocto##NAME_PLURAL, y##ABBREV) __NL__ \

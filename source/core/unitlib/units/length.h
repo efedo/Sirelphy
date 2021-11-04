@@ -31,13 +31,9 @@ namespace units {
 		public:
 		explicit constexpr Length(const double& _val = 0) : Unit(_val) {}
 
-		// Base unit
+		// Unit member functions
 		GENERATE_MEMBER_FUNCTIONS(meter, meters, m)
-
-		// SI prefix units
 		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(meter, meters, m)
-
-		// Non-SI units
 		GENERATE_MEMBER_FUNCTIONS(foot, feet, ft)
 		GENERATE_MEMBER_FUNCTIONS(yard, yards, yd)
 		GENERATE_MEMBER_FUNCTIONS(inch, inches, in)

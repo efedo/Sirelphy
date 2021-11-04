@@ -57,8 +57,8 @@ double rel_velocity(const cParticle& objectA, const cParticle& objectB) {
 	double angleVelBToA = angle(objectB.getVelocity().getRaw(), -dirAtoB);
 
 	// Calculate the movement towards or away from the other point
-	double velAtoB = objectA.getVelocity().magnitude().getRaw() * cos(angleVelAToB);
-	double velBtoA = objectB.getVelocity().magnitude().getRaw() * cos(angleVelBToA);
+	double velAtoB = objectA.getVelocity().magnitude().get_meters_per_second() * cos(angleVelAToB);
+	double velBtoA = objectB.getVelocity().magnitude().get_meters_per_second() * cos(angleVelBToA);
 
 	return velAtoB + velBtoA;
 }

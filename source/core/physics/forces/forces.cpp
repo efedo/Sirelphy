@@ -30,7 +30,7 @@ void cForce::applyForce(cParticle * particleA, cParticle * particleB) {
 	cVector3D dirVec(particleA->direction(*particleB));
 		
 	// Get distance and property values
-	const double dist = particleB->distance(*particleA).getRaw();
+	const double dist = particleB->distance(*particleA).get_meters();
 	const double propAval = particleA->getClass()->getPropertyVal(propA);
 	const double propBval = particleB->getClass()->getPropertyVal(propB);
 	double propBInertialVal = 1;

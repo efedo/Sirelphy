@@ -10,7 +10,7 @@ using namespace si;
 namespace _units_private {
 	UNIT_ADD_BASE(meter_per_second, meters_per_second, 1.0)
 	UNIT_ADD_RELATIVE(light_speed, light_speeds, meter_per_second, 1.0 / _constants::c)
-	UNIT_ADD_RELATIVE(km_per_hour, kms_per_hour, meter_per_second, 3.6)
+	UNIT_ADD_RELATIVE(kilometer_per_hour, kilometers_per_hour, meter_per_second, 3.6)
 }
 
 namespace units {
@@ -25,7 +25,7 @@ namespace units {
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(meter_per_second, meters_per_second, m_per_s)
-		GENERATE_MEMBER_FUNCTIONS(km_per_hour, kms_per_hour, km_per_h)
+		GENERATE_MEMBER_FUNCTIONS(kilometer_per_hour, kilometers_per_hour, km_per_h)
 
 		// Normalize to c
 		inline double relToC() const {

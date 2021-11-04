@@ -136,7 +136,7 @@ void cObject::calcVelocityAndMove() {
 	// Calculate what the relative (in-frame) velocity should be based on ekinetic
 	// Refer to eq. for kin eng in special relativity
 	const boost::multiprecision::cpp_bin_float_quad gamma =
-		((ekinmag) / ((maxvel * maxvel) * _restMass.getRaw())) + 1.0;
+		((ekinmag) / ((maxvel * maxvel) * _restMass.get_kilograms())) + 1.0;
 	const boost::multiprecision::cpp_bin_float_quad sqrtterm =
 		1.0 - (1.0 / (gamma * gamma));
 	const double relvel = (maxvel * sqrt(sqrtterm)).convert_to<double>();
@@ -195,8 +195,8 @@ double cObject::rel_velocity(const cObject& objectB) const {
 	double angleVelBToA = angle(objectB.getVelocity().getRaw(), -dirAtoB);
 
 	// Calculate the movement towards or away from the other point
-	double velAtoB = getVelocity().magnitude().getRaw() * cos(angleVelAToB);
-	double velBtoA = objectB.getVelocity().magnitude().getRaw() * cos(angleVelBToA);
+	double velAtoB = getVelocity().magnitude().get_meters_per_second() * cos(angleVelAToB);
+	double velBtoA = objectB.getVelocity().magnitude().get_meters_per_second() * cos(angleVelBToA);
 
 	return velAtoB + velBtoA;
 }
