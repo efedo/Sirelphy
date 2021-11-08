@@ -9,72 +9,128 @@
 #include "Sirelphy/source/core/unitlib/helpers/dimension_templates.h"
 
 // Advanced declaration
-namespace units {
-	template <class T, class D>
-	class Unit;
-}
-
-// Advanced declaration
 namespace _units_private {
 	template <class T, class D>
-	constexpr T get_raw(::units::Unit<T, D> const &);
-};
+	class _Unit;
 
-namespace units {
+	//template <class T, class D>
+	//constexpr T get_raw(_Unit<T, D> const &);
+
+	//template <class T, class D>
+	//constexpr T set_raw(_Unit<T, D> const&, T);
 
 	// Base unit
 	template <class T, class D>
-	class Unit {
+	class _Unit {
 	public:
-
-		constexpr Unit(const T& _val = 0) : val(_val) {}
-		constexpr Unit(const Unit& rhs) : val(rhs.val) {}
+		constexpr _Unit(const T& _val = 0) : val(_val) {}
+		constexpr _Unit(const _Unit& rhs) : val(rhs.val) {}
 
 		void debugUnitPrint() {
 			D::debugPrint();
 		}
-	protected:
-		constexpr friend T (::_units_private::get_raw(Unit<T, D> const &));
-		T val;
-		const Unit& getBaseUnit() const {
-			return *(static_cast<const Unit*>(this));
-		}
 		inline void set_raw(const double& _val) { val = _val; }
 		inline T get_raw() const { return val; }
+	protected:
+		//constexpr friend T (get_raw(_Unit<T, D> const &));
+		//constexpr friend T (set_raw(_Unit<T, D> const&, T val));
+		T val = 0.0;
 	};
-}
 
-namespace _units_private {
-	// Definition
-	template <class T, class D>
-	constexpr T get_raw(::units::Unit<T, D> const & unit) {
-		return unit.get_raw();
-	}
+	//// Definition
+	//template <class T, class D>
+	//constexpr T get_raw(_Unit<T, D> const & unit) {
+	//	return unit.get_raw();
+	//}
+
+	//template <class T, class D>
+	//constexpr void set_raw(_Unit<T, D> const& unit, T val) {
+	//	unit.set_raw(val);
+	//}
 };
 
 namespace units {
 
+	template <class T, class D>
+	class Unit : public _units_private::_Unit<T, D> {
+	public:
+		constexpr Unit(const T& _val = 0) : _Unit(_val) {}
+		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
+	};
+
+	using Mass = Unit<double, _units_private::dim_mass>;
+	using Velocity = Unit<double, _units_private::dim_velocity>;
+	using Energy = Unit<double, _units_private::dim_energy>;
+	using Length = Unit<double, _units_private::dim_length>;
+	using Distance = Length;
+	using Position = Length;
+	using Time = Unit<double, _units_private::dim_time>;
+	using Duration = Time;
+
 	// Operators
 	template <class T, class D>
 	constexpr Unit<T, D> operator+(const Unit<T, D>& lhs, const Unit<T, D>& rhs) {
-		return Unit<T, D>(_units_private::get_raw(lhs) + _units_private::get_raw(rhs));
+		return Unit<T, D>(lhs.get_raw() + rhs.get_raw());
 	}
 
 	template <class T, class D>
 	constexpr Unit<T, D> operator-(const Unit<T, D>& lhs, const Unit<T, D>& rhs) {
-		return Unit<T, D>(_units_private::get_raw(lhs) - _units_private::get_raw(rhs));
+		return Unit<T, D>(lhs.get_raw() - rhs.get_raw());
 	}
 
 	template <class T, class D_LHS, class D_RHS>
 	constexpr Unit<T, _units_private::unitDimensions_add<D_LHS, D_RHS >>
 		operator*(const Unit<T, D_LHS>& lhs, const Unit<T, D_RHS>& rhs) {
-		return Unit<T, _units_private::unitDimensions_add<D_LHS, D_RHS>>(_units_private::get_raw(lhs) * _units_private::get_raw(rhs));
+		return Unit<T, _units_private::unitDimensions_add<D_LHS, D_RHS>>(lhs.get_raw() * rhs.get_raw());
 	}
 
 	template <class T, class D_LHS, class D_RHS>
 	constexpr Unit<T, _units_private::unitDimensions_subtract<D_LHS, D_RHS>>
 		operator/(const Unit<T, D_LHS>& lhs, const Unit<T, D_RHS>& rhs) {
-		return Unit<T, _units_private::unitDimensions_subtract<D_LHS, D_RHS>>(_units_private::get_raw(lhs) / _units_private::get_raw(rhs));
+		return Unit<T, _units_private::unitDimensions_subtract<D_LHS, D_RHS>>(lhs.get_raw() / rhs.get_raw());
 	}
 
+	template <class T, class D>
+	constexpr Unit<T, D>& operator+=(const Unit<T, D>& lhs, const Unit<T, D>& rhs) {
+		lhs.set_raw(lhs.get_raw() + rhs.get_raw());
+		return lhs;
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D>& operator-=(const Unit<T, D>& lhs, const Unit<T, D>& rhs) {
+		lhs.set_raw(lhs.get_raw() - rhs.get_raw());
+		return lhs;
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D> operator*(Unit<T, D>& lhs, T rhs) {
+		return Unit<T, D>(lhs.get_raw() * rhs);
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D> operator*(T lhs, Unit<T, D>& rhs) {
+		return rhs * lhs;
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D> operator/(Unit<T, D>& lhs, T rhs) {
+		return Unit<T, D>(lhs.get_raw() / rhs);
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D> operator/(T lhs, Unit<T, D>& rhs) {
+		return Unit<T, _units_private::unitDimensions_subtract<_units_private::dim_none, D>>(lhs / rhs.get_raw());
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D> & operator*=(const Unit<T, D>& lhs, T& rhs) {
+		lhs.set_raw(lhs.get_raw() * rhs);
+		return lhs;
+	}
+
+	template <class T, class D>
+	constexpr Unit<T, D> & operator/=(const Unit<T, D>& lhs, T rhs) {
+		lhs.set_raw(lhs.get_raw() / rhs);
+		return lhs;
+	}
 }

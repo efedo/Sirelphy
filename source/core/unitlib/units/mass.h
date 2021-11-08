@@ -29,11 +29,12 @@ namespace _units_private {
 
 namespace units {
 
-	class Energy;
-
-	class Mass : public Unit<double, _units_private::dim_mass> {
-	public:
-		explicit constexpr Mass(const double& _val = 0) : Unit(_val) {}
+	template<>
+	class Unit<double, _units_private::dim_mass> : public _units_private::_Unit<double, _units_private::dim_mass> {
+		public:
+		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
+		//explicit constexpr Mass(const double& _val = 0) : Unit(_val) {}
 
 		// Unit member functions
 		GENERATE_MEMBER_FUNCTIONS(gram, grams, g)
@@ -53,8 +54,23 @@ namespace units {
 		GENERATE_MEMBER_FUNCTIONS(electronvolt_mass, electronvolts_mass, eVm)
 
 		// Functions
-		Energy convertToEnergy() const {
-			return Energy(val);
-		}
+		Energy convertToEnergy() const;
 	};
+
+	// Literals
+	GENERATE_LITERALS(Mass, gram, grams, g)
+	GENERATE_LITERALS_SIPREFIXES(Mass, gram, grams, g)
+	GENERATE_LITERALS(Mass, solar_mass, solar_masses, M)
+	GENERATE_LITERALS(Mass, tonne, tonnes, t)
+	GENERATE_LITERALS(Mass, metric_ton, metric_tons, mt)
+	GENERATE_LITERALS(Mass, pound, pounds, lb)
+	GENERATE_LITERALS(Mass, long_ton, long_tons, lt)
+	GENERATE_LITERALS(Mass, short_ton, short_tons, sht)
+	GENERATE_LITERALS(Mass, stone, stones, st)
+	GENERATE_LITERALS(Mass, ounce, ounces, oz)
+	GENERATE_LITERALS(Mass, carat, carats, ct)
+	GENERATE_LITERALS(Mass, dalton, daltons, Da)
+	GENERATE_LITERALS(Mass, kilodalton, kilodaltons, kDa)
+	GENERATE_LITERALS(Mass, megadalton, megadaltons, mDa)
+	GENERATE_LITERALS(Mass, electronvolt_mass, electronvolts_mass, eVm)
 }

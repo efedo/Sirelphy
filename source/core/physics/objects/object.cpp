@@ -34,7 +34,8 @@ void cObject::setVelocity(const cVectorVelocity3& tmpVel) {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 units::Energy cObject::getEnergyRest() const {
-	return _restMass.convertToEnergy(); 
+	return units::Energy();
+	//return _restMass.convertToEnergy(); 
 }
 
 units::Energy cObject::getEnergyKinetic() const {
@@ -163,7 +164,7 @@ void cObject::calcVelocityAndMove() {
 units::Length cObject::distance(const cObject& objectB) const {
 	// Check for same owner
 	if (getUniverse() != objectB.getUniverse()) throwl("Trying to get distances between objects in different universes");
-	return units::Length(0);
+	return units::Length();
 	//return Length(distance(getPosition().getRaw(), objectB.getPosition().getRaw()));
 }
 

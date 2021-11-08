@@ -70,8 +70,10 @@ GENERATE_MEMBER_FUNCTIONS(exa##NAME, exa##NAME_PLURAL, E##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(zetta##NAME, zetta##NAME_PLURAL, Z##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(yotta##NAME, yotta##NAME_PLURAL, Y##ABBREV) __NL__
 
-#define GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
-//constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) { return CLASSNAME(double(_val)); } __NL__ \
+#define GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) __NL__ \
+constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) {  __NL__ \
+return CLASSNAME(_val); __NL__ \
+} __NL__
 //constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) { return CLASSNAME(double(_val)); }
 
 #define GENERATE_LITERALS_SIPREFIXES(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \

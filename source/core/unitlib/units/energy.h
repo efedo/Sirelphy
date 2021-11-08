@@ -15,25 +15,37 @@ namespace _units_private {
 
 namespace units {
 
-	class Mass;
-	class Velocity;
+	template<>
+	class Unit<double, _units_private::dim_energy> : public _units_private::_Unit<double, _units_private::dim_energy> {
+		public:
+		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
-	class Energy : public Unit<double, _units_private::dim_energy> {
-	public:
-		explicit constexpr Energy(const double& _val = 0) : Unit(_val) {}
 
 		// Functions
-		Mass convertToMass() const;
-
-		constexpr friend Energy operator+(const Energy lhs, const Energy rhs) {
-			return Energy(lhs.val + rhs.val);
+		Mass convertToMass() const {
+			throw;
+			return Mass();
 		}
 
-		constexpr friend Energy operator-(const Energy lhs, const Energy rhs) {
-			return Energy(lhs.val - rhs.val);
-		}
+		//constexpr friend Energy operator+(const Energy lhs, const Energy rhs) {
+		//	return Energy(lhs.val + rhs.val);
+		//}
+
+		//constexpr friend Energy operator-(const Energy lhs, const Energy rhs) {
+		//	return Energy(lhs.val - rhs.val);
+		//}
 	};
 
-	Energy getKineticEnergy(const Mass& _mass, const Velocity& _vel);
+	// Literals
+	GENERATE_LITERALS(Energy, joule, joules, j)
+	GENERATE_LITERALS_SIPREFIXES(Energy, joule, joules, j)
+
+	Energy getKineticEnergy(const Mass& _mass, const Velocity& _vel) {
+		throw; // need to update due to change in base units
+		//const double dbl_mass = getRaw(_mass);// _mass.getRaw();
+		//const double dbl_vel = getRaw(_vel);
+		//return Energy(0.5 * dbl_mass * dbl_vel * dbl_vel);
+	}
 };
 

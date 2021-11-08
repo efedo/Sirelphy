@@ -7,7 +7,6 @@
 using namespace si;
 
 namespace _units_private {
-
 	UNIT_ADD_BASE(radian, radians, 1.0) // 1854858 * pow(10, 38)
 	UNIT_ADD_SIPREFIXES(radian, radians)
 	UNIT_ADD_RELATIVE(degree, degrees, radian, 1 / 180) //deg

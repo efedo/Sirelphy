@@ -19,18 +19,16 @@ namespace _units_private {
 }
 
 namespace units {
-	class Time : public Unit<double, _units_private::dim_time> {
-	public:
 
-		explicit constexpr Time(const double& _val = 0) : Unit(_val) {}
+	template<>
+	class Unit<double, _units_private::dim_time> : public _units_private::_Unit<double, _units_private::dim_time> {
+		public:
+		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(second, seconds, s)
-
-		// SI prefix units
 		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(second, seconds, s)
-
-		// Non-SI units
 		GENERATE_MEMBER_FUNCTIONS(minute, minutes, min)
 		GENERATE_MEMBER_FUNCTIONS(hour, hours, hr)
 		GENERATE_MEMBER_FUNCTIONS(day, days, d)
@@ -42,17 +40,10 @@ namespace units {
 		// Math functions
 		//friend Length operator*(const velocity::Velocity&, const time::Time&);
 	};
-	typedef Time Duration;
 
 	// Literals
-
-	// Base unit
 	GENERATE_LITERALS(Time, second, seconds, s)
-
-	// SI prefix units
 	GENERATE_LITERALS_SIPREFIXES(Time, second, seconds, s)
-
-	// Non-SI units
 	GENERATE_LITERALS(Time, minute, minutes, min)
 	GENERATE_LITERALS(Time, hour, hours, hr)
 	GENERATE_LITERALS(Time, day, days, d)

@@ -18,7 +18,7 @@ public:
 	void						addOriginatingForce(cParticleClass *, cForce *);
 	std::set<cForce *> *		getForcesToOtherClass(cParticleClass *);
 private:
-	units::Mass				_mass = units::Mass(1);
+	units::Mass					_mass; // Should be 1.0
 	std::map<cProperty *, 
 		double>					propertyVals;
 	cUniverse *					_owner = 0;

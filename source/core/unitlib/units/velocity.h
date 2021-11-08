@@ -15,13 +15,13 @@ namespace _units_private {
 
 namespace units {
 
-	class Length;
-	class Time;
-
-	class Velocity : public Unit<double, _units_private::dim_velocity> {
-	public:
-		explicit constexpr Velocity(const double& _val = 0) : Unit(_val) {}
-		constexpr Velocity(Unit<double, _units_private::dim_velocity> _oldunit) : Unit(_oldunit) {}
+	template<>
+	class Unit<double, _units_private::dim_velocity> : public _units_private::_Unit<double, _units_private::dim_velocity> {
+		public:
+		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
+		//explicit constexpr Velocity(const double& _val = 0) : Unit(_val) {}
+		//constexpr Velocity(Unit<double, _units_private::dim_velocity> _oldunit) : Unit(_oldunit) {}
 
 		// Base unit
 		GENERATE_MEMBER_FUNCTIONS(meter_per_second, meters_per_second, m_per_s)

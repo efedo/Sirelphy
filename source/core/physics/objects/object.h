@@ -66,8 +66,8 @@ protected:
 	cUniverse* const			_universe = 0;
 
 	// Proper properties (reference-frame-independent properties) 
-	units::Time				_age = units::Time(0);
-	units::Mass				_restMass = units::Mass(0);
+	units::Time				_age;
+	units::Mass				_restMass;
 
 	// Relative properties (reference-frame-dependent)
 	cFrame * const				_relativeTo = 0;

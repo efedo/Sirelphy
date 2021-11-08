@@ -38,3 +38,10 @@ TEST(UnitLib, Velocity) {
 	//std::cout << blah.in_m_per_s() << "/n";
 	//blah.debugUnitPrint();
 }
+
+TEST(UnitLib, Energy) {
+	//units::_kilometers;
+	//units::Energy energy1 = 5.0 units::_joules;
+	//units::Energy energy2 = 7.5 units::_joules;
+	//auto energy_sum = energy1 + energy2;
+}

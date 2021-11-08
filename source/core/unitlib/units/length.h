@@ -24,12 +24,12 @@ namespace _units_private {
 
 namespace units {
 
-	class Time;
-	class Velocity;
-
-	class Length : public Unit<double, _units_private::dim_length> {
+	template<>
+	class Unit<double, _units_private::dim_length> : public _units_private::_Unit<double, _units_private::dim_length> {
 		public:
-		explicit constexpr Length(const double& _val = 0) : Unit(_val) {}
+		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
+		//explicit constexpr Length(const double& _val = 0) : Unit(_val) {}
 
 		// Unit member functions
 		GENERATE_MEMBER_FUNCTIONS(meter, meters, m)
@@ -47,18 +47,10 @@ namespace units {
 		// Math functions
 		friend Length operator*(const Velocity&, const Time&);
 	};
-	typedef Length Distance;
-	typedef Length Position;
 
 	// Literals
-
-	// Base unit
 	GENERATE_LITERALS(Length, meter, meters, m)
-
-	// SI prefix units
 	GENERATE_LITERALS_SIPREFIXES(Length, meter, meters, m)
-
-	// Non-SI units
 	GENERATE_LITERALS(Length, foot, feet, ft)
 	GENERATE_LITERALS(Length, yard, yards, yd)
 	GENERATE_LITERALS(Length, inch, inches, in)
