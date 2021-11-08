@@ -10,14 +10,6 @@
 
 // Advanced declaration
 namespace _units_private {
-	template <class T, class D>
-	class _Unit;
-
-	//template <class T, class D>
-	//constexpr T get_raw(_Unit<T, D> const &);
-
-	//template <class T, class D>
-	//constexpr T set_raw(_Unit<T, D> const&, T);
 
 	// Base unit
 	template <class T, class D>
@@ -32,40 +24,34 @@ namespace _units_private {
 		inline void set_raw(const double& _val) { val = _val; }
 		inline T get_raw() const { return val; }
 	protected:
-		//constexpr friend T (get_raw(_Unit<T, D> const &));
-		//constexpr friend T (set_raw(_Unit<T, D> const&, T val));
 		T val = 0.0;
 	};
-
-	//// Definition
-	//template <class T, class D>
-	//constexpr T get_raw(_Unit<T, D> const & unit) {
-	//	return unit.get_raw();
-	//}
-
-	//template <class T, class D>
-	//constexpr void set_raw(_Unit<T, D> const& unit, T val) {
-	//	unit.set_raw(val);
-	//}
 };
 
 namespace units {
 
 	template <class T, class D>
 	class Unit : public _units_private::_Unit<T, D> {
-	public:
+		public:
 		constexpr Unit(const T& _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 	};
 
-	using Mass = Unit<double, _units_private::dim_mass>;
-	using Velocity = Unit<double, _units_private::dim_velocity>;
-	using Energy = Unit<double, _units_private::dim_energy>;
+	using Time = Unit<double, _units_private::dim_time>;
+	using Duration = Time;
 	using Length = Unit<double, _units_private::dim_length>;
 	using Distance = Length;
 	using Position = Length;
-	using Time = Unit<double, _units_private::dim_time>;
-	using Duration = Time;
+	using Mass = Unit<double, _units_private::dim_mass>;
+	using Charge = Unit<double, _units_private::dim_charge>;
+	using Temperature = Unit<double, _units_private::dim_temperature>;
+	using Amount = Unit<double, _units_private::dim_amount>;
+	using Cycle = Unit<double, _units_private::dim_cycle>;
+	using Angle = Unit<double, _units_private::dim_angle>;
+	using SolidAngle = Unit<double, _units_private::dim_solid_angle>;
+	using Velocity = Unit<double, _units_private::dim_velocity>;
+	using Energy = Unit<double, _units_private::dim_energy>;
+	using Frequency = Unit<double, _units_private::dim_frequency>;
 
 	// Operators
 	template <class T, class D>
@@ -118,7 +104,7 @@ namespace units {
 	}
 
 	template <class T, class D>
-	constexpr Unit<T, D> operator/(T lhs, Unit<T, D>& rhs) {
+	constexpr Unit<T, _units_private::unitDimensions_subtract<_units_private::dim_none, D>> operator/(T lhs, Unit<T, D>& rhs) {
 		return Unit<T, _units_private::unitDimensions_subtract<_units_private::dim_none, D>>(lhs / rhs.get_raw());
 	}
 

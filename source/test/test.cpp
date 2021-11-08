@@ -2,6 +2,8 @@
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/unitlib/units.h"
 
+//using namespace units;
+
 TEST(TestCaseName, TestName) {
   cVector3D testVec;
 
@@ -40,8 +42,17 @@ TEST(UnitLib, Velocity) {
 }
 
 TEST(UnitLib, Energy) {
-	//units::_kilometers;
-	//units::Energy energy1 = 5.0 units::_joules;
-	//units::Energy energy2 = 7.5 units::_joules;
-	//auto energy_sum = energy1 + energy2;
+	using namespace units;
+	units::Energy energy1 = 5.0_joules;
+	units::Energy energy2;
+	energy2.set_millijoules(500.0);
+	auto energy_sum = energy1 + energy2;
+	EXPECT_EQ(float(energy_sum.get_joules()), 5.5);
+}
+
+TEST(UnitLib, Frequency) {
+	using namespace units;
+	units::Frequency freq = 500.0_megahertz;
+	units::Cycle cycles = freq * 650_seconds;
+	EXPECT_EQ(float(cycles.get_cycles()), 325000000000);
 }

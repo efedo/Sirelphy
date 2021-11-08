@@ -20,10 +20,8 @@ namespace units {
 		public:
 		constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
-		//explicit constexpr Velocity(const double& _val = 0) : Unit(_val) {}
-		//constexpr Velocity(Unit<double, _units_private::dim_velocity> _oldunit) : Unit(_oldunit) {}
 
-		// Base unit
+		// Unit member functions
 		GENERATE_MEMBER_FUNCTIONS(meter_per_second, meters_per_second, m_per_s)
 		GENERATE_MEMBER_FUNCTIONS(kilometer_per_hour, kilometers_per_hour, km_per_h)
 

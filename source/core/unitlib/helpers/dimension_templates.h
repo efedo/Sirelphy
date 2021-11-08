@@ -29,8 +29,8 @@ namespace _units_private {
 		static constexpr long long temperature_den = Temperature::den;
 		static constexpr long long amount_num = Amount::num;
 		static constexpr long long amount_den = Amount::den;
-		static constexpr long long angle_num = Angle::num;
-		static constexpr long long angle_den = Angle::den;
+		static constexpr long long cycle_num = Angle::num;
+		static constexpr long long cycle_den = Angle::den;
 		static void debugPrint() {
 			std::cout << "Unit dimensions:" << "\n";
 			std::cout << "time (T): " << time_num << "/" << time_den << "\n";
@@ -39,7 +39,7 @@ namespace _units_private {
 			std::cout << "charge (Q): " << charge_num << "/" << charge_den << "\n";
 			std::cout << "temperature (K): " << temperature_num << "/" << temperature_den << "\n";
 			std::cout << "amount (N): " << amount_num << "/" << amount_den << "\n";
-			std::cout << "angle (A): " << angle_num << "/" << angle_den << "\n";
+			std::cout << "angle (A): " << cycle_num << "/" << cycle_den << "\n";
 		}
 	};
 
@@ -55,7 +55,7 @@ namespace _units_private {
 			std::ratio_add<std::ratio<LHS::charge_num, LHS::charge_den>, std::ratio<RHS::charge_num, RHS::charge_den>>,
 			std::ratio_add<std::ratio<LHS::temperature_num, LHS::temperature_den>, std::ratio<RHS::temperature_num, RHS::temperature_den>>,
 			std::ratio_add<std::ratio<LHS::amount_num, LHS::amount_den>, std::ratio<RHS::amount_num, RHS::amount_den>>,
-			std::ratio_add<std::ratio<LHS::angle_num, LHS::angle_den>, std::ratio<RHS::angle_num, RHS::angle_den>>
+			std::ratio_add<std::ratio<LHS::cycle_num, LHS::cycle_den>, std::ratio<RHS::cycle_num, RHS::cycle_den>>
 		>;
 	};
 
@@ -74,7 +74,7 @@ namespace _units_private {
 			std::ratio_subtract<std::ratio<LHS::charge_num, LHS::charge_den>, std::ratio<RHS::charge_num, RHS::charge_den>>,
 			std::ratio_subtract<std::ratio<LHS::temperature_num, LHS::temperature_den>, std::ratio<RHS::temperature_num, RHS::temperature_den>>,
 			std::ratio_subtract<std::ratio<LHS::amount_num, LHS::amount_den>, std::ratio<RHS::amount_num, RHS::amount_den>>,
-			std::ratio_subtract<std::ratio<LHS::angle_num, LHS::angle_den>, std::ratio<RHS::angle_num, RHS::angle_den>>
+			std::ratio_subtract<std::ratio<LHS::cycle_num, LHS::cycle_den>, std::ratio<RHS::cycle_num, RHS::cycle_den>>
 		>;
 	};
 

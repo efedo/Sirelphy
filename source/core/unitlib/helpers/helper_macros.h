@@ -16,7 +16,7 @@ constexpr double NAME_PLURAL##_per_unit = 1.0 / units_per_##NAME; __NL__
 constexpr double units_per_##NAME = units_per_##BASE * RATIO; __NL__ \
 constexpr double NAME_PLURAL##_per_unit = 1.0 / units_per_##NAME; __NL__ \
 
-#define UNIT_ADD_RELATIVE_SHIFTED(NAME, NAME_PLURAL, BASE, SHIFT, RATIO) __NL__ \
+#define UNIT_ADD_RELATIVE_SHIFTED(NAME, NAME_PLURAL, BASE, RATIO, SHIFT) __NL__ \
 constexpr double units_per_##NAME = units_per_##BASE * RATIO; __NL__ \
 constexpr double NAME_PLURAL##_per_unit = 1.0 / units_per_##NAME; __NL__ \
 
@@ -72,8 +72,14 @@ GENERATE_MEMBER_FUNCTIONS(yotta##NAME, yotta##NAME_PLURAL, Y##ABBREV) __NL__
 
 #define GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) __NL__ \
 constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) {  __NL__ \
-return CLASSNAME(_val); __NL__ \
-} __NL__
+return CLASSNAME(_val * _units_private::units_per_##NAME); __NL__ \
+} __NL__ \
+constexpr inline CLASSNAME operator"" _##NAME_PLURAL(unsigned long long _val) {  __NL__ \
+return CLASSNAME((double)_val * _units_private::units_per_##NAME); __NL__ \
+} __NL__ \
+//constexpr inline CLASSNAME operator"" _##NAME_PLURAL(double _val) {  __NL__ \
+//return CLASSNAME(_val * _units_private::units_per_##NAME); __NL__ \
+//} __NL__ \
 //constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) { return CLASSNAME(double(_val)); }
 
 #define GENERATE_LITERALS_SIPREFIXES(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \

@@ -26,7 +26,7 @@ namespace units {
 		constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
-		// Base unit
+		// Unit member functions
 		GENERATE_MEMBER_FUNCTIONS(second, seconds, s)
 		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(second, seconds, s)
 		GENERATE_MEMBER_FUNCTIONS(minute, minutes, min)
@@ -36,9 +36,6 @@ namespace units {
 		GENERATE_MEMBER_FUNCTIONS(year, years, yr)
 		GENERATE_MEMBER_FUNCTIONS(julian_year, julian_years, yr_j)
 		GENERATE_MEMBER_FUNCTIONS(gregorian_year, gregorian_years, yr_g)
-
-		// Math functions
-		//friend Length operator*(const velocity::Velocity&, const time::Time&);
 	};
 
 	// Literals

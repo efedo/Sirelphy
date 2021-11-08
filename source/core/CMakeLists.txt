@@ -55,7 +55,7 @@ add_library(SirelphyCore STATIC
     unitlib/units/temperature.h
     unitlib/units/time.h
     unitlib/units/velocity.h
- "unitlib/units/base.cpp" "unitlib/units/mass.cpp" "unitlib/units.cpp")
+ "unitlib/units/base.cpp" "unitlib/units/mass.cpp" "unitlib/units.cpp" "unitlib/units/charge.h" "unitlib/constants.h" "unitlib/units/cycle.h" "unitlib/units/frequency.h" "unitlib/units/amount.h")
 
 #target_precompile_headers(SirelphyCore
 #	PRIVATE precomp.h)

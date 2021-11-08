@@ -12,6 +12,13 @@ namespace _units_private {
 	// including angle as a fundemental unit (has at least as much business being one as molar amount).
 	// May also switch to derived temperature in the future;
 
+	// Thoughts re: units: https://ui.adsabs.harvard.edu/abs/2019JQSRT.23706594B/abstract
+
+	// Cycles / second = frequency?
+
+	// Consider switching back to Planck/Hartree atomic units as base units
+	// https://en.wikipedia.org/wiki/Hartree_atomic_units
+
 	typedef unitDimensions<>																												dim_none;
 	typedef unitDimensions<std::ratio< 1>>																									dim_time;        // T
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 1>>																					dim_length;      // L
@@ -19,36 +26,28 @@ namespace _units_private {
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>													dim_charge;      // Q
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>									dim_temperature; // K
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>					dim_amount;      // N
-	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>	dim_angle;		 // A
+	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>	dim_cycle;		 // C
 
 	// Derived Units
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 2>>																					dim_area;
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 3>>																					dim_volume;
+	typedef unitDimensions<std::ratio< 0>, std::ratio<-3>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>					dim_concentration;
 	typedef unitDimensions<std::ratio<-1>, std::ratio< 1>>																					dim_velocity;
+	typedef unitDimensions<std::ratio<-2>, std::ratio< 1>>																					dim_acceleration;
 	typedef unitDimensions<std::ratio<-2>, std::ratio< 2>, std::ratio< 1>>																	dim_energy;
-	typedef unitDimensions<std::ratio<-1>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>													dim_current;      // Q
+	typedef unitDimensions<std::ratio<-1>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>													dim_current;
+	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 2>>	dim_angle;
+	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 3>>	dim_solid_angle;
+	typedef unitDimensions<std::ratio<-1>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>	dim_frequency;
 
-	// 28 depth * 29 width * 66 height
-	
-	//typedef unitDimensions<std::ratio<0>, std::ratio<-3>, std::ratio<1>>												dim_density_mass;
-	//typedef unitDimensions<std::ratio<1>, std::ratio<-3>>																dim_density_amount;
-
-	//typedef unitDimensions<std::ratio<0>, std::ratio<0>, std::ratio<-1>, std::ratio<0>, std::ratio<1>>					dim_current; // current = charge / time
-	//typedef unitDimensions<std::ratio<-1>, std::ratio<0>, std::ratio<0>, std::ratio<1>>									; // temperature = energy / amount
-	//typedef unitDimensions<std::ratio<0>, std::ratio<0>, std::ratio<-1>>												dim_frequency; // frequency = 1 / time
-	//typedef unitDimensions<std::ratio<0>, std::ratio<0>, std::ratio<-1>, std::ratio<0>, std::ratio<0>, std::ratio<1>>	dim_angular_velocity; // angular velocity = angle / time
-	//typedef unitDimensions<std::ratio<0>, std::ratio<1>, std::ratio<-2>>												dim_acceleration; // acceleration = length / time^2
-
-	//typedef unitDimensions<std::ratio<0>, std::ratio<-1>, std::ratio<0>, std::ratio<1>>									dim_force; // force = energy / length;
-	//typedef unitDimensions<std::ratio<0>, std::ratio<1>, std::ratio<-2>, std::ratio<1>>								dim_force; // force = length * mass / time^2
-
-
-	//typedef unitDimensions<std::ratio<0>, std::ratio<-1>, std::ratio<-2>, std::ratio<1>>								dim_pressure; // pressure = energy / length * time^2
-	//typedef unitDimensions<std::ratio<0>, std::ratio<0>, std::ratio<-1>, std::ratio<1>>									dim_power; // power = energy / time
-	//typedef unitDimensions<std::ratio<0>, std::ratio<0>, std::ratio<0>, std::ratio<1>, std::ratio<-1>>					dim_voltage; // voltage = energy / charge
-
-	//typedef unitDimensions<std::ratio<2>, std::ratio<1>, std::ratio<-2>>												dim_torque;	///< Represents an SI derived unit of torque
-		//dim_capacitance; // capacitance = charge / voltage = energy
+    // dim_density_amount;
+	// dim_angular_velocity; // angular velocity = angle / time
+	// dim_force; // force = length * mass / time^2
+	// dim_pressure; // pressure = energy / length * time^2
+	// dim_power; // power = energy / time
+	// dim_voltage; // voltage = energy / charge
+	//dim_torque
+	//dim_capacitance;
 	//dim_impedance;
 	//dim_conductance;
 	//dim_magnetic_flux;

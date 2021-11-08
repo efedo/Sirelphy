@@ -8,7 +8,6 @@
 using namespace si;
 
 namespace _units_private {
-	//UNIT_ADD_BASE(joule_mass, joule_masses, 1.0)
 	UNIT_ADD_BASE(_kilogram, _kilograms, 1.0) // underscore to avoid collision with SI prefix autofill
 	UNIT_ADD_RELATIVE(gram, grams, _kilogram, 1.0 / 1000)
 	UNIT_ADD_SIPREFIXES(gram, grams)
@@ -25,6 +24,12 @@ namespace _units_private {
 	UNIT_ADD_RELATIVE(kilodalton, kilodaltons, dalton, 1000) // kDa
 	UNIT_ADD_RELATIVE(megadalton, megadaltons, dalton, 1000000) // kDa
 	UNIT_ADD_RELATIVE(electronvolt_mass, electronvolts_mass, gram, 1.782662e-33) // eVm
+
+	// Electron rest mass
+	// https://en.wikipedia.org/wiki/Electron_rest_mass
+	// == atomic unit of mass
+
+
 }
 
 namespace units {
@@ -34,7 +39,6 @@ namespace units {
 		public:
 		constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
-		//explicit constexpr Mass(const double& _val = 0) : Unit(_val) {}
 
 		// Unit member functions
 		GENERATE_MEMBER_FUNCTIONS(gram, grams, g)
