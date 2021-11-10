@@ -40,6 +40,9 @@ namespace units {
 	using Time = Unit<double, _units_private::dim_time>;
 	using Duration = Time;
 	using Length = Unit<double, _units_private::dim_length>;
+	using Area = Unit<double, _units_private::dim_area>;
+	using Volume = Unit<double, _units_private::dim_volume>;
+	using Concentration = Unit<double, _units_private::dim_concentration>;
 	using Distance = Length;
 	using Position = Length;
 	using Mass = Unit<double, _units_private::dim_mass>;
@@ -50,6 +53,7 @@ namespace units {
 	using Angle = Unit<double, _units_private::dim_angle>;
 	using SolidAngle = Unit<double, _units_private::dim_solid_angle>;
 	using Velocity = Unit<double, _units_private::dim_velocity>;
+	using Acceleration = Unit<double, _units_private::dim_acceleration>;
 	using Energy = Unit<double, _units_private::dim_energy>;
 	using Frequency = Unit<double, _units_private::dim_frequency>;
 

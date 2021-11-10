@@ -48,7 +48,8 @@ inline double get_##NAME_PLURAL() { return double(val) * _units_private::NAME_PL
 //inline void set_##ABBREV(const double& _val) { set_##NAME_PLURAL(_val); } __NL__ \
 //inline double get_##ABBREV() { return get_##NAME_PLURAL(); } __NL__
 
-#define GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(NAME, NAME_PLURAL, ABBREV) \
+#define GENERATE_MEMBER_FUNCTIONS_SI(NAME, NAME_PLURAL, ABBREV) \
+GENERATE_MEMBER_FUNCTIONS(NAME, NAME_PLURAL, ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(yocto##NAME, yocto##NAME_PLURAL, y##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(zepto##NAME, zepto##NAME_PLURAL, z##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(atto##NAME, atto##NAME_PLURAL, a##ABBREV) __NL__ \
@@ -82,7 +83,8 @@ return CLASSNAME((double)_val * _units_private::units_per_##NAME); __NL__ \
 //} __NL__ \
 //constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) { return CLASSNAME(double(_val)); }
 
-#define GENERATE_LITERALS_SIPREFIXES(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
+#define GENERATE_LITERALS_SI(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
+GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) __NL__ \
 GENERATE_LITERALS(CLASSNAME, yocto##NAME, yocto##NAME_PLURAL, y##ABBREV) __NL__ \
 GENERATE_LITERALS(CLASSNAME, zepto##NAME, zepto##NAME_PLURAL, z##ABBREV) __NL__ \
 GENERATE_LITERALS(CLASSNAME, atto##NAME, atto##NAME_PLURAL, a##ABBREV) __NL__ \

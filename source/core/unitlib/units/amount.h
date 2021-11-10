@@ -21,13 +21,11 @@ namespace units {
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS(mole, moles, mol)
-		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(mole, moles, mol)
+		GENERATE_MEMBER_FUNCTIONS_SI(mole, moles, mol)
 		GENERATE_MEMBER_FUNCTIONS(count, count, counts)
 	};
 
 	// Literals
-	GENERATE_LITERALS(Amount, mole, moles, mol)
-	GENERATE_LITERALS_SIPREFIXES(Amount, mole, moles, mol)
+	GENERATE_LITERALS_SI(Amount, mole, moles, mol)
 	GENERATE_LITERALS(Amount, count, count, counts)
 };

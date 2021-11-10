@@ -23,11 +23,10 @@ public:
 	void						addForce(const std::string &, const std::string &, const std::string&, const double &, const unsigned int &);
 	void						_updatePClassForceListsAll();
 	void						_advanceTime();
-	void						_setupTernaryPhotonSystem(cParticle*&, cParticle*&, cParticle*&);
-	void						setupStandardModel();
 	cUniverse();
 	~cUniverse();
 private:
+	friend class UniverseGenerator;
 	void						_calcImpulses();
 	cProperty *					_addProperty(const std::string &);
 	cForce *					_addForce(const std::string &, const std::string &, const std::string &, const double &, const unsigned int &);

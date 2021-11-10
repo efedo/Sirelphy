@@ -10,9 +10,9 @@ using namespace si;
 namespace _units_private {
 	UNIT_ADD_BASE(meter, meters, 1.0)
 	UNIT_ADD_SIPREFIXES(meter, meters)
-	UNIT_ADD_RELATIVE(Planck_length, Planck_lengths, meter, 1.61625518 / power(10, 35))
+	UNIT_ADD_RELATIVE(Planck_length, Planck_lengths, meter, _constants::Planck_length);
 	//Bohr radius : {\displaystyle a_{ 0 } = 1}a_0 = 1, also known as the atomic unit of length[4]
-	// 5.29177210903(80)×10?11 m
+	// 5.29177210903(80) x 10-11 m
 	//Classical electron radius
 	// https://en.wikipedia.org/wiki/Classical_electron_radius
 	UNIT_ADD_RELATIVE(foot, feet, meter, 381 / 1250)
@@ -40,8 +40,7 @@ namespace units {
 		//explicit constexpr Length(const double& _val = 0) : Unit(_val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS(meter, meters, m)
-		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(meter, meters, m)
+		GENERATE_MEMBER_FUNCTIONS_SI(meter, meters, m)
 		GENERATE_MEMBER_FUNCTIONS(Planck_length, Planck_lengths, Pl)
 		GENERATE_MEMBER_FUNCTIONS(foot, feet, ft)
 		GENERATE_MEMBER_FUNCTIONS(yard, yards, yd)
@@ -56,14 +55,10 @@ namespace units {
 		GENERATE_MEMBER_FUNCTIONS(light_year, light_years, ly)
 		GENERATE_MEMBER_FUNCTIONS(parsec, parsecs, pc)
 		GENERATE_MEMBER_FUNCTIONS(angstrom, angstroms, ang)
-
-		// Math functions
-		//friend Length operator*(const Velocity&, const Time&);
 	};
 
 	// Literals
-	GENERATE_LITERALS(Length, meter, meters, m)
-	GENERATE_LITERALS_SIPREFIXES(Length, meter, meters, m)
+	GENERATE_LITERALS_SI(Length, meter, meters, m)
 	GENERATE_LITERALS(Length, Planck_length, Planck_lengths, Pl)
 	GENERATE_LITERALS(Length, foot, feet, ft)
 	GENERATE_LITERALS(Length, yard, yards, yd)

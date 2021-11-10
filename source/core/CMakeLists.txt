@@ -32,6 +32,9 @@ add_library(SirelphyCore STATIC
     physics/universe/scenemanager.h
     physics/universe/universe.cpp
     physics/universe/universe.h
+    physics/universe/generators.h
+    physics/universe/generators/standard_atomic.cpp
+    physics/universe/generators/funny_photon_system.cpp
     physics/vector/special/vector_length.h
     physics/vector/special/vector_lengthtime.h
     physics/vector/special/vector_unit3d.h
@@ -39,23 +42,34 @@ add_library(SirelphyCore STATIC
     physics/vector/vector.decl.h
     physics/vector/vector.h
     precomp.cpp
-    "unitlib/helpers/constants_private.h"
+    unitlib/helpers/constants_private.h
     unitlib/helpers/dimension_fundamentals.h
     unitlib/helpers/dimension_templates.h
     unitlib/helpers/helper_macros.h
     unitlib/helpers/macro_debugging.h
     unitlib/helpers/si_prefixes.h
+    unitlib/units.cpp
     unitlib/units.h
+    unitlib/constants.h
+    unitlib/units/acceleration.h
+    unitlib/units/amount.h
     unitlib/units/angle.h
+    unitlib/units/area.h
     unitlib/units/base.h
-    
+    unitlib/units/charge.h
+    unitlib/units/concentration.h
+    unitlib/units/cycle.h
+    unitlib/units/energy.cpp
     unitlib/units/energy.h
+    unitlib/units/frequency.h
     unitlib/units/length.h
+    unitlib/units/mass.cpp
     unitlib/units/mass.h
     unitlib/units/temperature.h
     unitlib/units/time.h
     unitlib/units/velocity.h
- "unitlib/units/base.cpp" "unitlib/units/mass.cpp" "unitlib/units.cpp" "unitlib/units/charge.h" "unitlib/constants.h" "unitlib/units/cycle.h" "unitlib/units/frequency.h" "unitlib/units/amount.h")
+    unitlib/units/volume.h
+)
 
 #target_precompile_headers(SirelphyCore
 #	PRIVATE precomp.h)

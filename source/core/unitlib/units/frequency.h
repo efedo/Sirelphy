@@ -21,11 +21,9 @@ namespace units {
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS(hertz, hertz, Hz)
-		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(hertz, hertz, Hz)
+		GENERATE_MEMBER_FUNCTIONS_SI(hertz, hertz, Hz)
 	};
 
 	// Literals
-	GENERATE_LITERALS(Frequency, hertz, hertz, Hz)
-	GENERATE_LITERALS_SIPREFIXES(Frequency, hertz, hertz, Hz)
+	GENERATE_LITERALS_SI(Frequency, hertz, hertz, Hz)
 };

@@ -3,12 +3,14 @@
 #pragma once
 
 #include "Sirelphy/source/core/unitlib/units/base.h"
+#include "Sirelphy/source/core/unitlib/helpers/constants_private.h"
 
 using namespace si;
 
 namespace _units_private {
 	UNIT_ADD_BASE(second, seconds, 1.0)
 	UNIT_ADD_SIPREFIXES(second, seconds)
+	UNIT_ADD_RELATIVE(Planck_time, Planck_time, second, _constants::Planck_time);
 	UNIT_ADD_RELATIVE(minute, minutes, second, 60) // min
 	UNIT_ADD_RELATIVE(hour, hours, minute, 60) // hr
 	UNIT_ADD_RELATIVE(day, days, hour, 24) // d
@@ -27,8 +29,7 @@ namespace units {
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS(second, seconds, s)
-		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(second, seconds, s)
+		GENERATE_MEMBER_FUNCTIONS_SI(second, seconds, s)
 		GENERATE_MEMBER_FUNCTIONS(minute, minutes, min)
 		GENERATE_MEMBER_FUNCTIONS(hour, hours, hr)
 		GENERATE_MEMBER_FUNCTIONS(day, days, d)
@@ -39,8 +40,7 @@ namespace units {
 	};
 
 	// Literals
-	GENERATE_LITERALS(Time, second, seconds, s)
-	GENERATE_LITERALS_SIPREFIXES(Time, second, seconds, s)
+	GENERATE_LITERALS_SI(Time, second, seconds, s)
 	GENERATE_LITERALS(Time, minute, minutes, min)
 	GENERATE_LITERALS(Time, hour, hours, hr)
 	GENERATE_LITERALS(Time, day, days, d)

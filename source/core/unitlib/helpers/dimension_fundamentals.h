@@ -40,11 +40,14 @@ namespace _units_private {
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 3>>	dim_solid_angle;
 	typedef unitDimensions<std::ratio<-1>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>	dim_frequency;
 
+	// dim_pressure; // pressure = energy / length * time^2
+	// dim_force; // force = length * mass / time^2
+	// dim_power; // power = energy / time
+    // mass concentration
+	// current
+
     // dim_density_amount;
 	// dim_angular_velocity; // angular velocity = angle / time
-	// dim_force; // force = length * mass / time^2
-	// dim_pressure; // pressure = energy / length * time^2
-	// dim_power; // power = energy / time
 	// dim_voltage; // voltage = energy / charge
 	//dim_torque
 	//dim_capacitance;

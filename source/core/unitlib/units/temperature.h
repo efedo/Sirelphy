@@ -9,6 +9,7 @@ using namespace si;
 namespace _units_private {
 	UNIT_ADD_BASE(kelvin, kelvin, 1.0) // K
 	UNIT_ADD_SIPREFIXES(kelvin, kelvin)
+	UNIT_ADD_RELATIVE(rankine, rankine, kelvin, 5.0/9.0) // K
 }
 
 namespace units {
@@ -20,14 +21,12 @@ namespace units {
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS(kelvin, kelvin, K)
-		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(kelvin, kelvin, K)
+		GENERATE_MEMBER_FUNCTIONS_SI(kelvin, kelvin, K)
 
 		//UNIT_ADD(temperature, celsius, celsius, degC, unit<std::ratio<1>, kelvin, std::ratio<0>, std::ratio<27315, 100>>)
 		//UNIT_ADD(temperature, fahrenheit, fahrenheit, degF, unit<std::ratio<5, 9>, celsius, std::ratio<0>, std::ratio<-160, 9>>)
 	};
 
 	// Literals
-	GENERATE_LITERALS(Temperature, kelvin, kelvin, K)
-	GENERATE_LITERALS_SIPREFIXES(Temperature, kelvin, kelvin, K)
+	GENERATE_LITERALS_SI(Temperature, kelvin, kelvin, K)
 }

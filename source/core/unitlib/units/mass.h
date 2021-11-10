@@ -11,6 +11,8 @@ namespace _units_private {
 	UNIT_ADD_BASE(_kilogram, _kilograms, 1.0) // underscore to avoid collision with SI prefix autofill
 	UNIT_ADD_RELATIVE(gram, grams, _kilogram, 1.0 / 1000)
 	UNIT_ADD_SIPREFIXES(gram, grams)
+	UNIT_ADD_RELATIVE(electron_mass, electron_masses, kilogram, 9.109383701528e-31)
+	UNIT_ADD_RELATIVE(atomic_mass_unit, atomic_mass_units, electron_mass, 1.0)
 	UNIT_ADD_RELATIVE(solar_mass, solar_masses, kilogram, 1.98847e30) //t
 	UNIT_ADD_RELATIVE(tonne, tonnes, kilogram, 1000) //t
 	UNIT_ADD_RELATIVE(metric_ton, metric_tons, tonne, 1) //t
@@ -28,8 +30,6 @@ namespace _units_private {
 	// Electron rest mass
 	// https://en.wikipedia.org/wiki/Electron_rest_mass
 	// == atomic unit of mass
-
-
 }
 
 namespace units {
@@ -41,8 +41,7 @@ namespace units {
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS(gram, grams, g)
-		GENERATE_MEMBER_FUNCTIONS_SIPREFIXES(gram, grams, m)
+		GENERATE_MEMBER_FUNCTIONS_SI(gram, grams, m)
 		GENERATE_MEMBER_FUNCTIONS(solar_mass, solar_masses, M)
 		GENERATE_MEMBER_FUNCTIONS(tonne, tonnes, t) //t
 		GENERATE_MEMBER_FUNCTIONS(metric_ton, metric_tons, mt)
@@ -62,8 +61,7 @@ namespace units {
 	};
 
 	// Literals
-	GENERATE_LITERALS(Mass, gram, grams, g)
-	GENERATE_LITERALS_SIPREFIXES(Mass, gram, grams, g)
+	GENERATE_LITERALS_SI(Mass, gram, grams, g)
 	GENERATE_LITERALS(Mass, solar_mass, solar_masses, M)
 	GENERATE_LITERALS(Mass, tonne, tonnes, t)
 	GENERATE_LITERALS(Mass, metric_ton, metric_tons, mt)

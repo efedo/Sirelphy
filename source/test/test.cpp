@@ -1,24 +1,13 @@
 #include "pch.h"
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/unitlib/units.h"
+#include "Sirelphy/source/core/physics/universe/generators.h"
 
-//using namespace units;
-
-TEST(TestCaseName, TestName) {
-  cVector3D testVec;
-
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
-}
-
-TEST(Core, Compilation) {
+TEST(UnitLib, Core) {
 	units::Length mylength;
 	mylength.set_meters(10000000000000000);
 	double lenm = mylength.get_meters();
-	std::cout << "length in m: " << lenm;
-
 	units::Length myotherlength;
-
 	using namespace units;
 	myotherlength.set_meters(10.56);
 }
@@ -55,4 +44,20 @@ TEST(UnitLib, Frequency) {
 	units::Frequency freq = 500.0_megahertz;
 	units::Cycle cycles = freq * 650_seconds;
 	EXPECT_EQ(float(cycles.get_cycles()), 325000000000);
+}
+
+TEST(UnitLib, Concentration) {
+	using namespace units;
+	units::Amount amount = 0.75_moles;
+	units::Volume vol = 2.3_liters;
+	auto conc = amount / vol;
+	EXPECT_EQ(float(conc.get_millimolar()), 326.08695652173913043478260869565f);
+}
+
+TEST(Physics, UniverseStandardAtomic) {
+	cUniverse* newUni = UniverseGenerator::createStandardModelAtomic();
+}
+
+TEST(Physics, TernaryFunnyPhoton) {
+	cUniverse* newUni = UniverseGenerator::createTernaryPhotonSystem();
 }
