@@ -12,10 +12,10 @@
 //
 //class cOctreeMember {
 //public:
-//	cOctreeMember(const cVector3D &, cOctree *);
+//	cOctreeMember(const Vec3D &, cOctree *);
 //	~cOctreeMember();
-//	cVector3D getPosition() const;
-//	void setPosition(const cVector3D& newPosition);
+//	Vec3D getPosition() const;
+//	void setPosition(const Vec3D& newPosition);
 //	cOctree* getOwnerOctree() const { return ntree; };
 //private:
 //	friend class cOctant;
@@ -24,12 +24,12 @@
 //	cOctant* getOctant() const { return ntant; }
 //	cOctant* ntant = 0;
 //	cOctree* ntree = 0;
-//	cVector3D position;
+//	Vec3D position;
 //};
 //
 //class cOctant {
 //public:
-//	cOctant(cOctant* const, const cVector3D&, const cVector3D&);
+//	cOctant(cOctant* const, const Vec3D&, const Vec3D&);
 //	~cOctant();
 //protected:
 //	friend class cOctree;
@@ -41,7 +41,7 @@
 //	void _collapse();
 //	void _promoteMembers();
 //	cOctant* parent = 0;
-//	cVector3D splitpoint;
+//	Vec3D splitpoint;
 //	cBoundingBox3D boundingBox;
 //	bool isSubdivided = false;
 //	cOctant* children[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -53,7 +53,7 @@
 //
 //class cOctree : public cOctant {
 //public:
-//	cOctree(const cVector3D&, const cVector3D&);
+//	cOctree(const Vec3D&, const Vec3D&);
 //	void add(cOctreeMember* const);
 //	void remove(cOctreeMember* const);
 //};

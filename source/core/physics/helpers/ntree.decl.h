@@ -18,10 +18,10 @@ class cNtree;
 template <uint8_t D>
 class cNtreeMember {
 public:
-	cNtreeMember(const cVector<D>&, cNtree<D>*);
+	cNtreeMember(const Vec<D>&, cNtree<D>*);
 	~cNtreeMember();
-	cVector<D> getPosition() const;
-	void setPosition(const cVector<D>& newPosition);
+	Vec<D> getPosition() const;
+	void setPosition(const Vec<D>& newPosition);
 	cNtree<D>* getOwnerNtree() const { return ntree; };
 private:
 	template <uint8_t D>
@@ -32,13 +32,13 @@ private:
 	cNtant<D>* getNtant() const { return ntant; }
 	cNtant<D>* ntant = 0;
 	cNtree<D>* ntree = 0;
-	cVector<D> position;
+	Vec<D> position;
 };
 
 template <uint8_t D>
 class cNtant {
 public:
-	cNtant(cNtant<D>* const, const cVector<D>&, const cVector<D>&);
+	cNtant(cNtant<D>* const, const Vec<D>&, const Vec<D>&);
 	~cNtant();
 protected:
 	template <uint8_t D>
@@ -51,7 +51,7 @@ protected:
 	void _collapse();
 	void _promoteMembers();
 	cNtant* parent = 0;
-	cVector<D> splitpoint;
+	Vec<D> splitpoint;
 	cBoundingBox<D> boundingBox;
 	bool isSubdivided = false;
 	cNtant* children[pwrtwo(D)] = { 0 };
@@ -64,7 +64,7 @@ protected:
 template <uint8_t D>
 class cNtree : public cNtant<D> {
 public:
-	cNtree(const cVector<D>&, const cVector<D>&);
+	cNtree(const Vec<D>&, const Vec<D>&);
 	void add(cNtreeMember<D>* const);
 	void remove(cNtreeMember<D>* const);
 };

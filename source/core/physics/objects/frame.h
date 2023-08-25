@@ -14,27 +14,27 @@ public:
 	cFrame() = delete;
 
 	// Get position/time
-//	cVectorLength3Time1			getPositionSpaceTime()		const;
-	cVectorLength3				getPositionSpace()			const;
+//	VectorLength3Time1			getPositionSpaceTime()		const;
+	VecLength3					getPositionSpace()			const;
 //	Time						getPositionTime()			const;
-	cVectorVelocity3			getVelocity()				const;
-	units::Velocity			getVelocityMagnitude()		const;
+	VecVelocity3				getVelocity()				const;
+	units::Velocity				getVelocityMagnitude()		const;
 
 	// Set position/time
-//	void						setPositionSpaceTime(const cVectorLength3Time1&);
-	void						setPositionSpace(const cVectorLength3&);
+//	void						setPositionSpaceTime(const VectorLength3Time1&);
+	void						setPositionSpace(const VecLength3&);
 //	void						setPositionTime(const Time&);
 //	void						setTime(const Time&);
-	void						setVelocity(const cVectorVelocity3&);
+	void						setVelocity(const VecVelocity3&);
 
 protected:
 	friend class cOrigin;
 	cFrame(cOrigin*);
 	cFrame* const				_relativeTo = 0;
-	cVectorLength3				_position;
-	cVectorVelocity3			_velocity;
+	VecLength3					_position;
+	VecVelocity3				_velocity;
 //	Time						_time;
-//	cVectorOrientation3			_orientation;
-//	cVectorRotation3			_rotation;
+//	VectorOrientation3			_orientation;
+//	VectorRotation3				_rotation;
 	uint16_t					_level = 0; // How many levels frame is removed from origin
 };

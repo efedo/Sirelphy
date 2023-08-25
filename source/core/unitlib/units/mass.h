@@ -37,7 +37,7 @@ namespace units {
 	template<>
 	class Unit<double, _units_private::dim_mass> : public _units_private::_Unit<double, _units_private::dim_mass> {
 		public:
-		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		explicit constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
@@ -62,7 +62,7 @@ namespace units {
 
 	// Literals
 	GENERATE_LITERALS_SI(Mass, gram, grams, g)
-	GENERATE_LITERALS(Mass, solar_mass, solar_masses, M)
+	GENERATE_LITERALS_NOABR(Mass, solar_mass, solar_masses)
 	GENERATE_LITERALS(Mass, tonne, tonnes, t)
 	GENERATE_LITERALS(Mass, metric_ton, metric_tons, mt)
 	GENERATE_LITERALS(Mass, pound, pounds, lb)

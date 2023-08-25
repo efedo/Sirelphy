@@ -39,8 +39,8 @@ namespace _units_private {
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 2>>	dim_angle;
 	typedef unitDimensions<std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 3>>	dim_solid_angle;
 	typedef unitDimensions<std::ratio<-1>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 0>, std::ratio< 1>>	dim_frequency;
+	typedef unitDimensions<std::ratio<-2>, std::ratio<-1>, std::ratio< 1>>																	dim_pressure;
 
-	// dim_pressure; // pressure = energy / length * time^2
 	// dim_force; // force = length * mass / time^2
 	// dim_power; // power = energy / time
     // mass concentration

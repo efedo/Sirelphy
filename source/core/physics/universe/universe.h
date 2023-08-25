@@ -16,7 +16,7 @@ public:
 	uint8_t						getDimensions() const;
 	cOrigin*					getOrigin() const;
 	double						getMaxVelocity() const;
-	cGravityTensor				getGravity(const cVectorLength3 &) const; /// Gets gravity field and frame at the given
+	cGravityTensor				getGravity(const VecLength3 &) const; /// Gets gravity field and frame at the given
 														// position
 	double						getTickLength() const;
 	void						addProperty(const std::string &);

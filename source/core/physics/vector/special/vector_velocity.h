@@ -6,8 +6,8 @@
 #include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/physics/vector/special/vector_unit3d.h"
 
-typedef cVectorUnit3<units::Velocity> cVectorVelocity3;
+typedef VecUnit3<units::Velocity> VecVelocity3;
 
-//class cVectorVelocity3 : public cVectorUnit3<Velocity> {
+//class VectorVelocity3 : public VectorUnit3<Velocity> {
 //public:
 //};

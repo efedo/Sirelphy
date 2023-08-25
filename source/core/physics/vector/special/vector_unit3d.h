@@ -7,24 +7,24 @@
 #include "Sirelphy/source/core/physics/vector/vector.h"
 
 template <class T>
-class cVectorUnit3 {
+class VecUnit3 {
 public:
-	cVectorUnit3() {}
+	VecUnit3() {}
 
-	cVectorUnit3(const cVector3D& tmpVec)
+	VecUnit3(const Vec3D& tmpVec)
 		: vec3d_backend(tmpVec) {}
 
-	//cVectorUnit3(const cVector<3>& tmpVec)
+	//VectorUnit3(const Vector<3>& tmpVec)
 	//	: vec3d_backend(tmpVec.get3D()) {}
 
-	cVectorUnit3(const double& tmp_x, const double& tmp_y, const double& tmp_z)
+	VecUnit3(const double& tmp_x, const double& tmp_y, const double& tmp_z)
 		: vec3d_backend(tmp_x, tmp_y, tmp_z) {}
 
-	cVectorUnit3(const T& tmp_x, const T& tmp_y, const T& tmp_z)
-		: cVectorUnit3<T>(tmp_x.getRaw(), tmp_y.getRaw(), tmp_z.getRaw()) {}
+	VecUnit3(const T& tmp_x, const T& tmp_y, const T& tmp_z)
+		: VecUnit3<T>(tmp_x.getRaw(), tmp_y.getRaw(), tmp_z.getRaw()) {}
 
-	cVectorUnit3(const cVectorUnit3<T>& rhs)
-		: cVectorUnit3(rhs.vec3d_backend)
+	VecUnit3(const VecUnit3<T>& rhs)
+		: VecUnit3(rhs.vec3d_backend)
 	{}
 
 
@@ -32,12 +32,12 @@ public:
 	inline T y() const { return T(vec3d_backend.y()); }
 	inline T z() const { return T(vec3d_backend.z()); }
 
-	cVector3D& getRaw() {
+	Vec3D& getRaw() {
 		return vec3d_backend;
 	}
 
 	// Spatial distance from first vector to second vector
-	friend T distance(const cVectorUnit3<T>& lhs, const cVectorUnit3<T>& rhs) {
+	friend T distance(const VecUnit3<T>& lhs, const VecUnit3<T>& rhs) {
 		return T(distance(lhs.vec3d_backend, rhs.vec3d_backend));
 	}
 
@@ -46,28 +46,28 @@ public:
 	}
 
 	// Unit direction from first vector to second vector
-	friend cVectorUnit3<T> direction(const cVectorUnit3<T>& lhs, const cVectorUnit3<T>& rhs) {
-		return cVectorUnit3<T>(lhs.vec3d_backend.direction(rhs.vec3d_backend));
+	friend VecUnit3<T> direction(const VecUnit3<T>& lhs, const VecUnit3<T>& rhs) {
+		return VecUnit3<T>(lhs.vec3d_backend.direction(rhs.vec3d_backend));
 	}
 
 	// Normal angle from first vector to second vector (0 to 1)
-	friend double angle(const cVectorUnit3<T>& lhs, const cVectorUnit3<T>& rhs) {
+	friend double angle(const VecUnit3<T>& lhs, const VecUnit3<T>& rhs) {
 		return angle(lhs.vec3d_backend, rhs.vec3d_backend);
 	}
 
-	cVectorUnit3<T>& operator=(const cVectorUnit3<T>& rhs)
+	VecUnit3<T>& operator=(const VecUnit3<T>& rhs)
 	{
 		vec3d_backend = rhs.vec3d_backend;
 		return *this;
 	}
 
-	friend cVectorUnit3<T> operator+(const cVectorUnit3<T>& lhs, const cVectorUnit3<T>& rhs)
+	friend VecUnit3<T> operator+(const VecUnit3<T>& lhs, const VecUnit3<T>& rhs)
 	{
-		return cVectorUnit3<T>(lhs.vec3d_backend + rhs.vec3d_backend);
+		return VecUnit3<T>(lhs.vec3d_backend + rhs.vec3d_backend);
 	}
 
 private:
-	cVector3D vec3d_backend;
+	Vec3D vec3d_backend;
 };
 
 

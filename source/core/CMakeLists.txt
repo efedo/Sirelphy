@@ -16,6 +16,7 @@ add_library(SirelphyCore STATIC
     physics/helpers/ntree.decl.h
     physics/helpers/ntree.h
     physics/helpers/octree.h
+    physics/objects/atom.h
     physics/objects/blop.h
     physics/objects/frame.cpp
     physics/objects/frame.h
@@ -39,7 +40,7 @@ add_library(SirelphyCore STATIC
     physics/vector/special/vector_lengthtime.h
     physics/vector/special/vector_unit3d.h
     physics/vector/special/vector_velocity.h
-    physics/vector/vector.decl.h
+    
     physics/vector/vector.h
     precomp.cpp
     unitlib/helpers/constants_private.h
@@ -69,7 +70,7 @@ add_library(SirelphyCore STATIC
     unitlib/units/time.h
     unitlib/units/velocity.h
     unitlib/units/volume.h
-)
+    unitlib/units/pressure.h)
 
 #target_precompile_headers(SirelphyCore
 #	PRIVATE precomp.h)

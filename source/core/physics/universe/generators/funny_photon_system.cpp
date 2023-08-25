@@ -32,13 +32,13 @@ cUniverse* UniverseGenerator::createTernaryPhotonSystem() {
 	class_photonB->setProperty(propPhotonB, 1.0);
 
 	auto pA = uni._addParticle(class_photonA);
-	pA->setPosition(cVector3D(0, 1e-11, 0));
+	pA->setPosition(Vec3D(0, 1e-11, 0));
 
 	auto pB1 = uni._addParticle(class_photonB);
-	pB1->setPosition(cVector3D(1e-30, 0, 0));
+	pB1->setPosition(Vec3D(1e-30, 0, 0));
 
 	auto pB2 = uni._addParticle(class_photonB);
-	pB2->setPosition(cVector3D(-1e-30, 0, 0));
+	pB2->setPosition(Vec3D(-1e-30, 0, 0));
 
 	//std::ofstream physicsfile("physicsout.tsv", std::ofstream::trunc);
 

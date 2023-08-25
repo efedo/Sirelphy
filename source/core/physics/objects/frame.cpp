@@ -17,11 +17,11 @@ cFrame::cFrame(cOrigin* origin)
 // Get position/time																 //
 ///////////////////////////////////////////////////////////////////////////////////////
 
-//cVectorLength3Time1 cFrame::getPositionSpaceTime() const { 
+//VectorLength3Time1 cFrame::getPositionSpaceTime() const { 
 //	return _position; 
 //}
 
-cVectorLength3 cFrame::getPositionSpace() const { 
+VecLength3 cFrame::getPositionSpace() const { 
 	return _position; 
 }
 
@@ -29,7 +29,7 @@ cVectorLength3 cFrame::getPositionSpace() const {
 //	return _position.t(); 
 //}
 
-cVectorVelocity3 cFrame::getVelocity() const { 
+VecVelocity3 cFrame::getVelocity() const { 
 	return _velocity;
 }
 
@@ -41,11 +41,11 @@ units::Velocity cFrame::getVelocityMagnitude() const {
 // Set position/time																 //
 ///////////////////////////////////////////////////////////////////////////////////////
 
-//void cFrame::setPositionSpaceTime(const cVectorLength3Time1& _spaceTime) { 
+//void cFrame::setPositionSpaceTime(const VectorLength3Time1& _spaceTime) { 
 //	_position = _spaceTime; 
 //}
 
-void cFrame::setPositionSpace(const cVectorLength3& _space) { 
+void cFrame::setPositionSpace(const VecLength3& _space) { 
 	_position = _space; 
 }
 
@@ -57,6 +57,6 @@ void cFrame::setPositionSpace(const cVectorLength3& _space) {
 //	setPositionTime(_time);
 //}
 
-void cFrame::setVelocity(const cVectorVelocity3& _newVel) { 
+void cFrame::setVelocity(const VecVelocity3& _newVel) { 
 	_velocity = _newVel; 
 }

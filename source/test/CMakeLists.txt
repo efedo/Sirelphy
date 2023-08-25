@@ -3,11 +3,14 @@ cmake_minimum_required(VERSION 3.10)
 include(${UTILOGENY_DIR}/cmake/target_add_googletest.cmake)
 include(${UTILOGENY_DIR}/cmake/target_add_tbb.cmake)
 
+set(OVERRIDE_CXX_STANDARD 20)
+
 add_executable(SirelphyTest
 	pch.cpp
 	pch.h
 	test.cpp
-)
+    vector.cpp
+	)
 
 target_precompile_headers(SirelphyTest
 	PRIVATE pch.h)

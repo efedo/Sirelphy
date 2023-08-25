@@ -5,7 +5,7 @@
 #include "Sirelphy/source/physics/helpers/ntree.h"
 
 void ntree_test() {
-	cOctree testOctree(cVector3D(0.0, 0.0, 0.0), cVector3D(1.0, 1.0, 1.0));
+	cOctree testOctree(Vec3D(0.0, 0.0, 0.0), Vec3D(1.0, 1.0, 1.0));
 
 
 }

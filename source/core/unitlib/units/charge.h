@@ -21,7 +21,7 @@ namespace units {
 	template<>
 	class Unit<double, _units_private::dim_charge> : public _units_private::_Unit<double, _units_private::dim_charge> {
 	public:
-		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		explicit constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
@@ -36,7 +36,7 @@ namespace units {
 	// Literals
 	GENERATE_LITERALS_SI(Charge, coulomb, coulombs, C)
 	GENERATE_LITERALS(Charge, elementary_charge, elementary_charge, e)
-	GENERATE_LITERALS(Charge, atomic_unit_of_charge, atomic_units_of_charge, au)
+	//GENERATE_LITERALS_NOABR(Charge, atomic_unit_of_charge, atomic_units_of_charge)
 	GENERATE_LITERALS(Charge, faraday, faradays, F)
 	GENERATE_LITERALS(Charge, milliamp_hour, milliamp_hours, mAh)
 	GENERATE_LITERALS(Charge, amp_hour, amp_hours, Ah)

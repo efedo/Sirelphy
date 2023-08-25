@@ -15,7 +15,7 @@ namespace _units_private {
 	template <class T, class D>
 	class _Unit {
 	public:
-		constexpr _Unit(const T& _val = 0) : val(_val) {}
+		explicit constexpr _Unit(const T& _val = 0) : val(_val) {}
 		constexpr _Unit(const _Unit& rhs) : val(rhs.val) {}
 
 		void debugUnitPrint() {
@@ -33,8 +33,8 @@ namespace units {
 	template <class T, class D>
 	class Unit : public _units_private::_Unit<T, D> {
 		public:
-		constexpr Unit(const T& _val = 0) : _Unit(_val) {}
-		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
+		constexpr Unit(const T& _val = 0) : _units_private::_Unit<T, D>(_val) {}
+		constexpr Unit(const Unit& rhs) : _units_private::_Unit<T, D>(rhs.val) {}
 	};
 
 	using Time = Unit<double, _units_private::dim_time>;
@@ -56,6 +56,7 @@ namespace units {
 	using Acceleration = Unit<double, _units_private::dim_acceleration>;
 	using Energy = Unit<double, _units_private::dim_energy>;
 	using Frequency = Unit<double, _units_private::dim_frequency>;
+	using Pressure = Unit<double, _units_private::dim_pressure>;
 
 	// Operators
 	template <class T, class D>
@@ -81,13 +82,13 @@ namespace units {
 	}
 
 	template <class T, class D>
-	constexpr Unit<T, D>& operator+=(const Unit<T, D>& lhs, const Unit<T, D>& rhs) {
+	constexpr Unit<T, D>& operator+=(Unit<T, D>& lhs, const Unit<T, D>& rhs) {
 		lhs.set_raw(lhs.get_raw() + rhs.get_raw());
 		return lhs;
 	}
 
 	template <class T, class D>
-	constexpr Unit<T, D>& operator-=(const Unit<T, D>& lhs, const Unit<T, D>& rhs) {
+	constexpr Unit<T, D>& operator-=(Unit<T, D>& lhs, const Unit<T, D>& rhs) {
 		lhs.set_raw(lhs.get_raw() - rhs.get_raw());
 		return lhs;
 	}
@@ -113,13 +114,13 @@ namespace units {
 	}
 
 	template <class T, class D>
-	constexpr Unit<T, D> & operator*=(const Unit<T, D>& lhs, T& rhs) {
+	constexpr Unit<T, D> & operator*=(Unit<T, D>& lhs, T rhs) {
 		lhs.set_raw(lhs.get_raw() * rhs);
 		return lhs;
 	}
 
 	template <class T, class D>
-	constexpr Unit<T, D> & operator/=(const Unit<T, D>& lhs, T rhs) {
+	constexpr Unit<T, D> & operator/=(Unit<T, D>& lhs, T rhs) {
 		lhs.set_raw(lhs.get_raw() / rhs);
 		return lhs;
 	}

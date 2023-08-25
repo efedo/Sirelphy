@@ -42,11 +42,38 @@ UNIT_ADD_RELATIVE(exa##BASE, exa##BASE_PLURAL, BASE, si_exa) __NL__ \
 UNIT_ADD_RELATIVE(zetta##BASE, zetta##BASE_PLURAL, BASE, si_zetta) __NL__ \
 UNIT_ADD_RELATIVE(yotta##BASE, yotta##BASE_PLURAL, BASE, si_yotta) __NL__
 
+#define GENERATE_MEMBER_FUNCTIONS_NOABR(NAME, NAME_PLURAL) \
+inline void set_##NAME_PLURAL(const double& _val) { val = double(_val * _units_private::units_per_##NAME); } __NL__ \
+inline double get_##NAME_PLURAL() { return double(val) * _units_private::NAME_PLURAL##_per_unit; } __NL__
+
 #define GENERATE_MEMBER_FUNCTIONS(NAME, NAME_PLURAL, ABBREV) \
 inline void set_##NAME_PLURAL(const double& _val) { val = double(_val * _units_private::units_per_##NAME); } __NL__ \
 inline double get_##NAME_PLURAL() { return double(val) * _units_private::NAME_PLURAL##_per_unit; } __NL__ \
-//inline void set_##ABBREV(const double& _val) { set_##NAME_PLURAL(_val); } __NL__ \
-//inline double get_##ABBREV() { return get_##NAME_PLURAL(); } __NL__
+inline void set_##ABBREV(const double& _val) { set_##NAME_PLURAL(_val); } __NL__ \
+inline double get_##ABBREV() { return get_##NAME_PLURAL(); } __NL__
+
+#define GENERATE_MEMBER_FUNCTIONS_SI_NOABR(NAME, NAME_PLURAL) \
+GENERATE_MEMBER_FUNCTIONS_NOABR(NAME, NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(yocto##NAME, yocto##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(zepto##NAME, zepto##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(atto##NAME, atto##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(femto##NAME, femto##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(pico##NAME, pico##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(nano##NAME, nano##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(micro##NAME, micro##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(milli##NAME, milli##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(centi##NAME, centi##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(deci##NAME, deci##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(deca##NAME, deca##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(hecto##NAME, hecto##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(kilo##NAME, kilo##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(mega##NAME, mega##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(giga##NAME, giga##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(tera##NAME, tera##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(peta##NAME, peta##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(exa##NAME, exa##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(zetta##NAME, zetta##NAME_PLURAL) __NL__ \
+GENERATE_MEMBER_FUNCTIONS_NOABR(yotta##NAME, yotta##NAME_PLURAL) __NL__
 
 #define GENERATE_MEMBER_FUNCTIONS_SI(NAME, NAME_PLURAL, ABBREV) \
 GENERATE_MEMBER_FUNCTIONS(NAME, NAME_PLURAL, ABBREV) __NL__ \
@@ -71,17 +98,16 @@ GENERATE_MEMBER_FUNCTIONS(exa##NAME, exa##NAME_PLURAL, E##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(zetta##NAME, zetta##NAME_PLURAL, Z##ABBREV) __NL__ \
 GENERATE_MEMBER_FUNCTIONS(yotta##NAME, yotta##NAME_PLURAL, Y##ABBREV) __NL__
 
-#define GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) __NL__ \
+#define GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
 constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) {  __NL__ \
+return CLASSNAME(_val * _units_private::units_per_##NAME); __NL__ \
+} __NL__ \
+constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) {  __NL__ \
 return CLASSNAME(_val * _units_private::units_per_##NAME); __NL__ \
 } __NL__ \
 constexpr inline CLASSNAME operator"" _##NAME_PLURAL(unsigned long long _val) {  __NL__ \
 return CLASSNAME((double)_val * _units_private::units_per_##NAME); __NL__ \
-} __NL__ \
-//constexpr inline CLASSNAME operator"" _##NAME_PLURAL(double _val) {  __NL__ \
-//return CLASSNAME(_val * _units_private::units_per_##NAME); __NL__ \
-//} __NL__ \
-//constexpr inline CLASSNAME operator"" _##ABBREV(long double _val) { return CLASSNAME(double(_val)); }
+}
 
 #define GENERATE_LITERALS_SI(CLASSNAME, NAME, NAME_PLURAL, ABBREV) \
 GENERATE_LITERALS(CLASSNAME, NAME, NAME_PLURAL, ABBREV) __NL__ \
@@ -105,3 +131,34 @@ GENERATE_LITERALS(CLASSNAME, peta##NAME, peta##NAME_PLURAL, P##ABBREV) __NL__ \
 GENERATE_LITERALS(CLASSNAME, exa##NAME, exa##NAME_PLURAL, E##ABBREV) __NL__ \
 GENERATE_LITERALS(CLASSNAME, zetta##NAME, zetta##NAME_PLURAL, Z##ABBREV) __NL__ \
 GENERATE_LITERALS(CLASSNAME, yotta##NAME, yotta##NAME_PLURAL, Y##ABBREV) __NL__
+
+#define GENERATE_LITERALS_NOABR(CLASSNAME, NAME, NAME_PLURAL) \
+constexpr inline CLASSNAME operator"" _##NAME_PLURAL(long double _val) {  __NL__ \
+return CLASSNAME(_val * _units_private::units_per_##NAME); __NL__ \
+} __NL__ \
+constexpr inline CLASSNAME operator"" _##NAME_PLURAL(unsigned long long _val) {  __NL__ \
+return CLASSNAME((double)_val * _units_private::units_per_##NAME); __NL__ \
+} __NL__ \
+
+#define GENERATE_LITERALS_SI_NOABR(CLASSNAME, NAME, NAME_PLURAL) \
+GENERATE_LITERALS_NOABR(CLASSNAME, NAME, NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, yocto##NAME, yocto##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, zepto##NAME, zepto##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, atto##NAME, atto##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, femto##NAME, femto##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, pico##NAME, pico##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, nano##NAME, nano##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, micro##NAME, micro##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, milli##NAME, milli##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, centi##NAME, centi##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, deci##NAME, deci##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, deca##NAME, deca##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, hecto##NAME, hecto##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, kilo##NAME, kilo##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, mega##NAME, mega##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, giga##NAME, giga##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, tera##NAME, tera##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, peta##NAME, peta##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, exa##NAME, exa##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, zetta##NAME, zetta##NAME_PLURAL) __NL__ \
+GENERATE_LITERALS_NOABR(CLASSNAME, yotta##NAME, yotta##NAME_PLURAL)

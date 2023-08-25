@@ -18,7 +18,7 @@ public:
 	cParticle(cUniverse * const, cFrame* const, cParticleClass* const);
 	cParticleClass *			getClass();
 	void						tryAffecting(cParticle *);
-	//void						provideKinEnergy(cVectorND);
+	//void						provideKinEnergy(VectorND);
 
 	// Friend functions
 	friend units::Length		distance(const cParticle&, const cParticle&);

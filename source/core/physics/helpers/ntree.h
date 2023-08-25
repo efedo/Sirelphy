@@ -9,7 +9,7 @@ using cOctree = cNtree<3>;
 using cOctreeMember = cNtreeMember<3>;
 
 template <uint8_t D>
-cNtreeMember<D>::cNtreeMember(const cVector<D>& tmpPosition, cNtree<D>* tmpOwner)
+cNtreeMember<D>::cNtreeMember(const Vec<D>& tmpPosition, cNtree<D>* tmpOwner)
 	: position(tmpPosition), ntree(tmpOwner)
 {
 	if (ntree) ntree->add(this);
@@ -21,19 +21,19 @@ cNtreeMember<D>::~cNtreeMember() {
 }
 
 template <uint8_t D>
-cVector<D> cNtreeMember<D>::getPosition() const {
+Vec<D> cNtreeMember<D>::getPosition() const {
 	return position;
 }
 
 template <uint8_t D>
-void cNtreeMember<D>::setPosition(const cVector<D>& newPosition) {
+void cNtreeMember<D>::setPosition(const Vec<D>& newPosition) {
 	position = newPosition;
 	if (ntant)	getOwnerNtree()->remove(this);
 	getOwnerNtree()->add(this);
 }
 
 template <uint8_t D>
-cNtant<D>::cNtant(cNtant<D>* const tmpParentPtr, const cVector<D>& lowBound, const cVector<D>& highBound)
+cNtant<D>::cNtant(cNtant<D>* const tmpParentPtr, const Vec<D>& lowBound, const Vec<D>& highBound)
 	: parent(tmpParentPtr), boundingBox(lowBound, highBound)
 {
 	splitpoint = (lowBound + highBound) / 2.0;
@@ -71,7 +71,7 @@ void cNtant<D>::_add(cNtreeMember<D>* const newMember) {
 
 	// If it is subdivided, add to subdivision, otherwise add as direct member
 	if (isSubdivided) {
-		cVector<D> newMemberPosition = newMember->getPosition();
+		Vec<D> newMemberPosition = newMember->getPosition();
 		size_t i = 0;
 		for (uint8_t dim = D; dim != 0; --dim) {
 			if (newMemberPosition.dim(dim) > splitpoint.dim(dim)) i += pwrtwo(dim);
@@ -93,9 +93,9 @@ template <uint8_t D>
 void cNtant<D>::_subdivide() {
 	if (isSubdivided) throwl("Already subdivided");
 
-	cVector<D> lowBound = boundingBox.getLowerBound();
-	cVector<D> highBound = boundingBox.getLowerBound();
-	cVector<D> exteriorBound;
+	Vec<D> lowBound = boundingBox.getLowerBound();
+	Vec<D> highBound = boundingBox.getLowerBound();
+	Vec<D> exteriorBound;
 	for (size_t n = 0; D != pwrtwo(D); ++n) {
 		// for each child ntant, need to build up correct exterior vector
 		for (uint8_t dim = 0; dim != D; dim) {
@@ -155,7 +155,7 @@ void cNtant<D>::_remove(cNtreeMember<D>* const memberToRemove) {
 }
 
 template <uint8_t D>
-cNtree<D>::cNtree(const cVector<D>& lowerBound, const cVector<D>& upperBound)
+cNtree<D>::cNtree(const Vec<D>& lowerBound, const Vec<D>& upperBound)
 	: cNtant<D>(0, lowerBound, upperBound)
 {}
 

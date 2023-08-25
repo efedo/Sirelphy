@@ -32,11 +32,11 @@ namespace units {
 	template<>
 	class Unit<double, _units_private::dim_volume> : public _units_private::_Unit<double, _units_private::dim_volume> {
 	public:
-		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		explicit constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions
-		GENERATE_MEMBER_FUNCTIONS_SI(meter_cubed, meters_cubed, m2)
+		GENERATE_MEMBER_FUNCTIONS_SI(meter_cubed, meters_cubed, m3)
 		GENERATE_MEMBER_FUNCTIONS_SI(liter, liters, L)
 		GENERATE_MEMBER_FUNCTIONS(cubic_foot, cubic_feet, cu_ft)
 		GENERATE_MEMBER_FUNCTIONS(cubic_inch, cubic_inches, cu_in)
@@ -55,7 +55,7 @@ namespace units {
 	};
 
 	// Literals
-	GENERATE_LITERALS_SI(Volume, meter_cubed, meters_cubed, m2)
+	GENERATE_LITERALS_SI(Volume, meter_cubed, meters_cubed, m3)
 	GENERATE_LITERALS_SI(Volume, liter, liters, L)
 	GENERATE_LITERALS(Volume, cubic_foot, cubic_feet, cu_ft)
 	GENERATE_LITERALS(Volume, cubic_inch, cubic_inches, cu_in)

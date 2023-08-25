@@ -2,266 +2,356 @@
 
 #pragma once
 #include "Sirelphy/source/core/precomp.h"
-#include "Sirelphy/source/core/physics/vector/vector.decl.h"
-#include "Utilogeny/source/core/randomnumbers.h"
+#include "Sirelphy/source/core/unitlib/units.h"
 #include "Utilogeny/source/core/exceptions.h"
 #include "Utilogeny/source/core/randomnumbers.h"
 
-template <uint8_t ND>
-cVector<ND>::cVector()
-	: _values(new double[ND])
-//: _dimensions(ND)
-{
-	//_values = new double[ND];
-	memset(_values, 0, sizeof(double) * ND);
-	//for (uint8_t i = 0; i != ND; ++i) {
-	//	_values[i] = 0.0;
-	//}
-}
+namespace tmpl {
+	// Uint8_t template comparitor
+	template<uint8_t A, uint8_t B>
+	constexpr uint8_t greater_of()
+	{
+		if constexpr (A > B) return A;
+		else return B;
+	}
 
-template <uint8_t ND>
-cVector<ND>::cVector(const cVector<ND>& rhs)
-	: _values(new double[ND])
-{
-	_values = new double[ND];
-	for (uint8_t i = 0; i != ND; ++i) {
-		_values[i] = rhs._values[i];
+	template<uint8_t A, uint8_t B>
+	constexpr uint8_t lesser_of()
+	{
+		if constexpr (A < B) return A;
+		else return B;
+	}
+
+
+	template<uint8_t A, uint8_t B>
+	constexpr bool is_equal()
+	{
+		return A == B;
+	}
+
+	template<uint8_t A, uint8_t B>
+	constexpr bool is_less_or_equal()
+	{
+		return A <= B;
+	}
+
+	template<uint8_t A, uint8_t B>
+	constexpr bool is_greater_or_equal()
+	{
+		return A >= B;
 	}
 }
 
-////template <uint8_t ND>
-//cVector2D& cVector<2>::get2D() const {
-//	return *const_cast<cVector2D*>(static_cast<const cVector2D*>(this));
-//}
+namespace ctmath {
+	template <class T>
+	constexpr bool equal(T lhs, T rhs) { return lhs == rhs; }
+}
 
-//template <uint8_t ND>
-//cVector2D& cVector<ND>::get2D() const {
-//	throwl("Base vector has incorrect number of dimensions");
-//}
-
-////template <uint8_t ND>
-//cVector3D& cVector<3>::get3D() const {
-//	return *const_cast<cVector3D*>(static_cast<const cVector3D*>(this));
-//}
-
-//template <uint8_t ND>
-//cVector3D& cVector<ND>::get3D() const {
-//	throwl("Base vector has incorrect number of dimensions");
-//}
-
-//cVector4D& cVector<4>::get4D() const {
-//	return *const_cast<cVector4D*>(static_cast<const cVector4D*>(this));
-//}
-
-//template <uint8_t ND>
-//cVector4D& cVector<ND>::get4D() const {
-//	throwl("Base vector has incorrect number of dimensions");
-//}
+// You have the following options:
+// 1. Use variadic arguments + static assert to enforce dimensionality
+// 2. Use SFINAI to always provide only the correct option for a vector of given dimensions
+// 3. Template specializations
 
 template <uint8_t ND>
-cVector<ND>& cVector<ND>::operator=(const cVector<ND>& rhs)
-{
-	if (this == &rhs) return *this;
-	constexpr uint8_t dimensions = ND;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		_values[i] = rhs._values[i];
+class Vec {
+public:
+	Vec()
+	{
+		zero();
 	}
-	return *this;
-}
 
-template <uint8_t ND>
-cVector<ND>::~cVector()
-{
-	if (_values) delete[] _values;
-}
-
-template <uint8_t ND>
-inline double & cVector<ND>::dim(const uint8_t & dimnum) const {
-	#ifdef DEBUG
-	if (dimnum >= ND) throwl("Trying to access non-existant vector dimension");
-	#endif //DEBUG
-	return _values[dimnum];
-}
-
-template <uint8_t ND>
-double cVector<ND>::magnitude() const {
-	constexpr uint8_t dimensions = ND;
-	double sum = 0;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		sum += (double)_values[i] * (double)_values[i];
+	Vec(const Vec& rhs)
+	{
+		memcpy(_values, rhs._values, sizeof(double) * ND);
 	}
-	sum = sqrt(sum);
-	return sum;
-}
 
-// Generates a random unit vector
-template <uint8_t ND>
-void cVector<ND>::randomUnit() {
-	constexpr uint8_t dimensions = ND;
-	bool incomplete = true;
-	while (incomplete) {
+	Vec(const double(&vals)[ND])
+	{
+		memcpy(_values, vals, sizeof(double) * ND);
+	}
+
+	Vec& operator=(const Vec& rhs)
+	{
+		if (this != &rhs) memcpy(_values, rhs._values, sizeof(double) * ND);
+		return *this;
+	}
+
+	~Vec() {}
+
+	template<typename = std::enable_if_t<tmpl::is_equal<ND, 1>()>>
+	Vec(const double nx)
+	{
+		x() = nx;
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_equal<ND, 2>()>>
+	Vec(const double nx, const double ny)
+	{
+		x() = nx;
+		y() = ny;
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_equal<ND, 3>()>>
+	Vec(const double nx, const double ny, const double nz)
+	{
+		x() = nx;
+		y() = ny;
+		z() = nz;
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_equal<ND, 4>()>>
+	Vec(const double nx, const double ny, const double nz, const double nt)
+	{
+		x() = nx;
+		y() = ny;
+		z() = nz;
+		t() = nt;
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_greater_or_equal<ND, 1>()>>
+	inline double& x() const
+	{
+		return dim(0);
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_greater_or_equal<ND, 2>()>>
+	inline double& y() const
+	{
+		return dim(1);
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_greater_or_equal<ND, 3>()>>
+	inline double& z() const
+	{
+		return dim(2);
+	};
+
+	template<typename = std::enable_if_t<tmpl::is_greater_or_equal<ND, 4>()>>
+	inline double& t() const
+	{
+		return dim(3);
+	};
+
+	// Vec information
+	uint8_t getDimensions() const { return ND; }
+
+	// Gets direct access to dimension
+	inline double& dim(const uint8_t& dimnum) const {
+		#ifdef DEBUG
+		if (dimnum >= ND) throwl("Trying to access non-existant vector dimension");
+		#endif //DEBUG
+		return (double&)(_values[dimnum]);
+	}
+
+	// Gets magnitude of vector
+	double magnitude() const {
+		constexpr uint8_t dimensions = ND;
+		double sum = 0;
 		for (uint8_t i = 0; i != dimensions; ++i) {
-			_values[i] = globals::mersenneTwister.randomDouble(0, 1);
+			sum += (double)_values[i] * (double)_values[i];
 		}
-		if (this->isNotZero()) incomplete = false;
+		sum = sqrt(sum);
+		return sum;
 	}
-	this->unitize();
-}
 
-// Checks if not zero
-template <uint8_t ND>
-bool cVector<ND>::isNotZero() {
-	constexpr uint8_t dimensions = ND;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		if (_values[i]) return true;
+	// Generates a random unit vector
+	void randomUnit() {
+		constexpr uint8_t dimensions = ND;
+		bool incomplete = true;
+		while (incomplete) {
+			for (uint8_t i = 0; i != dimensions; ++i) {
+				_values[i] = globals::mersenneTwister.randomDouble(0, 1);
+			}
+			if (this->isNotZero()) incomplete = false;
+		}
+		this->unitize();
 	}
-	return false;
-}
 
-template <uint8_t ND>
-void cVector<ND>::unitize() {
-	scaleTo(1.0);
-}
-
-// Flushes values to 0
-template <uint8_t ND>
-void cVector<ND>::zero() {
-	constexpr uint8_t dimensions = ND;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		_values[i] = 0;
+	// Checks if not zero
+	bool isNotZero() {
+		constexpr uint8_t dimensions = ND;
+		for (uint8_t i = 0; i != dimensions; ++i) {
+			if (_values[i]) return true;
+		}
+		return false;
 	}
-}
 
-/// Scales a vector to magnitude
-template <uint8_t ND>
-void cVector<ND>::scaleTo(const double & targetMagnitude) {
-	if (!isfinite(targetMagnitude)) throwl("Cannot scale vector to non-finite magnitude");
-	const double mag = magnitude();
-	if (!isfinite(mag)) throwl("Cannot scale vector with non-finite magnitude to a target magnitude");
-	const double scaleFactor = targetMagnitude / mag;
-	scaleBy(scaleFactor);
-}
-
-template <uint8_t ND>
-void cVector<ND>::scaleBy(const double & scaleFactor) {
-	constexpr uint8_t dimensions = ND;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		_values[i] = (double)(scaleFactor * (double)_values[i]);
+	void unitize() {
+		scaleTo(1.0);
 	}
-}
 
-template <uint8_t ND>
-bool operator==(const cVector<ND>& lhs, const cVector<ND>& rhs) {
-	constexpr uint8_t dimensions = ND;
-	//if (dimensions != rhs.getDimensions()) throwl("Trying to compare vectors with different numbers of dimensions");
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		if (lhs._values[i] != rhs._values[i]) return false;
+	// Scales a vector to magnitude
+	void scaleTo(const double& targetMagnitude) {
+		if (!isfinite(targetMagnitude)) throwl("Cannot scale vector to non-finite magnitude");
+		const double mag = magnitude();
+		if (!isfinite(mag)) throwl("Cannot scale vector with non-finite magnitude to a target magnitude");
+		const double scaleFactor = targetMagnitude / mag;
+		scaleBy(scaleFactor);
 	}
-	return true;
-}
 
-// Uint8_t template comparitor
-template<uint8_t A, uint8_t B>
-constexpr uint8_t greaterTemplateUint8()
-{
-	if (A > B) return A;
-	else return B;
-}
+	// Scales vector by factor
+	void scaleBy(const double& scaleFactor) {
+		constexpr uint8_t dimensions = ND;
+		for (uint8_t i = 0; i != dimensions; ++i) {
+			_values[i] = (double)(scaleFactor * (double)_values[i]);
+		}
+	}
 
-template <uint8_t ND, uint8_t RD>
-cVector<ND> operator+(const cVector<ND>& lhs, const cVector<RD>& rhs) {
-	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
-	cVector<ND> newVec;
-	uint8_t i = 0;
-	for (; i != RD; ++i) {
-		newVec.dim(i)= lhs.dim(i) + rhs.dim(i);
+	// Flushes values to 0
+	void zero() {
+		memset(_values, 0, sizeof(double) * ND);
 	}
-	for (; i != ND; ++i) {
-		newVec.dim(i) = lhs.dim(i);
-	}
-	return newVec;
-}
 
-template <uint8_t ND, uint8_t RD>
-cVector<ND> operator-(const cVector<ND>& lhs, const cVector<RD>& rhs) {
-	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
-	cVector<ND> newVec;
-	uint8_t i = 0;
-	for (; i != RD; ++i) {
-		newVec.dim(i) = lhs.dim(i) - rhs.dim(i);
+	friend bool operator==(const Vec& lhs, const Vec& rhs) {
+		constexpr uint8_t dimensions = ND;
+		//if (dimensions != rhs.getDimensions()) throwl("Trying to compare vectors with different numbers of dimensions");
+		for (uint8_t i = 0; i != dimensions; ++i) {
+			if (lhs._values[i] != rhs._values[i]) return false;
+		}
+		return true;
 	}
-	for (; i != ND; ++i) {
-		newVec.dim(i) = lhs.dim(i);
-	}
-	return newVec;
-}
 
-template <uint8_t ND>
-cVector<ND> operator-(const cVector<ND>& rhs) {
-	constexpr uint8_t dimensions = ND;
-	cVector<ND> unaryNeg;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		unaryNeg._values[i] = -rhs._values[i];
-	}
-	return unaryNeg;
-}
+	//template <uint8_t RD> friend Vec<ND> operator+(const Vec<ND>&, const Vec<RD>&);
+	template <uint8_t LD, uint8_t RD, typename = std::enable_if_t<tmpl::is_equal<tmpl::greater_of<LD, RD>(), ND>()>>
+	friend Vec operator+(const Vec<LD>& lhs, const Vec<RD>& rhs)
+	{
+		const Vec<tmpl::greater_of<LD, RD>()>* larger;
+		const Vec<tmpl::lesser_of<LD, RD>()>* smaller;
 
-template <uint8_t ND>
-cVector<ND> operator*(const cVector<ND>& vec, const double & mult) {
-	constexpr uint8_t dimensions = ND;
-	cVector<ND> newVec;
+		if constexpr (RD > LD) {
+			larger = &rhs;
+			smaller = &lhs;
+		}
+		else {
+			larger = &lhs;
+			smaller = &rhs;
+		}
+
+		Vec<tmpl::greater_of<LD, RD>()> newVec = *larger;
+		for (uint8_t i = 0; i != tmpl::lesser_of<LD, RD>(); ++i) {
+			newVec.dim(i) += smaller->dim(i);
+		}
+		return newVec;
+	}
+
+	template <uint8_t RD, typename = std::enable_if_t<tmpl::is_less_or_equal<RD, ND>()>>
+	friend Vec operator-(const Vec& lhs, const Vec<RD>& rhs) {
+		Vec<ND> newVec = lhs;
+		for (uint8_t i = 0; i != RD; ++i) {
+			newVec.dim(i) -= rhs.dim(i);
+		}
+		return newVec;
+	}
+
+	friend Vec operator-(const Vec& rhs) {
+		Vec unaryNeg;
+		for (uint8_t i = 0; i != ND; ++i) {
+			unaryNeg._values[i] = -rhs._values[i];
+		}
+		return unaryNeg;
+	}
+
 	/// Scale a vector by a given factor
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		newVec._values[i] = (double)((double)(vec._values[i]) * mult);
+	friend Vec operator*(const Vec& vec, const double& mult) {
+		Vec<ND> newVec;
+		for (uint8_t i = 0; i != ND; ++i) {
+			newVec._values[i] = (double)((double)(vec._values[i]) * mult);
+		}
+		return newVec;
 	}
-	return newVec;
-}
 
-template <uint8_t ND>
-cVector<ND> operator/(const cVector<ND>& vec, const double & div) {
-	const double mult = 1 / div;
-	return vec * mult;
-}
-
-template <uint8_t ND>
-cVector<ND> operator*(const double & mult, const cVector<ND>& vec) {
-	return operator*(vec, mult);
-}
-
-template <uint8_t ND>
-cVector<ND> operator/(const double & /*div*/, const cVector<ND>& /*vec*/) {
-	throwl_unimplemented;
-}
-
-template <uint8_t ND, uint8_t RD>
-cVector<ND>& operator+=(cVector<ND>& lhs, const cVector<RD>& rhs) {
-	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
-	for (uint8_t i = 0; i != RD; ++i) {
-		lhs.dim(i) += rhs.dim(i);
+	friend Vec operator*(const double& mult, const Vec& vec) {
+		return operator*(vec, mult);
 	}
-	return lhs;
-}
 
-template <uint8_t ND, uint8_t RD>
-cVector<ND>& operator-=(cVector<ND>& lhs, const cVector<RD>& rhs) {
-	static_assert(RD <= ND, "Right vector must be same or viewer dimensions than left");
-	for (uint8_t i = 0; i != RD; ++i) {
-		lhs.dim(i) -= rhs.dim(i);
+	friend Vec<ND> operator/(const Vec<ND>& vec, const double& div) {
+		const double mult = 1.0 / div;
+		return vec * mult;
 	}
-	return lhs;
-}
 
-template <uint8_t ND>
-cVector<ND>& operator*=(cVector<ND>& lhs, const double & rhs) {
-	constexpr uint8_t dimensions = ND;
-	for (uint8_t i = 0; i != dimensions; ++i) {
-		lhs._values[i] = (double)((double)(lhs._values[i]) * rhs);
+	template <uint8_t RD, typename = std::enable_if_t<tmpl::is_less_or_equal<RD, ND>()>>
+	friend Vec& operator+=(Vec& lhs, const Vec<RD>& rhs) {
+		for (uint8_t i = 0; i != RD; ++i) {
+			lhs.dim(i) += rhs.dim(i);
+		}
+		return lhs;
 	}
-	return lhs;
-}
 
-template <uint8_t ND>
-cVector<ND>& operator/=(cVector<ND>& lhs, const double & rhs) {
-	return operator*=(lhs, 1.0 / rhs); // speedier
-}
+	template <uint8_t RD, typename = std::enable_if_t<tmpl::is_less_or_equal<RD, ND>()>>
+	friend Vec& operator-=(Vec& lhs, const Vec<RD>& rhs) {
+		for (uint8_t i = 0; i != RD; ++i) {
+			lhs.dim(i) -= rhs.dim(i);
+		}
+		return lhs;
+	}
 
+	friend Vec& operator*=(Vec& lhs, const double& rhs) {
+		for (uint8_t i = 0; i != ND; ++i) {
+			lhs._values[i] = (double)((double)(lhs._values[i]) * rhs);
+		}
+		return lhs;
+	}
+
+	friend Vec& operator/=(Vec& lhs, const double& rhs) {
+		return operator*=(lhs, 1.0 / rhs); // speedier
+	}
+
+	double distance(const Vec& rhs) const {
+		double sum = 0.0;
+		for (uint8_t i = 0; i != ND; ++i) {
+			const double dif = (double)(rhs._values[i] - _values[i]);
+			sum += (dif * dif);
+		}
+		return sqrt(sum);
+	}
+
+	friend double distance(const Vec& lhs, const Vec& rhs) {
+		return lhs.distance(rhs);
+	}
+
+	friend double distance(const Vec* lhs, const Vec* rhs) {
+		if (!(lhs && rhs)) throwl("Trying to get distance for vector with undefined pointer");
+		return lhs->distance(*rhs);
+	}
+
+	Vec direction(const Vec& rhs) const {
+		if (this == &rhs) throwl("Cannot get direction of vector to itself");
+		if (*this == rhs) throwl("Cannot get direction of vectors at same position");
+		Vec dirVec(rhs - *this);
+		dirVec.unitize();
+		return dirVec;
+	}
+
+	friend Vec direction(const Vec& lhs, const Vec& rhs) {
+		return lhs.direction(rhs);
+	}
+
+	friend Vec direction(const Vec* lhs, const Vec* rhs) {
+		if (!(lhs && rhs)) throwl("Trying to get distance for vector with undefined pointer");
+		return lhs->direction(*rhs);
+	}
+
+	// Normal angle from first vector to second vector (0 to 1)
+	double angle(const Vec& rhs) const {
+		return asin(distance(rhs));
+		// not sure if this is in degrees, rads or what... check doc
+	}
+
+	// Normal angle from first vector to second vector (0 to 1)
+	friend double angle(const Vec& lhs, const Vec& rhs) {
+		return lhs.angle(rhs);
+		// not sure if this is in degrees, rads or what... check doc
+	}
+
+	// Normal angle from first vector to second vector (0 to 1)
+	friend double angle(const Vec* lhs, const Vec* rhs) {
+		return lhs->angle(*rhs);
+	}
+protected:
+	//double* _values = 0;
+	double _values[ND];
+};
+
+using Vec2D = Vec<2>;
+using Vec3D = Vec<3>;
+using Vec4D = Vec<4>;

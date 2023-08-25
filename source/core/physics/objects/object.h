@@ -16,8 +16,8 @@ public:
 	~cObject();
 
 	// Set initial dynamics
-	void						setPosition(const cVectorLength3&);
-	void						setVelocity(const cVectorVelocity3&);
+	void						setPosition(const VecLength3&);
+	void						setVelocity(const VecVelocity3&);
 	void						changeReference(cFrame* const);			// Will be very complicated to implement....
 
 	// Get mass/energy
@@ -31,8 +31,8 @@ public:
 	cFrame *					getReference()						const;
 	cUniverse*					getUniverse()						const;
 	double						getClockSpeedFractional()			const;
-	cVectorLength3				getPosition()						const;
-	cVectorVelocity3			getVelocity()						const;
+	VecLength3				getPosition()						const;
+	VecVelocity3			getVelocity()						const;
 	double						getVelocityFractional()				const;
 	double						getVelocitySpacetimeFractional()	const; /// Should always be 1.0;
 		// All objects are always moving at a constant relative speed when you sum their 
@@ -45,17 +45,17 @@ public:
 
 	// Update functions
 	void						tick(const units::Duration &);
-	void						provideKinEnergy(cVector3D);
+	void						provideKinEnergy(Vec3D);
 	void						calcVelocityAndMove();
 
 	// Two-object functions
 	units::Length				distance(const cObject&) const;
 	double						rel_velocity(const cObject&) const;
-	cVector<3>					direction(const cObject&) const; // Unit direction from first vector to second vector
+	Vec<3>					direction(const cObject&) const; // Unit direction from first vector to second vector
 
 	// Friend functions
 	friend units::Length		distance(const cObject&, const cObject&);
-	friend cVector<3>			direction(const cObject&, const cObject&); // Unit direction from first vector to second vector
+	friend Vec<3>			direction(const cObject&, const cObject&); // Unit direction from first vector to second vector
 	//friend double				distance_spacetime(const cParticle&, const cParticle&);
 	friend double				rel_velocity(const cObject&, const cObject&);
 
@@ -71,11 +71,11 @@ protected:
 
 	// Relative properties (reference-frame-dependent)
 	cFrame * const				_relativeTo = 0;
-	cVectorLength3				_position;
-	cVectorVelocity3			_velocity;
-	cVector3D					_ekinetic; // Directional kinetic energy relative to reference frame
+	VecLength3				_position;
+	VecVelocity3			_velocity;
+	Vec3D					_ekinetic; // Directional kinetic energy relative to reference frame
 	double						_clockSpeed; // 0 to 1, fractional, relative to reference frame
 
-	//cVectorOrientation3		_orientation;
-	//cVectorRotation3			_rotation;
+	//VecOrientation3		_orientation;
+	//VecRotation3			_rotation;
 };

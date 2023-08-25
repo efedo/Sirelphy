@@ -37,7 +37,7 @@ double cUniverse::getMaxVelocity() const {
 }
 
 /// Gets frame velocity at the given position
-cGravityTensor cUniverse::getGravity(const cVectorLength3 &) const {
+cGravityTensor cUniverse::getGravity(const VecLength3 &) const {
 	cGravityTensor gravityTensor(_dimensions);
 	gravityTensor.forcefield.dim(0) = 0.0;
 	gravityTensor.fieldvelocity.dim(0) = 0.0;

@@ -50,7 +50,7 @@ double rel_velocity(const cParticle& objectA, const cParticle& objectB) {
 	if (objectA.getUniverse() != objectB.getUniverse()) throwl("Trying to get relative velocity between objects in different universes")
 
 		// Get unit direction from A to B
-		cVector3D dirAtoB = direction(objectA.getPosition(), objectB.getPosition()).getRaw();
+		Vec3D dirAtoB = direction(objectA.getPosition(), objectB.getPosition()).getRaw();
 
 	// Determine angle between velocity of A and direction from A to B and vice versa
 	double angleVelAToB = angle(objectA.getVelocity().getRaw(), dirAtoB);

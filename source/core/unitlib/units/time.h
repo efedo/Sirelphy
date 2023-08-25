@@ -25,7 +25,7 @@ namespace units {
 	template<>
 	class Unit<double, _units_private::dim_time> : public _units_private::_Unit<double, _units_private::dim_time> {
 		public:
-		constexpr Unit(const double _val = 0) : _Unit(_val) {}
+		explicit constexpr Unit(const double _val = 0) : _Unit(_val) {}
 		constexpr Unit(const Unit& rhs) : _Unit(rhs.val) {}
 
 		// Unit member functions

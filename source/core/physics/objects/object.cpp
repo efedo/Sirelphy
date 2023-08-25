@@ -21,11 +21,11 @@ cObject::~cObject() {
 // Set initial dynamics																 //
 ///////////////////////////////////////////////////////////////////////////////////////
 
-void cObject::setPosition(const cVectorLength3& tmpPos) {
+void cObject::setPosition(const VecLength3& tmpPos) {
 	_position = tmpPos;
 }
 
-void cObject::setVelocity(const cVectorVelocity3& tmpVel) {
+void cObject::setVelocity(const VecVelocity3& tmpVel) {
 	_velocity = tmpVel;
 }
 
@@ -74,11 +74,11 @@ double cObject::getVelocityFractional() const {
 	return _velocity.magnitude().relToC();
 };
 
-cVectorLength3 cObject::getPosition() const {
+VecLength3 cObject::getPosition() const {
 	return _position;
 }
 
-cVectorVelocity3 cObject::getVelocity() const {
+VecVelocity3 cObject::getVelocity() const {
 	return _velocity;
 };
 
@@ -118,7 +118,7 @@ void cObject::tick(const units::Duration&) {
 	throwl_unimplemented;
 }
 
-void cObject::provideKinEnergy(cVector3D addedImpulse) {
+void cObject::provideKinEnergy(Vec3D addedImpulse) {
 	_ekinetic += addedImpulse;
 }
 
@@ -144,7 +144,7 @@ void cObject::calcVelocityAndMove() {
 	if (!isfinite(relvel)) throwl("Non-finite relative velocity");
 
 	// Get in-frame directional velocity
-	cVector3D newVel = _ekinetic;
+	Vec3D newVel = _ekinetic;
 	newVel.scaleTo(relvel);
 
 	//if (abs((_velocity.magnitude() - relvel) / relvel) > 0.1) {
@@ -155,7 +155,7 @@ void cObject::calcVelocityAndMove() {
 	newVel += gravity.fieldvelocity;
 
 	// Update position in global frame
-	_position = _position + cVectorLength3(newVel);
+	_position = _position + VecLength3(newVel);
 
 	// Note that this is and the global velocity calculation are currently a cludge; 
 	// do not fully account for relativistic effects (e.g. length contraction)
@@ -173,12 +173,12 @@ units::Length distance(const cObject& objectA, const cObject& objectB) {
 }
 
 // Unit direction from first vector to second vector
-cVector<3> cObject::direction(const cObject& objectB) const {
+Vec<3> cObject::direction(const cObject& objectB) const {
 	return getPosition().getRaw().direction(objectB.getPosition().getRaw());
 }
 
 // Unit direction from first vector to second vector
-cVector<3> direction(const cObject& objectA, const cObject& objectB) {
+Vec<3> direction(const cObject& objectA, const cObject& objectB) {
 	return objectA.direction(objectB);
 }
 
@@ -189,7 +189,7 @@ double cObject::rel_velocity(const cObject& objectB) const {
 	if (getUniverse() != objectB.getUniverse()) throwl("Trying to get relative velocity between objects in different universes")
 
 	// Get unit direction from A to B
-	cVector3D dirAtoB = direction(objectB);
+	Vec3D dirAtoB = direction(objectB);
 
 	// Determine angle between velocity of A and direction from A to B and vice versa
 	double angleVelAToB = angle(getVelocity().getRaw(), dirAtoB);

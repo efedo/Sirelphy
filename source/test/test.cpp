@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "Sirelphy/source/core/physics/vector/vector.h"
 #include "Sirelphy/source/core/unitlib/units.h"
 #include "Sirelphy/source/core/physics/universe/generators.h"
 
@@ -54,6 +53,12 @@ TEST(UnitLib, Concentration) {
 	EXPECT_EQ(float(conc.get_millimolar()), 326.08695652173913043478260869565f);
 }
 
+TEST(UnitLib, Pressure) {
+	using namespace units;
+	//units::_kiloPascals
+	units::Pressure pressure = 0.50_kiloPascals;
+}
+
 TEST(Physics, UniverseStandardAtomic) {
 	cUniverse* newUni = UniverseGenerator::createStandardModelAtomic();
 }
@@ -61,3 +66,4 @@ TEST(Physics, UniverseStandardAtomic) {
 TEST(Physics, TernaryFunnyPhoton) {
 	cUniverse* newUni = UniverseGenerator::createTernaryPhotonSystem();
 }
+

@@ -20,8 +20,8 @@
 //	cObject(const cFrame&, cObject&, cBlop* = 0, uint16_t = 0);
 //	~cObject();
 //	void refreshBoundingBox();
-//	const cVectorLength3& boundingMins() const;
-//	const cVectorLength3& boundingMaxs() const;
+//	const VectorLength3& boundingMins() const;
+//	const VectorLength3& boundingMaxs() const;
 //
 //	// Position and time
 //	const cVec4D_big& getCurrentPositionTime() const { return relpos; };

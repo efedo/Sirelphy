@@ -19,4 +19,5 @@
 #include "Sirelphy/source/core/unitlib/units/velocity.h"
 #include "Sirelphy/source/core/unitlib/units/acceleration.h"
 #include "Sirelphy/source/core/unitlib/units/energy.h"
+#include "Sirelphy/source/core/unitlib/units/pressure.h"
 #include "Sirelphy/source/core/unitlib/units/concentration.h"

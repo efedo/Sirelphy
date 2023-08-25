@@ -7,7 +7,7 @@
 
 class cGravityTensor {
 public:
-	cVector3D fieldvelocity;
-	cVector3D forcefield;
+	Vec3D fieldvelocity;
+	Vec3D forcefield;
 	cGravityTensor(const uint8_t &);
 };

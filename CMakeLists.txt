@@ -3,13 +3,9 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../Utilogeny/CMakeLists.txt")
-	set(UTILOGENY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Utilogeny" CACHE STRING "Path to Utilogeny")
-else()
-	set(UTILOGENY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/Utilogeny" CACHE STRING "Path to Utilogeny")
-endif()
+set(UTILOGENY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Utilogeny" CACHE STRING "Path to Utilogeny" FORCE)
+set(SIRELPHY_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Path to Sirelphy" FORCE)
 
-set(SIRELPHY_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Path to Sirelphy")
 include(${UTILOGENY_DIR}/cmake/setup_project.cmake)
 
 pre_project_boilerplate(NAME "Sirelphy")
