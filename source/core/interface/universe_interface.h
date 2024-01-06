@@ -1,6 +1,6 @@
 // Copyright 2018-19 Eric Fedosejevs
 
-#include <string>
+#include "Sirelphy/source/core/precomp.h"
 
 class cUniverse;
 class cObjectInterface;

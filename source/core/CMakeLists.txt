@@ -17,7 +17,7 @@ add_library(SirelphyCore STATIC
     physics/helpers/ntree.h
     physics/helpers/octree.h
     physics/objects/atom.h
-    physics/objects/blop.h
+    
     physics/objects/frame.cpp
     physics/objects/frame.h
     physics/objects/object.cpp
@@ -30,7 +30,7 @@ add_library(SirelphyCore STATIC
     physics/objects/particleclass.cpp
     physics/objects/particleclass.h
     physics/relativity.h
-    physics/universe/scenemanager.h
+    
     physics/universe/universe.cpp
     physics/universe/universe.h
     physics/universe/generators.h
